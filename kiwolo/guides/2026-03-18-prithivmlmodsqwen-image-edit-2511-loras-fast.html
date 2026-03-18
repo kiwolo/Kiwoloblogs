@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>prithivMLmods/Qwen-Image-Edit-2511-LoRAs-Fast | Kiwolo.io</title>
+  <meta name="description" content="What It Is Qwen-Image-Edit-2511-LoRAs-Fast is a HuggingFace Space created by prithivMLmods that delivers a fast, interactive image editing pipeline powered by the Qwen2.5-VL vision-language model fami...">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://kiwolo.io/guides/prithivmlmodsqwen-image-edit-2511-loras-fast">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="prithivMLmods/Qwen-Image-Edit-2511-LoRAs-Fast">
+  <meta property="og:description" content="What It Is Qwen-Image-Edit-2511-LoRAs-Fast is a HuggingFace Space created by prithivMLmods that delivers a fast, interactive image editing pipeline powered by the Qwen2.5-VL vision-language model fami...">
+  <meta property="og:url" content="https://kiwolo.io/guides/prithivmlmodsqwen-image-edit-2511-loras-fast">
+  <meta property="og:site_name" content="Kiwolo.io">
+  <meta property="article:published_time" content="2026-03-18">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="prithivMLmods/Qwen-Image-Edit-2511-LoRAs-Fast">
+  <meta name="twitter:description" content="What It Is Qwen-Image-Edit-2511-LoRAs-Fast is a HuggingFace Space created by prithivMLmods that delivers a fast, interactive image editing pipeline powered by the Qwen2.5-VL vision-language model fami...">
+
+  <!-- Custom metadata -->
+  <meta name="kiwolo:source" content="huggingface">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "prithivMLmods/Qwen-Image-Edit-2511-LoRAs-Fast",
+    "description": "What It Is Qwen-Image-Edit-2511-LoRAs-Fast is a HuggingFace Space created by prithivMLmods that delivers a fast, interactive image editing pipeline powered by the Qwen2.5-VL vision-language model fami...",
+    "datePublished": "2026-03-18",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Kiwolo.io",
+      "url": "https://kiwolo.io"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://kiwolo.io/guides/prithivmlmodsqwen-image-edit-2511-loras-fast"
+    }
+  }
+  </script>
+
+  <style>
+    /* ── CSS Variables ── */
+    :root {
+      --bg: #0f0f13;
+      --surface: #1a1a23;
+      --border: #2a2a38;
+      --accent: #7c6dfa;
+      --text: #e2e2ee;
+      --muted: #888899;
+      --code-bg: #13131c;
+      --header-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      --radius: 8px;
+      --transition: 0.2s ease;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root:not([data-theme="dark"]) {
+        --bg: #f5f5f8;
+        --surface: #ffffff;
+        --border: #dcdce8;
+        --accent: #5c4ee8;
+        --text: #1a1a2e;
+        --muted: #666677;
+        --code-bg: #f0f0f5;
+        --header-bg: linear-gradient(135deg, #e8e8f8 0%, #d8e0f0 50%, #c8d8f0 100%);
+      }
+    }
+
+    [data-theme="light"] {
+      --bg: #f5f5f8;
+      --surface: #ffffff;
+      --border: #dcdce8;
+      --accent: #5c4ee8;
+      --text: #1a1a2e;
+      --muted: #666677;
+      --code-bg: #f0f0f5;
+      --header-bg: linear-gradient(135deg, #e8e8f8 0%, #d8e0f0 50%, #c8d8f0 100%);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0f0f13;
+      --surface: #1a1a23;
+      --border: #2a2a38;
+      --accent: #7c6dfa;
+      --text: #e2e2ee;
+      --muted: #888899;
+      --code-bg: #13131c;
+      --header-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    }
+
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    /* ── Reading Progress Bar ── */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: var(--accent);
+      z-index: 1000;
+      transition: width 0.1s linear;
+    }
+
+    /* ── Theme Toggle ── */
+    #theme-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 999;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition), border-color var(--transition), transform var(--transition);
+    }
+
+    #theme-toggle:hover {
+      border-color: var(--accent);
+      transform: scale(1.1);
+    }
+
+    /* ── Header ── */
+    .site-header {
+      background: var(--header-bg);
+      padding: 48px 24px 40px;
+      text-align: center;
+      position: relative;
+    }
+
+    .site-logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 16px;
+      opacity: 0.9;
+    }
+
+    .site-logo:hover { opacity: 1; }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      margin-bottom: 24px;
+      transition: color var(--transition);
+    }
+
+    .back-link:hover { color: var(--accent); }
+
+    .article-badge {
+      display: inline-block;
+      background: rgba(124, 109, 250, 0.15);
+      color: var(--accent);
+      border: 1px solid rgba(124, 109, 250, 0.3);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 20px;
+    }
+
+    .article-title {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.25;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      max-width: 820px;
+      margin: 0 auto 20px;
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    .article-meta time { font-variant-numeric: tabular-nums; }
+
+    .article-meta a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    .article-meta a:hover { color: var(--accent); }
+
+    .meta-sep { opacity: 0.4; }
+
+    /* ── Main Content ── */
+    main {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* ── Typography ── */
+    .content h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 2.5rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      letter-spacing: -0.3px;
+    }
+
+    .content h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 2rem 0 0.75rem;
+      letter-spacing: -0.2px;
+    }
+
+    .content h4 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 1.5rem 0 0.5rem;
+    }
+
+    .content p {
+      margin-bottom: 1.25rem;
+      color: var(--text);
+    }
+
+    .content a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-color: rgba(124, 109, 250, 0.4);
+      transition: text-decoration-color var(--transition);
+    }
+
+    .content a:hover { text-decoration-color: var(--accent); }
+
+    /* ── Lists ── */
+    .content ul, .content ol {
+      margin: 1rem 0 1.25rem 1.5rem;
+    }
+
+    .content li {
+      margin-bottom: 0.5rem;
+      padding-left: 0.25rem;
+    }
+
+    .content ul li::marker { color: var(--accent); }
+    .content ol li::marker { color: var(--accent); font-weight: 600; }
+
+    /* ── Code ── */
+    .content code {
+      font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", Consolas, monospace;
+      font-size: 0.875em;
+      background: var(--code-bg);
+      color: #b8b0ff;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    .content pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      position: relative;
+    }
+
+    .content pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 0.875rem;
+      color: #c8c0ff;
+      line-height: 1.6;
+    }
+
+    /* ── Blockquote ── */
+    .content blockquote {
+      border-left: 3px solid var(--accent);
+      background: var(--surface);
+      padding: 16px 20px;
+      margin: 1.5rem 0;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ── Callout ── */
+    .callout {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin: 1.5rem 0;
+    }
+
+    .callout.info { border-left-color: #4a9eff; }
+    .callout.warning { border-left-color: #f5a623; }
+    .callout.success { border-left-color: #50c878; }
+    .callout.danger { border-left-color: #ff5f5f; }
+
+    .callout-title {
+      font-weight: 700;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+
+    .callout.info .callout-title { color: #4a9eff; }
+    .callout.warning .callout-title { color: #f5a623; }
+    .callout.success .callout-title { color: #50c878; }
+    .callout.danger .callout-title { color: #ff5f5f; }
+
+    /* ── Pros / Cons ── */
+    .pros-cons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 1.5rem 0;
+    }
+
+    @media (max-width: 560px) {
+      .pros-cons { grid-template-columns: 1fr; }
+    }
+
+    .pros, .cons {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+    }
+
+    .pros { border-top: 3px solid #50c878; }
+    .cons { border-top: 3px solid #ff5f5f; }
+
+    .pros h4, .cons h4 {
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+      margin-top: 0;
+    }
+
+    .pros h4 { color: #50c878; }
+    .cons h4 { color: #ff5f5f; }
+
+    .pros ul, .cons ul {
+      margin: 0;
+      list-style: none;
+      padding: 0;
+    }
+
+    .pros li::before { content: "+ "; color: #50c878; font-weight: 700; }
+    .cons li::before { content: "− "; color: #ff5f5f; font-weight: 700; }
+
+    /* ── Table ── */
+    .content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    .content th {
+      background: var(--surface);
+      color: var(--text);
+      font-weight: 600;
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .content td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .content tr:last-child td { border-bottom: none; }
+    .content tbody tr:hover { background: var(--surface); }
+
+    /* ── Horizontal Rule ── */
+    .content hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2.5rem 0;
+    }
+
+    /* ── Back to Top ── */
+    #back-to-top {
+      position: fixed;
+      bottom: 28px;
+      right: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition), border-color var(--transition), transform var(--transition);
+      z-index: 900;
+    }
+
+    #back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #back-to-top:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 24px;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    footer a:hover { color: var(--accent); }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      main { padding: 32px 16px 64px; }
+      .site-header { padding: 40px 16px 32px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Reading Progress Bar -->
+  <div id="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
+  <!-- Theme Toggle -->
+  <button id="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light theme">🌙</button>
+
+  <!-- Header -->
+  <header class="site-header">
+    <a href="../index.html" class="site-logo">Kiwolo.io</a>
+    <br>
+    <a href="../index.html" class="back-link">&#8592; Back to Kiwolo.io</a>
+    <div>
+      <span class="article-badge">huggingface</span>
+    </div>
+    <h1 class="article-title">prithivMLmods/Qwen-Image-Edit-2511-LoRAs-Fast</h1>
+    <div class="article-meta">
+      <time datetime="2026-03-18">March 18, 2026</time>
+      <span class="meta-sep">·</span>
+      <a href="https://huggingface.co/prithivMLmods/Qwen-Image-Edit-2511-LoRAs-Fast" target="_blank" rel="noopener noreferrer">View Source ↗</a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <article class="content">
+      <h2>What It Is</h2>
+
+<p><strong>Qwen-Image-Edit-2511-LoRAs-Fast</strong> is a HuggingFace Space created by <a href="https://huggingface.co/prithivMLmods" target="_blank">prithivMLmods</a> that delivers a fast, interactive image editing pipeline powered by the <strong>Qwen2.5-VL</strong> vision-language model family combined with multiple <strong>LoRA (Low-Rank Adaptation)</strong> adapters. The Space provides a Gradio-based web interface that allows users to perform instruction-driven image editing — modifying, transforming, stylizing, or reimagining images using natural language prompts — with near real-time performance thanks to optimized LoRA switching and inference acceleration.</p>
+
+<p>At its core, the system leverages <strong>Qwen's multimodal architecture</strong>, which understands both visual content and textual instructions simultaneously, enabling nuanced image manipulation that respects the semantic intent of user prompts. The "2511" in the name references the November 2025 model checkpoint, and "LoRAs-Fast" signals the key engineering innovation: multiple task-specific LoRA adapters can be loaded, swapped, and composed quickly without reloading the full base model, dramatically cutting inference latency.</p>
+
+<p>The Space also exposes an <strong>MCP (Model Context Protocol) server endpoint</strong>, meaning it can be programmatically integrated into agentic AI workflows, LLM tool chains, and automated pipelines — not just used as a standalone demo.</p>
+
+<h3>Core Components</h3>
+<ul>
+  <li><strong>Base Model:</strong> Qwen2.5-VL (vision-language model with strong instruction-following)</li>
+  <li><strong>LoRA Adapters:</strong> Multiple fine-tuned adapters covering styles, tasks (inpainting, object removal, stylization, colorization, etc.)</li>
+  <li><strong>Interface:</strong> Gradio UI with image upload, prompt input, and adapter selector</li>
+  <li><strong>MCP Server:</strong> Programmatic API access compatible with the Model Context Protocol</li>
+  <li><strong>Hosting:</strong> HuggingFace Spaces (US region) with GPU acceleration</li>
+</ul>
+
+<hr>
+
+<h2>Why It Matters</h2>
+
+<p>Image editing with AI has traditionally required either massive compute resources, highly specialized models per task, or multi-step pipelines with separate segmentation, inpainting, and generation models. <strong>Qwen-Image-Edit-2511-LoRAs-Fast</strong> represents a meaningful step toward consolidating this complexity into a single, fast, instruction-following system.</p>
+
+<h3>Key Reasons This Is Significant</h3>
+<ul>
+  <li><strong>Unified multimodal understanding:</strong> Unlike diffusion-only editors (e.g., InstructPix2Pix), Qwen2.5-VL genuinely understands the image content contextually before applying edits, leading to more semantically accurate results.</li>
+  <li><strong>LoRA composability at speed:</strong> The fast LoRA switching mechanism means you can apply style transfer, object editing, and background replacement in succession without reloading gigabytes of model weights — a practical breakthrough for production pipelines.</li>
+  <li><strong>MCP integration:</strong> By supporting the Model Context Protocol, this tool can act as a <em>tool call</em> inside larger agentic systems (e.g., being invoked by Claude, GPT-4o, or custom LLM agents), bridging the gap between language reasoning and visual manipulation.</li>
+  <li><strong>Open accessibility:</strong> Available freely on HuggingFace Spaces, lowering the barrier for researchers, indie developers, and startups to experiment with state-of-the-art image editing without infrastructure overhead.</li>
+  <li><strong>November 2025 checkpoint:</strong> The 2511 checkpoint incorporates Qwen's latest improvements in visual grounding and instruction fidelity, making it one of the more capable open-access image editing systems available today.</li>
+</ul>
+
+<hr>
+
+<h2>How to Get Started</h2>
+
+<h3>Option 1: Use the HuggingFace Space Directly (No Setup Required)</h3>
+<p>The easiest way to get started is to visit the Space in your browser:</p>
+<pre><code>https://huggingface.co/spaces/prithivMLmods/Qwen-Image-Edit-2511-LoRAs-Fast</code></pre>
+<p>No account is required for basic usage, though logging in with a free HuggingFace account gives you higher rate limits and the ability to use the API token.</p>
+
+<h3>Option 2: Run Locally via Gradio Client</h3>
+<p>Install the required dependencies:</p>
+<pre><code>pip install gradio-client huggingface_hub pillow requests</code></pre>
+
+<h3>Option 3: Clone and Self-Host</h3>
+<pre><code># Install Git LFS first
+git lfs install
+
+# Clone the Space repository
+git clone https://huggingface.co/spaces/prithivMLmods/Qwen-Image-Edit-2511-LoRAs-Fast
+
+cd Qwen-Image-Edit-2511-LoRAs-Fast
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Launch locally
+python app.py</code></pre>
+
+<h3>System Requirements for Local Hosting</h3>
+<ul>
+  <li>Python 3.10 or higher</li>
+  <li>CUDA-capable GPU with at least 16GB VRAM (24GB+ recommended for full LoRA set)</li>
+  <li>16GB+ system RAM</li>
+  <li>PyTorch 2.1+ with CUDA 11.8 or 12.1</li>
+  <li>~30–50GB disk space for model weights and adapters</li>
+</ul>
+
+<h3>Authentication Setup</h3>
+<pre><code># Set your HuggingFace token for gated model access
+export HF_TOKEN="your_hf_token_here"
+
+# Or via Python
+from huggingface_hub import login
+login(token="your_hf_token_here")</code></pre>
+
+<hr>
+
+<h2>Step-by-Step Usage Guide</h2>
+
+<h3>Step 1: Upload Your Source Image</h3>
+<p>In the Gradio interface, click the <strong>image upload panel</strong> on the left and select a JPEG or PNG file from your local machine. The interface accepts images up to 2048×2048 pixels. For best results:</p>
+<ul>
+  <li>Use clear, well-lit photos with distinct subjects</li>
+  <li>Avoid heavily compressed or low-resolution images</li>
+  <li>Square or landscape crops tend to produce more consistent edits</li>
+</ul>
+
+<h3>Step 2: Select a LoRA Adapter</h3>
+<p>From the <strong>LoRA selector dropdown</strong>, choose the adapter that best matches your intended edit. Common adapter categories include:</p>
+<ul>
+  <li><strong>Style Transfer LoRAs</strong> — Apply artistic styles (anime, oil painting, watercolor, cinematic)</li>
+  <li><strong>Object Editing LoRAs</strong> — Add, remove, or replace objects described in your prompt</li>
+  <li><strong>Background LoRAs</strong> — Swap or enhance backgrounds while preserving the foreground subject</li>
+  <li><strong>Color Grading LoRAs</strong> — Apply professional-grade color corrections and tonal adjustments</li>
+  <li><strong>Restoration LoRAs</strong> — Denoise, sharpen, or upscale degraded images</li>
+</ul>
+
+<h3>Step 3: Write Your Editing Prompt</h3>
+<p>Enter a natural language instruction in the <strong>prompt text box</strong>. Be specific and descriptive. Examples of effective prompts:</p>
+<ul>
+  <li><em>"Change the background to a snowy mountain landscape at sunset"</em></li>
+  <li><em>"Make the subject wear a red leather jacket instead of the blue shirt"</em></li>
+  <li><em>"Apply a Studio Ghibli animation style to the entire image"</em></li>
+  <li><em>"Remove the parked car on the left side of the image"</em></li>
+</ul>
+
+<h3>Step 4: Adjust Parameters</h3>
+<p>Fine-tune the generation with available sliders:</p>
+<ul>
+  <li><strong>Guidance Scale</strong> — Higher values (7–12) adhere more strictly to the prompt; lower values (3–5) give the model more creative freedom</li>
+  <li><strong>LoRA Weight</strong> — Controls how strongly the LoRA adapter influences the output (0.5–1.0 typical range)</li>
+  <li><strong>Steps</strong> — Number of denoising steps; more steps = higher quality but slower inference</li>
+  <li><strong>Seed</strong> — Set for reproducible outputs; leave random for variation</li>
+</ul>
+
+<h3>Step 5: Generate and Iterate</h3>
+<p>Click <strong>Generate</strong> and wait for the result (typically 5–20 seconds on GPU). Review the output in the right panel. If unsatisfied:</p>
+<ul>
+  <li>Refine your prompt with more specific spatial or descriptive language</li>
+  <li>Try a different LoRA adapter or adjust the LoRA weight</li>
+  <li>Use the output image as a new input for chained multi-step editing</li>
+  <li>Download successful outputs via the download button beneath the result image</li>
+</ul>
+
+<hr>
+
+<h2>5+ Real-World Use Cases</h2>
+
+<h3>Use Case 1: E-Commerce Product Photography</h3>
+<p>Retailers can automate background replacement for product images, generating studio-quality shots from raw photos taken on any background.</p>
+<pre><code>from gradio_client import Client
+
+client = Client("prithivMLmods/Qwen-Image-Edit-2511-LoRAs-Fast")
+
+result = client.predict(
+    image="product_raw.jpg",
+    prompt="Place the product on a clean white studio surface with soft shadow",
+    lora_name="background-replace-v1",
+    guidance_scale=8.0,
+    lora_weight=0.85,
+    api_name="/edit"
+)
+print("Edited image saved at:", result)</code></pre>
+
+<h3>Use Case 2: Social Media Content Creation</h3>
+<p>Content creators can apply consistent artistic styles across batches of photos to maintain visual brand identity without hiring a graphic designer.</p>
+<pre><code>import os
+from gradio_client import Client
+
+client = Client("prithivMLmods/Qwen-Image-Edit-2511-LoRAs-Fast")
+input_folder = "./raw_photos"
+output_folder = "./styled_photos"
+os.makedirs(output_folder, exist_ok=True)
+
+for filename in os.listdir(input_folder):
+    if filename.endswith(".jpg"):
+        result = client.predict(
+            image=os.path.join(input_folder, filename),
+            prompt="Apply a warm, cinematic color grade with film grain",
+            lora_name="cinematic-grade-v2",
+            guidance_scale=7.5,
+            lora_weight=0.9,
+            api_name="/edit"
+        )
+        # Move result to output folder
+        os.rename(result, os.path.join(output_folder, filename))
+        print(f"Processed: {filename}")</code></pre>
+
+<h3>Use Case 3: Architectural Visualization</h3>
+<p>Architects and interior designers can instantly visualize how a room looks with different furniture, lighting, or materials by editing reference photos with natural language prompts.</p>
+<pre><code>result = client.predict(
+    image="living_room.jpg",
+    prompt="Replace the wooden floor with dark marble tiles, keep all furniture unchanged",
+    lora_name="interior-edit-v1",
+    guidance_scale=9.0,
+    lora_weight=0.8,
+    api_name="/edit"
+)</code></pre>
+
+<h3>Use Case 4: Agentic Workflow Integration via MCP</h3>
+<p>Developers building LLM-powered agents can expose this image editor as a tool call, allowing an AI assistant to edit images as part of a multi-step reasoning workflow.</p>
+<pre><code># Example MCP tool registration (pseudo-code for agent frameworks)
+tool_config = {
+    "name": "image_editor",
+    "description": "Edit or transform an image using natural language instructions",
+    "endpoint": "https://prithivmlmods-qwen-image-edit-2511-loras-fast.hf.space/mcp",
+    "parameters": {
+        "image_url": {"type": "string", "description": "URL or base64 of source image"},
+        "prompt": {"type": "string", "description": "Editing instruction"},
+        "lora_name": {"type": "string", "description": "LoRA adapter to use"}
+    }
+}
+# Register with your agent framework (LangChain, CrewAI, custom, etc.)
+agent.register_tool(tool_config)</code></pre>
+
+<h3>Use Case 5: Photo Restoration and Enhancement</h3>
+<p>Archivists and photographers can restore old, damaged, or low-quality images — removing scratches, enhancing color, and improving sharpness — using restoration LoRA adapters.</p>
+<pre><code>result = client.predict(
+    image="old_family_photo_damaged.jpg",
+    prompt="Restore this old photograph: remove scratches, enhance clarity, and restore natural colors",
+    lora_name="photo-restoration-v1",
+    guidance_scale=8.5,
+    lora_weight=1.0,
+    api_name="/edit"
+)</code></pre>
+
+<h3>Use Case 6: Game Asset Creation</h3>
+<p>Indie game developers can rapidly generate textured, stylized game assets from rough sketches or real photographs, applying specific art direction (pixel art, low-poly, fantasy illustration) via style LoRAs.</p>
+<pre><code>result = client.predict(
+    image="character_sketch.png",
+    prompt="Convert to a 16-bit pixel art character sprite on transparent background",
+    lora_name="pixel-art-style-v3",
+    guidance_scale=7.0,
+    lora_weight=0.95,
+    api_name="/edit"
+)</code></pre>
+
+<hr>
+
+<h2>Code Examples</h2>
+
+<h3>Example 1: Basic Image Edit with Gradio Client</h3>
+<pre><code>"""
+Basic image editing using the Gradio Client API.
+Requirements: pip install gradio-client pillow
+"""
+
+from gradio_client import Client, handle_file
+from PIL import Image
+import requests
+from io import BytesIO
+
+def edit_image(image_path: str, prompt: str, lora_name: str = "default") -> str:
+    """
+    Edit an image using the Qwen-Image-Edit-2511-LoRAs-Fast Space.
+    
+    Args:
+        image_path: Local path or URL to the source image
+        prompt: Natural language editing instruction
+        lora_name: Name of the LoRA adapter to apply
+    
+    Returns:
+        Path to the edited image file
+    """
+    client = Client("prithivMLmods/Qwen-Image-Edit-2511-LoRAs-Fast")
+    
+    result = client.predict(
+        image=handle_file(image_path),
+        prompt=prompt,
+        lora_name=lora_name,
+        guidance_scale=7.5,
+        lora_weight=0.85,
+        num_steps=30,
+        seed=42,
+        api_name="/edit"
+    )
+    
+    print(f"Edit complete. Result saved at: {result}")
+    return result
+
+
+# Example usage
+if __name__ == "__main__":
+    output = edit_image(
+        image_path="./my_photo.jpg",
+        prompt="Transform the scene to look like it's set in a cyberpunk neon-lit city at night",
+        lora_name="cyberpunk-
+    </article>
+  </main>
+
+  <!-- Back to Top -->
+  <button id="back-to-top" aria-label="Back to top" title="Back to top">&#8593;</button>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 <a href="../index.html">Kiwolo.io</a> &middot; Daily AI Tech Guides</p>
+  </footer>
+
+  <script>
+    // ── Theme Toggle ──
+    const toggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+
+    function getTheme() {
+      return localStorage.getItem('kiwolo-theme') ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    }
+
+    function applyTheme(theme) {
+      html.setAttribute('data-theme', theme);
+      toggle.textContent = theme === 'dark' ? '☀' : '🌙';
+      localStorage.setItem('kiwolo-theme', theme);
+    }
+
+    applyTheme(getTheme());
+
+    toggle.addEventListener('click', () => {
+      applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    });
+
+    // ── Reading Progress Bar ──
+    const bar = document.getElementById('progress-bar');
+
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? Math.round((scrollTop / docHeight) * 100) : 0;
+      bar.style.width = pct + '%';
+      bar.setAttribute('aria-valuenow', pct);
+    }
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+
+    // ── Back to Top ──
+    const backTop = document.getElementById('back-to-top');
+
+    window.addEventListener('scroll', () => {
+      backTop.classList.toggle('visible', window.scrollY > 400);
+    }, { passive: true });
+
+    backTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
