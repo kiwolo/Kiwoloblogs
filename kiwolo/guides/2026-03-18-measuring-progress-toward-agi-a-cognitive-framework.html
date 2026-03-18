@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Measuring progress toward AGI: A cognitive framework | Kiwolo.io</title>
+  <meta name="description" content="What It Is Google DeepMind has introduced a formal cognitive framework designed to systematically measure and track progress toward Artificial General Intelligence (AGI). Rather than relying on vague ...">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://kiwolo.io/guides/measuring-progress-toward-agi-a-cognitive-framework">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Measuring progress toward AGI: A cognitive framework">
+  <meta property="og:description" content="What It Is Google DeepMind has introduced a formal cognitive framework designed to systematically measure and track progress toward Artificial General Intelligence (AGI). Rather than relying on vague ...">
+  <meta property="og:url" content="https://kiwolo.io/guides/measuring-progress-toward-agi-a-cognitive-framework">
+  <meta property="og:site_name" content="Kiwolo.io">
+  <meta property="article:published_time" content="2026-03-18">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Measuring progress toward AGI: A cognitive framework">
+  <meta name="twitter:description" content="What It Is Google DeepMind has introduced a formal cognitive framework designed to systematically measure and track progress toward Artificial General Intelligence (AGI). Rather than relying on vague ...">
+
+  <!-- Custom metadata -->
+  <meta name="kiwolo:source" content="company-research">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Measuring progress toward AGI: A cognitive framework",
+    "description": "What It Is Google DeepMind has introduced a formal cognitive framework designed to systematically measure and track progress toward Artificial General Intelligence (AGI). Rather than relying on vague ...",
+    "datePublished": "2026-03-18",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Kiwolo.io",
+      "url": "https://kiwolo.io"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://kiwolo.io/guides/measuring-progress-toward-agi-a-cognitive-framework"
+    }
+  }
+  </script>
+
+  <style>
+    /* ── CSS Variables ── */
+    :root {
+      --bg: #0f0f13;
+      --surface: #1a1a23;
+      --border: #2a2a38;
+      --accent: #7c6dfa;
+      --text: #e2e2ee;
+      --muted: #888899;
+      --code-bg: #13131c;
+      --header-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      --radius: 8px;
+      --transition: 0.2s ease;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root:not([data-theme="dark"]) {
+        --bg: #f5f5f8;
+        --surface: #ffffff;
+        --border: #dcdce8;
+        --accent: #5c4ee8;
+        --text: #1a1a2e;
+        --muted: #666677;
+        --code-bg: #f0f0f5;
+        --header-bg: linear-gradient(135deg, #e8e8f8 0%, #d8e0f0 50%, #c8d8f0 100%);
+      }
+    }
+
+    [data-theme="light"] {
+      --bg: #f5f5f8;
+      --surface: #ffffff;
+      --border: #dcdce8;
+      --accent: #5c4ee8;
+      --text: #1a1a2e;
+      --muted: #666677;
+      --code-bg: #f0f0f5;
+      --header-bg: linear-gradient(135deg, #e8e8f8 0%, #d8e0f0 50%, #c8d8f0 100%);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0f0f13;
+      --surface: #1a1a23;
+      --border: #2a2a38;
+      --accent: #7c6dfa;
+      --text: #e2e2ee;
+      --muted: #888899;
+      --code-bg: #13131c;
+      --header-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    }
+
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    /* ── Reading Progress Bar ── */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: var(--accent);
+      z-index: 1000;
+      transition: width 0.1s linear;
+    }
+
+    /* ── Theme Toggle ── */
+    #theme-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 999;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition), border-color var(--transition), transform var(--transition);
+    }
+
+    #theme-toggle:hover {
+      border-color: var(--accent);
+      transform: scale(1.1);
+    }
+
+    /* ── Header ── */
+    .site-header {
+      background: var(--header-bg);
+      padding: 48px 24px 40px;
+      text-align: center;
+      position: relative;
+    }
+
+    .site-logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 16px;
+      opacity: 0.9;
+    }
+
+    .site-logo:hover { opacity: 1; }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      margin-bottom: 24px;
+      transition: color var(--transition);
+    }
+
+    .back-link:hover { color: var(--accent); }
+
+    .article-badge {
+      display: inline-block;
+      background: rgba(124, 109, 250, 0.15);
+      color: var(--accent);
+      border: 1px solid rgba(124, 109, 250, 0.3);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 20px;
+    }
+
+    .article-title {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.25;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      max-width: 820px;
+      margin: 0 auto 20px;
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    .article-meta time { font-variant-numeric: tabular-nums; }
+
+    .article-meta a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    .article-meta a:hover { color: var(--accent); }
+
+    .meta-sep { opacity: 0.4; }
+
+    /* ── Main Content ── */
+    main {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* ── Typography ── */
+    .content h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 2.5rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      letter-spacing: -0.3px;
+    }
+
+    .content h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 2rem 0 0.75rem;
+      letter-spacing: -0.2px;
+    }
+
+    .content h4 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 1.5rem 0 0.5rem;
+    }
+
+    .content p {
+      margin-bottom: 1.25rem;
+      color: var(--text);
+    }
+
+    .content a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-color: rgba(124, 109, 250, 0.4);
+      transition: text-decoration-color var(--transition);
+    }
+
+    .content a:hover { text-decoration-color: var(--accent); }
+
+    /* ── Lists ── */
+    .content ul, .content ol {
+      margin: 1rem 0 1.25rem 1.5rem;
+    }
+
+    .content li {
+      margin-bottom: 0.5rem;
+      padding-left: 0.25rem;
+    }
+
+    .content ul li::marker { color: var(--accent); }
+    .content ol li::marker { color: var(--accent); font-weight: 600; }
+
+    /* ── Code ── */
+    .content code {
+      font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", Consolas, monospace;
+      font-size: 0.875em;
+      background: var(--code-bg);
+      color: #b8b0ff;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    .content pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      position: relative;
+    }
+
+    .content pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 0.875rem;
+      color: #c8c0ff;
+      line-height: 1.6;
+    }
+
+    /* ── Blockquote ── */
+    .content blockquote {
+      border-left: 3px solid var(--accent);
+      background: var(--surface);
+      padding: 16px 20px;
+      margin: 1.5rem 0;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ── Callout ── */
+    .callout {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin: 1.5rem 0;
+    }
+
+    .callout.info { border-left-color: #4a9eff; }
+    .callout.warning { border-left-color: #f5a623; }
+    .callout.success { border-left-color: #50c878; }
+    .callout.danger { border-left-color: #ff5f5f; }
+
+    .callout-title {
+      font-weight: 700;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+
+    .callout.info .callout-title { color: #4a9eff; }
+    .callout.warning .callout-title { color: #f5a623; }
+    .callout.success .callout-title { color: #50c878; }
+    .callout.danger .callout-title { color: #ff5f5f; }
+
+    /* ── Pros / Cons ── */
+    .pros-cons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 1.5rem 0;
+    }
+
+    @media (max-width: 560px) {
+      .pros-cons { grid-template-columns: 1fr; }
+    }
+
+    .pros, .cons {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+    }
+
+    .pros { border-top: 3px solid #50c878; }
+    .cons { border-top: 3px solid #ff5f5f; }
+
+    .pros h4, .cons h4 {
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+      margin-top: 0;
+    }
+
+    .pros h4 { color: #50c878; }
+    .cons h4 { color: #ff5f5f; }
+
+    .pros ul, .cons ul {
+      margin: 0;
+      list-style: none;
+      padding: 0;
+    }
+
+    .pros li::before { content: "+ "; color: #50c878; font-weight: 700; }
+    .cons li::before { content: "− "; color: #ff5f5f; font-weight: 700; }
+
+    /* ── Table ── */
+    .content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    .content th {
+      background: var(--surface);
+      color: var(--text);
+      font-weight: 600;
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .content td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .content tr:last-child td { border-bottom: none; }
+    .content tbody tr:hover { background: var(--surface); }
+
+    /* ── Horizontal Rule ── */
+    .content hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2.5rem 0;
+    }
+
+    /* ── Back to Top ── */
+    #back-to-top {
+      position: fixed;
+      bottom: 28px;
+      right: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition), border-color var(--transition), transform var(--transition);
+      z-index: 900;
+    }
+
+    #back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #back-to-top:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 24px;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    footer a:hover { color: var(--accent); }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      main { padding: 32px 16px 64px; }
+      .site-header { padding: 40px 16px 32px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Reading Progress Bar -->
+  <div id="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
+  <!-- Theme Toggle -->
+  <button id="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light theme">🌙</button>
+
+  <!-- Header -->
+  <header class="site-header">
+    <a href="../index.html" class="site-logo">Kiwolo.io</a>
+    <br>
+    <a href="../index.html" class="back-link">&#8592; Back to Kiwolo.io</a>
+    <div>
+      <span class="article-badge">company-research</span>
+    </div>
+    <h1 class="article-title">Measuring progress toward AGI: A cognitive framework</h1>
+    <div class="article-meta">
+      <time datetime="2026-03-18">March 18, 2026</time>
+      <span class="meta-sep">·</span>
+      <a href="https://deepmind.google/blog/measuring-progress-toward-agi-a-cognitive-framework/" target="_blank" rel="noopener noreferrer">View Source ↗</a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <article class="content">
+      <h2>What It Is</h2>
+
+<p>Google DeepMind has introduced a formal cognitive framework designed to systematically measure and track progress toward Artificial General Intelligence (AGI). Rather than relying on vague milestones or single-benchmark performance metrics, this framework proposes a structured, multi-dimensional approach to evaluating how close AI systems are to achieving human-level — and eventually superhuman-level — general cognitive capabilities.</p>
+
+<p>At its core, the framework draws from cognitive science, developmental psychology, and AI research to define AGI not as a binary switch but as a <strong>spectrum of capability levels</strong> across a broad range of cognitive domains. These domains include reasoning, memory, learning, planning, language, perception, social intelligence, and more. The framework also introduces a companion initiative: a <strong>Kaggle hackathon</strong> inviting the global research and developer community to build the evaluations needed to operationalize this measurement system.</p>
+
+<p>The framework distinguishes between <em>narrow AI</em> (systems that excel at specific tasks), <em>general AI</em> (systems that can perform any cognitive task a human can), and levels in between, using a tiered model to describe capability breadth and depth simultaneously. It also explicitly separates <strong>performance</strong> from <strong>generalization</strong> — a system that scores highly on a single benchmark may not generalize across domains the way a truly general intelligence would.</p>
+
+<p>This effort represents one of the most rigorous, publicly shared attempts by a major AI lab to define what AGI actually means in measurable, scientific terms — and to provide tools for tracking progress toward it transparently.</p>
+
+<h2>Why It Matters</h2>
+
+<p>The question of "how close are we to AGI?" has historically been answered with speculation, hype, or dismissal. Google DeepMind's framework changes that dynamic by introducing scientific rigor into one of AI's most consequential questions. Here's why this matters profoundly:</p>
+
+<h3>1. Ending the Benchmark Trap</h3>
+<p>Current AI evaluation culture is dominated by narrow benchmarks — MMLU, HumanEval, GSM8K — that measure performance on specific tasks. Models can "pass" these without demonstrating anything close to general intelligence. This framework pushes the field toward holistic, multi-domain evaluations that resist gaming and overfitting.</p>
+
+<h3>2. A Common Language for AGI Discussion</h3>
+<p>Researchers, policymakers, journalists, and the public often use "AGI" to mean wildly different things. DeepMind's tiered, domain-based definition gives the field a shared vocabulary and a shared yardstick — critical for both scientific progress and responsible governance.</p>
+
+<h3>3. Safety and Alignment Implications</h3>
+<p>Knowing where we are on the AGI spectrum has direct implications for AI safety research. If we can measure capability levels across domains with precision, we can better anticipate risks, deploy appropriate safeguards, and pace capability development responsibly.</p>
+
+<h3>4. Open Community Participation</h3>
+<p>By launching a Kaggle hackathon, DeepMind is democratizing the evaluation-building process. This is a significant step toward community-driven, independent accountability in AI progress measurement — rather than labs self-reporting progress on their own terms.</p>
+
+<h3>5. Foundational for Future Policy</h3>
+<p>Governments and regulatory bodies worldwide are grappling with how to regulate AI. A scientifically grounded, widely adopted framework for measuring AI capability levels could directly inform policy thresholds, licensing requirements, and safety standards.</p>
+
+<h2>How to Get Started</h2>
+
+<p>Engaging with this framework can take several forms: reading and applying the conceptual model, participating in the Kaggle hackathon, or building your own evaluation suites inspired by the framework. Here's how to get started across all three paths.</p>
+
+<h3>Path 1: Study the Framework</h3>
+<ul>
+  <li>Read the official DeepMind blog post: <a href="https://deepmind.google/blog/measuring-progress-toward-agi-a-cognitive-framework/">https://deepmind.google/blog/measuring-progress-toward-agi-a-cognitive-framework/</a></li>
+  <li>Access the accompanying technical paper through the DeepMind research portal or arXiv.</li>
+  <li>Familiarize yourself with the cognitive domain taxonomy used in the framework.</li>
+</ul>
+
+<h3>Path 2: Join the Kaggle Hackathon</h3>
+<ul>
+  <li>Create or log in to your Kaggle account at <a href="https://www.kaggle.com">kaggle.com</a></li>
+  <li>Search for the DeepMind AGI Evaluation Hackathon competition page.</li>
+  <li>Review the competition rules, dataset access instructions, and submission format.</li>
+  <li>Install the Kaggle CLI for streamlined dataset access:</li>
+</ul>
+
+<pre><code># Install the Kaggle CLI
+pip install kaggle
+
+# Configure your API credentials
+# Download kaggle.json from your Kaggle account settings and place it at:
+# ~/.kaggle/kaggle.json (Linux/macOS)
+# C:\Users\<YourUsername>\.kaggle\kaggle.json (Windows)
+
+# Verify installation
+kaggle --version
+
+# List available competitions related to the hackathon
+kaggle competitions list --search "deepmind agi"
+</code></pre>
+
+<h3>Path 3: Build Evaluation Tools Locally</h3>
+<ul>
+  <li>Set up a Python environment for cognitive evaluation experiments:</li>
+</ul>
+
+<pre><code># Create and activate a virtual environment
+python -m venv agi-eval-env
+source agi-eval-env/bin/activate  # On Windows: agi-eval-env\Scripts\activate
+
+# Install core dependencies for evaluation work
+pip install openai anthropic transformers datasets
+pip install numpy pandas scikit-learn matplotlib seaborn
+pip install torch torchvision  # For model-level experiments
+pip install jupyter notebook    # For interactive exploration
+
+# Verify environment
+python -c "import transformers; print(transformers.__version__)"
+</code></pre>
+
+<h2>Step-by-Step Usage Guide</h2>
+
+<p>The following walkthrough demonstrates how to apply the DeepMind cognitive framework practically — mapping AI system capabilities to framework domains, designing evaluations, and analyzing results.</p>
+
+<h3>Step 1: Map the Cognitive Domain Taxonomy</h3>
+
+<p>The framework organizes cognition into domains. Your first step is to explicitly define which domains you want to evaluate. Based on the framework's structure, create a domain map:</p>
+
+<pre><code># cognitive_domains.py
+# Define the cognitive domain taxonomy from the DeepMind framework
+
+COGNITIVE_DOMAINS = {
+    "reasoning": {
+        "description": "Logical deduction, inductive reasoning, causal inference",
+        "subtypes": ["deductive", "inductive", "abductive", "causal", "analogical"]
+    },
+    "language": {
+        "description": "Comprehension, generation, translation, summarization",
+        "subtypes": ["reading_comprehension", "generation", "translation", "summarization"]
+    },
+    "memory": {
+        "description": "Working memory, long-term recall, episodic and semantic memory",
+        "subtypes": ["working_memory", "long_term_recall", "episodic", "semantic"]
+    },
+    "planning": {
+        "description": "Multi-step planning, goal setting, strategy formulation",
+        "subtypes": ["sequential_planning", "hierarchical_planning", "resource_allocation"]
+    },
+    "learning": {
+        "description": "Few-shot learning, transfer learning, adaptation",
+        "subtypes": ["few_shot", "zero_shot", "transfer", "continual"]
+    },
+    "perception": {
+        "description": "Visual, auditory, and multimodal perception and understanding",
+        "subtypes": ["visual", "auditory", "multimodal", "spatial"]
+    },
+    "social_intelligence": {
+        "description": "Theory of mind, emotion recognition, collaborative reasoning",
+        "subtypes": ["theory_of_mind", "emotion_recognition", "collaboration"]
+    },
+    "creativity": {
+        "description": "Novel generation, problem reformulation, artistic creation",
+        "subtypes": ["divergent_thinking", "combinatorial_creativity", "aesthetic_judgment"]
+    }
+}
+
+def list_domains():
+    for domain, info in COGNITIVE_DOMAINS.items():
+        print(f"\n📌 {domain.upper()}")
+        print(f"   Description: {info['description']}")
+        print(f"   Subtypes: {', '.join(info['subtypes'])}")
+
+if __name__ == "__main__":
+    list_domains()
+</code></pre>
+
+<h3>Step 2: Design Domain-Specific Evaluation Tasks</h3>
+
+<p>For each cognitive domain, design evaluation tasks that probe the relevant capabilities. Here's an example of building a small reasoning evaluation battery:</p>
+
+<pre><code># reasoning_eval.py
+# Build a reasoning evaluation suite aligned with the framework
+
+REASONING_TASKS = [
+    {
+        "id": "deductive_001",
+        "domain": "reasoning",
+        "subtype": "deductive",
+        "prompt": (
+            "All mammals are warm-blooded. Whales are mammals. "
+            "Are whales warm-blooded? Explain your reasoning step by step."
+        ),
+        "expected_answer": "Yes",
+        "evaluation_criteria": ["correct_conclusion", "valid_chain_of_reasoning"]
+    },
+    {
+        "id": "causal_001",
+        "domain": "reasoning",
+        "subtype": "causal",
+        "prompt": (
+            "A city introduces a congestion charge for driving into the city center. "
+            "Over the next year, air pollution in the city center decreases by 18%. "
+            "Identify two plausible causal pathways that could explain this outcome."
+        ),
+        "expected_answer": None,  # Open-ended, requires rubric evaluation
+        "evaluation_criteria": [
+            "identifies_direct_pathway",
+            "identifies_indirect_pathway",
+            "demonstrates_causal_language"
+        ]
+    },
+    {
+        "id": "analogical_001",
+        "domain": "reasoning",
+        "subtype": "analogical",
+        "prompt": (
+            "Doctor is to patient as teacher is to ___? "
+            "Now create a novel analogy that follows the same structural relationship "
+            "but uses concepts from technology."
+        ),
+        "expected_answer": "student",
+        "evaluation_criteria": ["correct_completion", "novel_analogy_quality"]
+    }
+]
+
+def display_tasks(tasks):
+    for task in tasks:
+        print(f"\n{'='*60}")
+        print(f"Task ID: {task['id']}")
+        print(f"Domain: {task['domain']} > {task['subtype']}")
+        print(f"Prompt: {task['prompt']}")
+        print(f"Evaluation Criteria: {', '.join(task['evaluation_criteria'])}")
+
+if __name__ == "__main__":
+    display_tasks(REASONING_TASKS)
+</code></pre>
+
+<h3>Step 3: Run Evaluations Against an AI Model</h3>
+
+<p>Using the OpenAI API (or any compatible LLM endpoint), run your evaluation battery and collect structured results:</p>
+
+<pre><code># run_evaluation.py
+import openai
+import json
+import time
+from reasoning_eval import REASONING_TASKS
+
+client = openai.OpenAI(api_key="YOUR_API_KEY_HERE")
+
+def evaluate_model_on_task(task, model="gpt-4o"):
+    """Run a single evaluation task and return structured results."""
+    response = client.chat.completions.create(
+        model=model,
+        messages=[
+            {
+                "role": "system",
+                "content": (
+                    "You are being evaluated on cognitive tasks. "
+                    "Respond clearly and show your reasoning where appropriate."
+                )
+            },
+            {"role": "user", "content": task["prompt"]}
+        ],
+        temperature=0.0,  # Deterministic for evaluation
+        max_tokens=500
+    )
+    
+    return {
+        "task_id": task["id"],
+        "domain": task["domain"],
+        "subtype": task["subtype"],
+        "model": model,
+        "response": response.choices[0].message.content,
+        "tokens_used": response.usage.total_tokens,
+        "prompt_tokens": response.usage.prompt_tokens,
+        "completion_tokens": response.usage.completion_tokens
+    }
+
+def run_full_evaluation(tasks, model="gpt-4o", output_file="eval_results.json"):
+    """Run all tasks and save results to JSON."""
+    results = []
+    
+    for i, task in enumerate(tasks):
+        print(f"Running task {i+1}/{len(tasks)}: {task['id']}...")
+        try:
+            result = evaluate_model_on_task(task, model)
+            results.append(result)
+            time.sleep(1)  # Respect rate limits
+        except Exception as e:
+            print(f"Error on task {task['id']}: {e}")
+            results.append({
+                "task_id": task["id"],
+                "error": str(e)
+            })
+    
+    with open(output_file, "w") as f:
+        json.dump(results, f, indent=2)
+    
+    print(f"\n✅ Evaluation complete. Results saved to {output_file}")
+    return results
+
+if __name__ == "__main__":
+    results = run_full_evaluation(REASONING_TASKS)
+    for r in results:
+        print(f"\nTask: {r['task_id']}")
+        print(f"Response: {r.get('response', 'ERROR')[:200]}...")
+</code></pre>
+
+<h3>Step 4: Score and Analyze Results Using the Framework's Tier System</h3>
+
+<p>The DeepMind framework proposes capability tiers (from narrow/task-specific to broadly general). Apply a scoring system that maps evaluation performance to framework tiers:</p>
+
+<pre><code># score_and_tier.py
+import json
+
+# Framework-inspired capability tiers
+CAPABILITY_TIERS = {
+    1: "Narrow Task Performance — excels at specific prompted tasks",
+    2: "Emergent Generalization — shows transfer within a domain",
+    3: "Cross-Domain Reasoning — applies concepts across cognitive domains",
+    4: "Autonomous Learning — adapts with minimal supervision",
+    5: "Human-Level General Cognition — matches human performance broadly",
+    6: "Superhuman General Cognition — exceeds human performance broadly"
+}
+
+def compute_domain_score(results, domain):
+    """Compute a raw pass rate for a given domain (placeholder scoring)."""
+    domain_results = [r for r in results if r.get("domain") == domain]
+    if not domain_results:
+        return None
+    
+    # In a real system, this would use rubric-based human or LLM judging
+    # Here we use response length as a naive proxy for completeness
+    scores = []
+    for r in domain_results:
+        response = r.get("response", "")
+        # Naive proxy: longer, more structured responses score higher
+        score = min(len(response) / 300, 1.0)
+        scores.append(score)
+    
+    return sum(scores) / len(scores)
+
+def assign_tier(domain_scores):
+    """Map average domain score to a capability tier."""
+    avg_score = sum(domain_scores.values()) / len(domain_scores)
+    if avg_score >= 0.9:
+        return 5
+    elif avg_score >= 0.75:
+        return 4
+    elif avg_score >= 0.55:
+        return 3
+    elif avg_score >= 0.35:
+        return 2
+    else:
+        return 1
+
+def generate_report(results_file="eval_results.json"):
+    with open(results_file) as f:
+        results = json.load(f)
+    
+    domains = list(set(r["domain"] for r in results if "domain" in r))
+    domain_scores = {}
+    
+    print("\n📊 COGNITIVE FRAMEWORK EVALUATION REPORT")
+    print("=" * 50)
+    
+    for domain in domains:
+        score = compute_domain_score(results, domain)
+        if score is not None:
+            domain_scores[domain] = score
+            print(f"  {domain.upper()}: {score:.2f} / 1.00")
+    
+    </article>
+  </main>
+
+  <!-- Back to Top -->
+  <button id="back-to-top" aria-label="Back to top" title="Back to top">&#8593;</button>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 <a href="../index.html">Kiwolo.io</a> &middot; Daily AI Tech Guides</p>
+  </footer>
+
+  <script>
+    // ── Theme Toggle ──
+    const toggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+
+    function getTheme() {
+      return localStorage.getItem('kiwolo-theme') ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    }
+
+    function applyTheme(theme) {
+      html.setAttribute('data-theme', theme);
+      toggle.textContent = theme === 'dark' ? '☀' : '🌙';
+      localStorage.setItem('kiwolo-theme', theme);
+    }
+
+    applyTheme(getTheme());
+
+    toggle.addEventListener('click', () => {
+      applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    });
+
+    // ── Reading Progress Bar ──
+    const bar = document.getElementById('progress-bar');
+
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? Math.round((scrollTop / docHeight) * 100) : 0;
+      bar.style.width = pct + '%';
+      bar.setAttribute('aria-valuenow', pct);
+    }
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+
+    // ── Back to Top ──
+    const backTop = document.getElementById('back-to-top');
+
+    window.addEventListener('scroll', () => {
+      backTop.classList.toggle('visible', window.scrollY > 400);
+    }, { passive: true });
+
+    backTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>

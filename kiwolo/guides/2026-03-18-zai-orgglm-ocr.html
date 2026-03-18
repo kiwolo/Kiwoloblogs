@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>zai-org/GLM-OCR | Kiwolo.io</title>
+  <meta name="description" content="What It Is GLM-OCR is a specialized multimodal vision-language model developed by zai-org (Zhipu AI) and hosted on HuggingFace at zai-org/GLM-OCR. Built on top of the GLM (General Language Model) arch...">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://kiwolo.io/guides/zai-orgglm-ocr">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="zai-org/GLM-OCR">
+  <meta property="og:description" content="What It Is GLM-OCR is a specialized multimodal vision-language model developed by zai-org (Zhipu AI) and hosted on HuggingFace at zai-org/GLM-OCR. Built on top of the GLM (General Language Model) arch...">
+  <meta property="og:url" content="https://kiwolo.io/guides/zai-orgglm-ocr">
+  <meta property="og:site_name" content="Kiwolo.io">
+  <meta property="article:published_time" content="2026-03-18">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="zai-org/GLM-OCR">
+  <meta name="twitter:description" content="What It Is GLM-OCR is a specialized multimodal vision-language model developed by zai-org (Zhipu AI) and hosted on HuggingFace at zai-org/GLM-OCR. Built on top of the GLM (General Language Model) arch...">
+
+  <!-- Custom metadata -->
+  <meta name="kiwolo:source" content="huggingface">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "zai-org/GLM-OCR",
+    "description": "What It Is GLM-OCR is a specialized multimodal vision-language model developed by zai-org (Zhipu AI) and hosted on HuggingFace at zai-org/GLM-OCR. Built on top of the GLM (General Language Model) arch...",
+    "datePublished": "2026-03-18",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Kiwolo.io",
+      "url": "https://kiwolo.io"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://kiwolo.io/guides/zai-orgglm-ocr"
+    }
+  }
+  </script>
+
+  <style>
+    /* ── CSS Variables ── */
+    :root {
+      --bg: #0f0f13;
+      --surface: #1a1a23;
+      --border: #2a2a38;
+      --accent: #7c6dfa;
+      --text: #e2e2ee;
+      --muted: #888899;
+      --code-bg: #13131c;
+      --header-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      --radius: 8px;
+      --transition: 0.2s ease;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root:not([data-theme="dark"]) {
+        --bg: #f5f5f8;
+        --surface: #ffffff;
+        --border: #dcdce8;
+        --accent: #5c4ee8;
+        --text: #1a1a2e;
+        --muted: #666677;
+        --code-bg: #f0f0f5;
+        --header-bg: linear-gradient(135deg, #e8e8f8 0%, #d8e0f0 50%, #c8d8f0 100%);
+      }
+    }
+
+    [data-theme="light"] {
+      --bg: #f5f5f8;
+      --surface: #ffffff;
+      --border: #dcdce8;
+      --accent: #5c4ee8;
+      --text: #1a1a2e;
+      --muted: #666677;
+      --code-bg: #f0f0f5;
+      --header-bg: linear-gradient(135deg, #e8e8f8 0%, #d8e0f0 50%, #c8d8f0 100%);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0f0f13;
+      --surface: #1a1a23;
+      --border: #2a2a38;
+      --accent: #7c6dfa;
+      --text: #e2e2ee;
+      --muted: #888899;
+      --code-bg: #13131c;
+      --header-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    }
+
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    /* ── Reading Progress Bar ── */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: var(--accent);
+      z-index: 1000;
+      transition: width 0.1s linear;
+    }
+
+    /* ── Theme Toggle ── */
+    #theme-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 999;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition), border-color var(--transition), transform var(--transition);
+    }
+
+    #theme-toggle:hover {
+      border-color: var(--accent);
+      transform: scale(1.1);
+    }
+
+    /* ── Header ── */
+    .site-header {
+      background: var(--header-bg);
+      padding: 48px 24px 40px;
+      text-align: center;
+      position: relative;
+    }
+
+    .site-logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 16px;
+      opacity: 0.9;
+    }
+
+    .site-logo:hover { opacity: 1; }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      margin-bottom: 24px;
+      transition: color var(--transition);
+    }
+
+    .back-link:hover { color: var(--accent); }
+
+    .article-badge {
+      display: inline-block;
+      background: rgba(124, 109, 250, 0.15);
+      color: var(--accent);
+      border: 1px solid rgba(124, 109, 250, 0.3);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 20px;
+    }
+
+    .article-title {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.25;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      max-width: 820px;
+      margin: 0 auto 20px;
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    .article-meta time { font-variant-numeric: tabular-nums; }
+
+    .article-meta a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    .article-meta a:hover { color: var(--accent); }
+
+    .meta-sep { opacity: 0.4; }
+
+    /* ── Main Content ── */
+    main {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* ── Typography ── */
+    .content h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 2.5rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      letter-spacing: -0.3px;
+    }
+
+    .content h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 2rem 0 0.75rem;
+      letter-spacing: -0.2px;
+    }
+
+    .content h4 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 1.5rem 0 0.5rem;
+    }
+
+    .content p {
+      margin-bottom: 1.25rem;
+      color: var(--text);
+    }
+
+    .content a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-color: rgba(124, 109, 250, 0.4);
+      transition: text-decoration-color var(--transition);
+    }
+
+    .content a:hover { text-decoration-color: var(--accent); }
+
+    /* ── Lists ── */
+    .content ul, .content ol {
+      margin: 1rem 0 1.25rem 1.5rem;
+    }
+
+    .content li {
+      margin-bottom: 0.5rem;
+      padding-left: 0.25rem;
+    }
+
+    .content ul li::marker { color: var(--accent); }
+    .content ol li::marker { color: var(--accent); font-weight: 600; }
+
+    /* ── Code ── */
+    .content code {
+      font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", Consolas, monospace;
+      font-size: 0.875em;
+      background: var(--code-bg);
+      color: #b8b0ff;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    .content pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      position: relative;
+    }
+
+    .content pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 0.875rem;
+      color: #c8c0ff;
+      line-height: 1.6;
+    }
+
+    /* ── Blockquote ── */
+    .content blockquote {
+      border-left: 3px solid var(--accent);
+      background: var(--surface);
+      padding: 16px 20px;
+      margin: 1.5rem 0;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ── Callout ── */
+    .callout {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin: 1.5rem 0;
+    }
+
+    .callout.info { border-left-color: #4a9eff; }
+    .callout.warning { border-left-color: #f5a623; }
+    .callout.success { border-left-color: #50c878; }
+    .callout.danger { border-left-color: #ff5f5f; }
+
+    .callout-title {
+      font-weight: 700;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+
+    .callout.info .callout-title { color: #4a9eff; }
+    .callout.warning .callout-title { color: #f5a623; }
+    .callout.success .callout-title { color: #50c878; }
+    .callout.danger .callout-title { color: #ff5f5f; }
+
+    /* ── Pros / Cons ── */
+    .pros-cons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 1.5rem 0;
+    }
+
+    @media (max-width: 560px) {
+      .pros-cons { grid-template-columns: 1fr; }
+    }
+
+    .pros, .cons {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+    }
+
+    .pros { border-top: 3px solid #50c878; }
+    .cons { border-top: 3px solid #ff5f5f; }
+
+    .pros h4, .cons h4 {
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+      margin-top: 0;
+    }
+
+    .pros h4 { color: #50c878; }
+    .cons h4 { color: #ff5f5f; }
+
+    .pros ul, .cons ul {
+      margin: 0;
+      list-style: none;
+      padding: 0;
+    }
+
+    .pros li::before { content: "+ "; color: #50c878; font-weight: 700; }
+    .cons li::before { content: "− "; color: #ff5f5f; font-weight: 700; }
+
+    /* ── Table ── */
+    .content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    .content th {
+      background: var(--surface);
+      color: var(--text);
+      font-weight: 600;
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .content td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .content tr:last-child td { border-bottom: none; }
+    .content tbody tr:hover { background: var(--surface); }
+
+    /* ── Horizontal Rule ── */
+    .content hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2.5rem 0;
+    }
+
+    /* ── Back to Top ── */
+    #back-to-top {
+      position: fixed;
+      bottom: 28px;
+      right: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition), border-color var(--transition), transform var(--transition);
+      z-index: 900;
+    }
+
+    #back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #back-to-top:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 24px;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    footer a:hover { color: var(--accent); }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      main { padding: 32px 16px 64px; }
+      .site-header { padding: 40px 16px 32px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Reading Progress Bar -->
+  <div id="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
+  <!-- Theme Toggle -->
+  <button id="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light theme">🌙</button>
+
+  <!-- Header -->
+  <header class="site-header">
+    <a href="../index.html" class="site-logo">Kiwolo.io</a>
+    <br>
+    <a href="../index.html" class="back-link">&#8592; Back to Kiwolo.io</a>
+    <div>
+      <span class="article-badge">huggingface</span>
+    </div>
+    <h1 class="article-title">zai-org/GLM-OCR</h1>
+    <div class="article-meta">
+      <time datetime="2026-03-18">March 18, 2026</time>
+      <span class="meta-sep">·</span>
+      <a href="https://huggingface.co/zai-org/GLM-OCR" target="_blank" rel="noopener noreferrer">View Source ↗</a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <article class="content">
+      <h2>What It Is</h2>
+
+<p><strong>GLM-OCR</strong> is a specialized multimodal vision-language model developed by <strong>zai-org</strong> (Zhipu AI) and hosted on HuggingFace at <a href="https://huggingface.co/zai-org/GLM-OCR" target="_blank">zai-org/GLM-OCR</a>. Built on top of the GLM (General Language Model) architecture — the same family behind ChatGLM — GLM-OCR is purpose-built for <strong>Optical Character Recognition (OCR) and document understanding</strong> tasks, combining the power of large language models with robust visual perception capabilities.</p>
+
+<p>Unlike traditional OCR engines (like Tesseract or PaddleOCR) that rely on classical computer vision pipelines, GLM-OCR is an <strong>image-text-to-text</strong> and <strong>image-to-text</strong> transformer model that understands the semantic context of text within images. It can process complex layouts — including tables, forms, receipts, handwritten notes, and mixed-language documents — and return structured, coherent textual output.</p>
+
+<p>The model is distributed in the <strong>SafeTensors</strong> format, ensuring safe and efficient model weight loading, and integrates seamlessly with the HuggingFace <code>transformers</code> library. It falls under the <code>glm_ocr</code> model architecture tag, indicating a custom backbone tailored for visual document parsing workflows.</p>
+
+<h3>Core Architecture Highlights</h3>
+<ul>
+  <li><strong>Backbone:</strong> GLM-series transformer with a vision encoder (likely ViT-based) fused to a language decoder</li>
+  <li><strong>Task Tags:</strong> <code>image-text-to-text</code>, <code>image-to-text</code></li>
+  <li><strong>Format:</strong> SafeTensors (secure, fast weight serialization)</li>
+  <li><strong>Framework:</strong> HuggingFace Transformers-compatible</li>
+  <li><strong>Developer:</strong> Zhipu AI (zai-org), known for the ChatGLM and CogVLM series</li>
+</ul>
+
+<h2>Why It Matters</h2>
+
+<p>OCR is one of the oldest problems in AI, yet it remains unsolved for complex, real-world documents. Traditional OCR tools struggle with:</p>
+<ul>
+  <li>Dense multi-column layouts (academic papers, newspapers)</li>
+  <li>Mixed-language and multilingual documents</li>
+  <li>Handwritten or stylized text</li>
+  <li>Tables, charts, and semi-structured forms</li>
+  <li>Low-resolution or noisy scans</li>
+</ul>
+
+<p>GLM-OCR addresses these pain points by bringing <strong>LLM-level semantic understanding</strong> to the OCR problem. Rather than just recognizing characters, it understands <em>what those characters mean in context</em> — enabling tasks like extracting specific fields from invoices, summarizing a scanned document, or answering questions about image-embedded text.</p>
+
+<p>The significance of this model in the broader AI landscape is threefold:</p>
+<ul>
+  <li><strong>Enterprise document automation:</strong> Companies processing thousands of PDFs, invoices, or contracts per day can use GLM-OCR to replace fragile rule-based pipelines.</li>
+  <li><strong>Multilingual capability:</strong> Zhipu AI's models have historically excelled at Chinese-English bilingual tasks, making GLM-OCR particularly valuable for Asian market documents.</li>
+  <li><strong>Open-weight availability:</strong> Unlike proprietary OCR APIs (Google Vision AI, AWS Textract), GLM-OCR can be run <strong>on-premises</strong>, which is critical for privacy-sensitive industries like healthcare and legal.</li>
+</ul>
+
+<h2>How to Get Started</h2>
+
+<h3>Prerequisites</h3>
+<ul>
+  <li>Python 3.9 or later</li>
+  <li>CUDA-compatible GPU (recommended: 16GB+ VRAM) or CPU with sufficient RAM</li>
+  <li>HuggingFace account (for model access)</li>
+</ul>
+
+<h3>Installation</h3>
+
+<pre><code># Step 1: Create a virtual environment (recommended)
+python -m venv glm-ocr-env
+source glm-ocr-env/bin/activate  # On Windows: glm-ocr-env\Scripts\activate
+
+# Step 2: Install core dependencies
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+
+# Step 3: Install HuggingFace Transformers and related libraries
+pip install transformers accelerate safetensors pillow requests
+
+# Step 4: (Optional) Install HuggingFace Hub CLI for model management
+pip install huggingface_hub
+huggingface-cli login  # Authenticate with your HF token
+</code></pre>
+
+<h3>Model Download</h3>
+
+<pre><code># Download model weights using HuggingFace Hub
+from huggingface_hub import snapshot_download
+
+snapshot_download(
+    repo_id="zai-org/GLM-OCR",
+    local_dir="./glm-ocr-weights"
+)
+</code></pre>
+
+<h2>Step-by-Step Usage Guide</h2>
+
+<h3>Step 1: Load the Model and Processor</h3>
+<p>Start by loading the tokenizer/processor and the model from HuggingFace. GLM-OCR uses a combined vision-language processor to handle both image inputs and text prompts.</p>
+
+<pre><code>from transformers import AutoProcessor, AutoModelForCausalLM
+import torch
+
+MODEL_ID = "zai-org/GLM-OCR"
+
+# Load processor (handles image preprocessing + tokenization)
+processor = AutoProcessor.from_pretrained(MODEL_ID, trust_remote_code=True)
+
+# Load model with automatic device mapping
+model = AutoModelForCausalLM.from_pretrained(
+    MODEL_ID,
+    torch_dtype=torch.float16,       # Use float16 for GPU efficiency
+    device_map="auto",               # Automatically assign to GPU/CPU
+    trust_remote_code=True
+)
+model.eval()
+print("Model loaded successfully.")
+</code></pre>
+
+<h3>Step 2: Prepare Your Input Image</h3>
+<p>GLM-OCR accepts standard image formats (JPEG, PNG, TIFF). Here we load an image from disk and prepare it with the processor alongside an instruction prompt.</p>
+
+<pre><code>from PIL import Image
+
+# Load your document image
+image = Image.open("./sample_invoice.png").convert("RGB")
+
+# Define your OCR instruction prompt
+prompt = "Please extract all text from this document, preserving the original structure and layout as much as possible."
+
+# Process inputs
+inputs = processor(
+    text=prompt,
+    images=image,
+    return_tensors="pt"
+).to(model.device)
+
+print(f"Input image size: {image.size}")
+print(f"Input tensor shapes: { {k: v.shape for k, v in inputs.items()} }")
+</code></pre>
+
+<h3>Step 3: Run Inference and Decode Output</h3>
+<p>Pass the processed inputs to the model's <code>generate()</code> method and decode the token output back into readable text.</p>
+
+<pre><code>with torch.no_grad():
+    output_ids = model.generate(
+        **inputs,
+        max_new_tokens=1024,       # Adjust based on document length
+        do_sample=False,           # Greedy decoding for deterministic OCR
+        temperature=1.0,
+        repetition_penalty=1.1
+    )
+
+# Decode generated tokens, skipping special tokens
+generated_text = processor.batch_decode(
+    output_ids[:, inputs["input_ids"].shape[1]:],  # Only new tokens
+    skip_special_tokens=True
+)[0]
+
+print("=== Extracted Text ===")
+print(generated_text)
+</code></pre>
+
+<h3>Step 4: Handle Batch Processing for Multiple Documents</h3>
+<p>For production scenarios involving many documents, process them in batches to maximize GPU utilization.</p>
+
+<pre><code>from pathlib import Path
+
+image_paths = list(Path("./documents/").glob("*.png"))
+results = {}
+
+for img_path in image_paths:
+    image = Image.open(img_path).convert("RGB")
+    inputs = processor(
+        text="Extract all text from this document.",
+        images=image,
+        return_tensors="pt"
+    ).to(model.device)
+
+    with torch.no_grad():
+        output_ids = model.generate(**inputs, max_new_tokens=512, do_sample=False)
+
+    text = processor.batch_decode(
+        output_ids[:, inputs["input_ids"].shape[1]:],
+        skip_special_tokens=True
+    )[0]
+
+    results[img_path.name] = text
+    print(f"Processed: {img_path.name}")
+
+# Save results
+import json
+with open("ocr_results.json", "w", encoding="utf-8") as f:
+    json.dump(results, f, ensure_ascii=False, indent=2)
+
+print("All documents processed.")
+</code></pre>
+
+<h2>5+ Real-World Use Cases</h2>
+
+<h3>1. Invoice and Receipt Processing (Accounts Payable Automation)</h3>
+<p>Extract structured data from supplier invoices to automatically populate ERP systems, eliminating manual data entry.</p>
+
+<pre><code>prompt = """Extract the following fields from this invoice as JSON:
+- Invoice Number
+- Date
+- Vendor Name
+- Line Items (description, quantity, unit price, total)
+- Subtotal, Tax, Grand Total"""
+
+image = Image.open("invoice_2024.jpg").convert("RGB")
+inputs = processor(text=prompt, images=image, return_tensors="pt").to(model.device)
+
+with torch.no_grad():
+    output = model.generate(**inputs, max_new_tokens=800, do_sample=False)
+
+json_output = processor.batch_decode(
+    output[:, inputs["input_ids"].shape[1]:], skip_special_tokens=True
+)[0]
+print(json_output)
+</code></pre>
+
+<h3>2. Legal Contract Analysis</h3>
+<p>Scan and extract key clauses, party names, dates, and obligations from scanned legal agreements — all processed locally to maintain client confidentiality.</p>
+
+<pre><code>prompt = "Extract party names, effective date, termination clauses, and payment terms from this contract."
+# Same pattern as above — swap the image and prompt accordingly
+</code></pre>
+
+<h3>3. Academic Paper Digitization</h3>
+<p>Convert scanned academic papers, including mathematical formulas and multi-column layouts, into clean, editable text for researchers building literature review databases.</p>
+
+<pre><code>prompt = "Transcribe this academic paper page exactly, including section headings, body text, and any mathematical expressions in LaTeX notation."
+</code></pre>
+
+<h3>4. Multilingual Signage and Menu Translation</h3>
+<p>For travel apps or accessibility tools, extract text from images of menus or signage in Chinese, Japanese, Korean, or English and feed it to a translation pipeline.</p>
+
+<pre><code>from transformers import pipeline
+
+# Step 1: OCR with GLM-OCR
+ocr_prompt = "Read all text visible in this image."
+# ... (run inference as shown above) ...
+
+# Step 2: Translate using a separate translation pipeline
+translator = pipeline("translation", model="Helsinki-NLP/opus-mt-zh-en")
+translated = translator(extracted_text)
+print(translated[0]['translation_text'])
+</code></pre>
+
+<h3>5. Medical Record Digitization</h3>
+<p>Healthcare providers can convert handwritten or printed patient records, prescriptions, and lab reports into structured digital data — processed on-premises to maintain HIPAA compliance.</p>
+
+<pre><code>prompt = """Extract patient name, date of birth, diagnosis codes (ICD-10),
+prescribed medications with dosages, and attending physician name."""
+</code></pre>
+
+<h3>6. E-commerce Product Catalog Extraction</h3>
+<p>Retailers scraping product information from supplier catalogs (PDFs or images) can automate SKU, pricing, and description extraction at scale.</p>
+
+<pre><code>prompt = "List all products on this catalog page as JSON with fields: SKU, product name, description, price, and availability."
+</code></pre>
+
+<h2>Code Examples</h2>
+
+<h3>Complete End-to-End OCR Pipeline</h3>
+
+<pre><code>"""
+GLM-OCR: Complete End-to-End Document OCR Pipeline
+Kiwolo.io Technical Guide Example
+"""
+
+import torch
+from PIL import Image
+from transformers import AutoProcessor, AutoModelForCausalLM
+import json
+
+def load_glm_ocr(model_id: str = "zai-org/GLM-OCR"):
+    """Load GLM-OCR model and processor."""
+    print(f"Loading model from: {model_id}")
+    processor = AutoProcessor.from_pretrained(model_id, trust_remote_code=True)
+    model = AutoModelForCausalLM.from_pretrained(
+        model_id,
+        torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32,
+        device_map="auto",
+        trust_remote_code=True
+    )
+    model.eval()
+    print(f"Model loaded on device: {next(model.parameters()).device}")
+    return model, processor
+
+
+def run_ocr(
+    model,
+    processor,
+    image_path: str,
+    prompt: str = "Extract all text from this document.",
+    max_new_tokens: int = 1024
+) -> str:
+    """Run OCR on a single image file."""
+    # Load and preprocess image
+    image = Image.open(image_path).convert("RGB")
+
+    # Tokenize inputs
+    inputs = processor(
+        text=prompt,
+        images=image,
+        return_tensors="pt"
+    ).to(next(model.parameters()).device)
+
+    # Generate output
+    with torch.no_grad():
+        output_ids = model.generate(
+            **inputs,
+            max_new_tokens=max_new_tokens,
+            do_sample=False,
+            repetition_penalty=1.1
+        )
+
+    # Decode only the newly generated tokens
+    new_tokens = output_ids[:, inputs["input_ids"].shape[1]:]
+    result = processor.batch_decode(new_tokens, skip_special_tokens=True)[0]
+    return result.strip()
+
+
+if __name__ == "__main__":
+    model, processor = load_glm_ocr()
+
+    # Example 1: Simple text extraction
+    text = run_ocr(model, processor, "document.png")
+    print("Extracted Text:\n", text)
+
+    # Example 2: Structured extraction
+    structured_prompt = "Extract all data from this form as a JSON object."
+    structured_data = run_ocr(model, processor, "form.png", prompt=structured_prompt)
+    print("\nStructured Output:\n", structured_data)
+
+    # Try to parse as JSON
+    try:
+        parsed = json.loads(structured_data)
+        print("\nParsed JSON:", json.dumps(parsed, indent=2))
+    except json.JSONDecodeError:
+        print("Output is not valid JSON — may need post-processing.")
+</code></pre>
+
+<h3>Gradio Web App for GLM-OCR</h3>
+
+<pre><code>"""
+GLM-OCR Gradio Interface — Quick Demo App
+Run with: python glm_ocr_app.py
+"""
+
+import gradio as gr
+import torch
+from PIL import Image
+from transformers import AutoProcessor, AutoModelForCausalLM
+
+MODEL_ID = "zai-org/GLM-OCR"
+processor = AutoProcessor.from_pretrained(MODEL_ID, trust_remote_code=True)
+model = AutoModelForCausalLM.from_pretrained(
+    MODEL_ID,
+    torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32,
+    device_map="auto",
+    trust_remote_code=True
+)
+model.eval
+    </article>
+  </main>
+
+  <!-- Back to Top -->
+  <button id="back-to-top" aria-label="Back to top" title="Back to top">&#8593;</button>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 <a href="../index.html">Kiwolo.io</a> &middot; Daily AI Tech Guides</p>
+  </footer>
+
+  <script>
+    // ── Theme Toggle ──
+    const toggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+
+    function getTheme() {
+      return localStorage.getItem('kiwolo-theme') ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    }
+
+    function applyTheme(theme) {
+      html.setAttribute('data-theme', theme);
+      toggle.textContent = theme === 'dark' ? '☀' : '🌙';
+      localStorage.setItem('kiwolo-theme', theme);
+    }
+
+    applyTheme(getTheme());
+
+    toggle.addEventListener('click', () => {
+      applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    });
+
+    // ── Reading Progress Bar ──
+    const bar = document.getElementById('progress-bar');
+
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? Math.round((scrollTop / docHeight) * 100) : 0;
+      bar.style.width = pct + '%';
+      bar.setAttribute('aria-valuenow', pct);
+    }
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+
+    // ── Back to Top ──
+    const backTop = document.getElementById('back-to-top');
+
+    window.addEventListener('scroll', () => {
+      backTop.classList.toggle('visible', window.scrollY > 400);
+    }, { passive: true });
+
+    backTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>

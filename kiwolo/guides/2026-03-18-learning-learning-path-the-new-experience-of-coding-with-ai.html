@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning Path: The New Experience of Coding with AI | Kiwolo.io</title>
+  <meta name="description" content="```html What You'll Learn This learning path guides you through the rapidly evolving world of AI-assisted coding — one of the most transformative shifts in modern software development. By the end, you...">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://kiwolo.io/guides/learning-path-the-new-experience-of-coding-with-ai">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Learning Path: The New Experience of Coding with AI">
+  <meta property="og:description" content="```html What You'll Learn This learning path guides you through the rapidly evolving world of AI-assisted coding — one of the most transformative shifts in modern software development. By the end, you...">
+  <meta property="og:url" content="https://kiwolo.io/guides/learning-path-the-new-experience-of-coding-with-ai">
+  <meta property="og:site_name" content="Kiwolo.io">
+  <meta property="article:published_time" content="2026-03-18">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Learning Path: The New Experience of Coding with AI">
+  <meta name="twitter:description" content="```html What You'll Learn This learning path guides you through the rapidly evolving world of AI-assisted coding — one of the most transformative shifts in modern software development. By the end, you...">
+
+  <!-- Custom metadata -->
+  <meta name="kiwolo:source" content="learning-resource">
+  <meta name="kiwolo:source-label" content="Towards Data Science">
+  <meta name="kiwolo:section" content="learning-path">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Learning Path: The New Experience of Coding with AI",
+    "description": "```html What You'll Learn This learning path guides you through the rapidly evolving world of AI-assisted coding — one of the most transformative shifts in modern software development. By the end, you...",
+    "datePublished": "2026-03-18",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Kiwolo.io",
+      "url": "https://kiwolo.io"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://kiwolo.io/guides/learning-path-the-new-experience-of-coding-with-ai"
+    }
+  }
+  </script>
+
+  <style>
+    /* ── CSS Variables ── */
+    :root {
+      --bg: #0f0f13;
+      --surface: #1a1a23;
+      --border: #2a2a38;
+      --accent: #7c6dfa;
+      --text: #e2e2ee;
+      --muted: #888899;
+      --code-bg: #13131c;
+      --header-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      --radius: 8px;
+      --transition: 0.2s ease;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root:not([data-theme="dark"]) {
+        --bg: #f5f5f8;
+        --surface: #ffffff;
+        --border: #dcdce8;
+        --accent: #5c4ee8;
+        --text: #1a1a2e;
+        --muted: #666677;
+        --code-bg: #f0f0f5;
+        --header-bg: linear-gradient(135deg, #e8e8f8 0%, #d8e0f0 50%, #c8d8f0 100%);
+      }
+    }
+
+    [data-theme="light"] {
+      --bg: #f5f5f8;
+      --surface: #ffffff;
+      --border: #dcdce8;
+      --accent: #5c4ee8;
+      --text: #1a1a2e;
+      --muted: #666677;
+      --code-bg: #f0f0f5;
+      --header-bg: linear-gradient(135deg, #e8e8f8 0%, #d8e0f0 50%, #c8d8f0 100%);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0f0f13;
+      --surface: #1a1a23;
+      --border: #2a2a38;
+      --accent: #7c6dfa;
+      --text: #e2e2ee;
+      --muted: #888899;
+      --code-bg: #13131c;
+      --header-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    }
+
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    /* ── Reading Progress Bar ── */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: var(--accent);
+      z-index: 1000;
+      transition: width 0.1s linear;
+    }
+
+    /* ── Theme Toggle ── */
+    #theme-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 999;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition), border-color var(--transition), transform var(--transition);
+    }
+
+    #theme-toggle:hover {
+      border-color: var(--accent);
+      transform: scale(1.1);
+    }
+
+    /* ── Header ── */
+    .site-header {
+      background: var(--header-bg);
+      padding: 48px 24px 40px;
+      text-align: center;
+      position: relative;
+    }
+
+    .site-logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 16px;
+      opacity: 0.9;
+    }
+
+    .site-logo:hover { opacity: 1; }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      margin-bottom: 24px;
+      transition: color var(--transition);
+    }
+
+    .back-link:hover { color: var(--accent); }
+
+    .article-badge {
+      display: inline-block;
+      background: rgba(124, 109, 250, 0.15);
+      color: var(--accent);
+      border: 1px solid rgba(124, 109, 250, 0.3);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 20px;
+    }
+
+    .article-title {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.25;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      max-width: 820px;
+      margin: 0 auto 20px;
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    .article-meta time { font-variant-numeric: tabular-nums; }
+
+    .article-meta a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    .article-meta a:hover { color: var(--accent); }
+
+    .meta-sep { opacity: 0.4; }
+
+    /* ── Main Content ── */
+    main {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* ── Typography ── */
+    .content h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 2.5rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      letter-spacing: -0.3px;
+    }
+
+    .content h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 2rem 0 0.75rem;
+      letter-spacing: -0.2px;
+    }
+
+    .content h4 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 1.5rem 0 0.5rem;
+    }
+
+    .content p {
+      margin-bottom: 1.25rem;
+      color: var(--text);
+    }
+
+    .content a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-color: rgba(124, 109, 250, 0.4);
+      transition: text-decoration-color var(--transition);
+    }
+
+    .content a:hover { text-decoration-color: var(--accent); }
+
+    /* ── Lists ── */
+    .content ul, .content ol {
+      margin: 1rem 0 1.25rem 1.5rem;
+    }
+
+    .content li {
+      margin-bottom: 0.5rem;
+      padding-left: 0.25rem;
+    }
+
+    .content ul li::marker { color: var(--accent); }
+    .content ol li::marker { color: var(--accent); font-weight: 600; }
+
+    /* ── Code ── */
+    .content code {
+      font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", Consolas, monospace;
+      font-size: 0.875em;
+      background: var(--code-bg);
+      color: #b8b0ff;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    .content pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      position: relative;
+    }
+
+    .content pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 0.875rem;
+      color: #c8c0ff;
+      line-height: 1.6;
+    }
+
+    /* ── Blockquote ── */
+    .content blockquote {
+      border-left: 3px solid var(--accent);
+      background: var(--surface);
+      padding: 16px 20px;
+      margin: 1.5rem 0;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ── Callout ── */
+    .callout {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin: 1.5rem 0;
+    }
+
+    .callout.info { border-left-color: #4a9eff; }
+    .callout.warning { border-left-color: #f5a623; }
+    .callout.success { border-left-color: #50c878; }
+    .callout.danger { border-left-color: #ff5f5f; }
+
+    .callout-title {
+      font-weight: 700;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+
+    .callout.info .callout-title { color: #4a9eff; }
+    .callout.warning .callout-title { color: #f5a623; }
+    .callout.success .callout-title { color: #50c878; }
+    .callout.danger .callout-title { color: #ff5f5f; }
+
+    /* ── Pros / Cons ── */
+    .pros-cons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 1.5rem 0;
+    }
+
+    @media (max-width: 560px) {
+      .pros-cons { grid-template-columns: 1fr; }
+    }
+
+    .pros, .cons {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+    }
+
+    .pros { border-top: 3px solid #50c878; }
+    .cons { border-top: 3px solid #ff5f5f; }
+
+    .pros h4, .cons h4 {
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+      margin-top: 0;
+    }
+
+    .pros h4 { color: #50c878; }
+    .cons h4 { color: #ff5f5f; }
+
+    .pros ul, .cons ul {
+      margin: 0;
+      list-style: none;
+      padding: 0;
+    }
+
+    .pros li::before { content: "+ "; color: #50c878; font-weight: 700; }
+    .cons li::before { content: "− "; color: #ff5f5f; font-weight: 700; }
+
+    /* ── Table ── */
+    .content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    .content th {
+      background: var(--surface);
+      color: var(--text);
+      font-weight: 600;
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .content td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .content tr:last-child td { border-bottom: none; }
+    .content tbody tr:hover { background: var(--surface); }
+
+    /* ── Horizontal Rule ── */
+    .content hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2.5rem 0;
+    }
+
+    /* ── Back to Top ── */
+    #back-to-top {
+      position: fixed;
+      bottom: 28px;
+      right: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition), border-color var(--transition), transform var(--transition);
+      z-index: 900;
+    }
+
+    #back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #back-to-top:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 24px;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    footer a:hover { color: var(--accent); }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      main { padding: 32px 16px 64px; }
+      .site-header { padding: 40px 16px 32px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Reading Progress Bar -->
+  <div id="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
+  <!-- Theme Toggle -->
+  <button id="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light theme">🌙</button>
+
+  <!-- Header -->
+  <header class="site-header">
+    <a href="../index.html" class="site-logo">Kiwolo.io</a>
+    <br>
+    <a href="../index.html" class="back-link">&#8592; Back to Kiwolo.io</a>
+    <div>
+      <span class="article-badge">learning-resource</span>
+    </div>
+    <h1 class="article-title">Learning Path: The New Experience of Coding with AI</h1>
+    <div class="article-meta">
+      <time datetime="2026-03-18">March 18, 2026</time>
+      <span class="meta-sep">·</span>
+      <a href="https://towardsdatascience.com/the-new-experience-of-coding-with-ai/" target="_blank" rel="noopener noreferrer">View Source ↗</a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <article class="content">
+      ```html
+<h2>What You'll Learn</h2>
+<p>
+  This learning path guides you through the rapidly evolving world of <strong>AI-assisted coding</strong> — one of the most transformative shifts in modern software development. By the end, you'll understand not just <em>how</em> to use AI code assistants, but <em>why</em> they work the way they do, their limitations, and how to collaborate with them effectively to write better code faster.
+</p>
+<ul>
+  <li>How AI code assistants (like GitHub Copilot, ChatGPT, and Cursor) generate and suggest code</li>
+  <li>Techniques for writing effective prompts to get high-quality code suggestions</li>
+  <li>How to critically evaluate AI-generated code for correctness, security, and style</li>
+  <li>How to integrate AI tools into a real development workflow without losing your coding instincts</li>
+  <li>The psychological and cognitive dynamics of coding alongside AI ("the seduction effect")</li>
+  <li>Best practices for staying in control as a developer while leveraging AI speed</li>
+</ul>
+
+<hr />
+
+<h2>Prerequisites</h2>
+<p>This path is designed for developers at an <strong>intermediate level</strong>. Before starting, you should be comfortable with:</p>
+<ul>
+  <li>Basic to intermediate Python (or another language like JavaScript/TypeScript)</li>
+  <li>Familiarity with writing functions, classes, and working with APIs</li>
+  <li>Understanding of version control with Git</li>
+  <li>A general curiosity about how machine learning models work (no deep expertise needed)</li>
+  <li>Access to at least one AI coding tool: GitHub Copilot (free trial available), ChatGPT (free tier), or Cursor IDE</li>
+</ul>
+<p>
+  💡 <em>If you're a complete beginner to Python, spend a week on a free Python basics course first — then come back. This path will be worth the wait!</em>
+</p>
+
+<hr />
+
+<h2>The Learning Path</h2>
+
+<h3>Step 1 — Understand the Landscape of AI Code Assistants <span style="color:#888;">(~45 minutes)</span></h3>
+<p>
+  Start by reading the foundational article <a href="https://towardsdatascience.com/the-new-experience-of-coding-with-ai/" target="_blank">The New Experience of Coding with AI</a> on Towards Data Science. Take notes on:
+</p>
+<ul>
+  <li>The concept of "the seduction" — why AI-generated code feels so compelling even when it's wrong</li>
+  <li>The difference between autocomplete-style assistants (Copilot) and conversational ones (ChatGPT)</li>
+  <li>How large language models (LLMs) are trained on code repositories</li>
+</ul>
+<p>
+  After reading, write a one-paragraph summary in your own words. This active recall step cements the concepts before you start experimenting.
+</p>
+
+<h3>Step 2 — Set Up Your AI Coding Environment <span style="color:#888;">(~30 minutes)</span></h3>
+<p>
+  Choose and install one AI coding assistant. Recommended starting point: <strong>GitHub Copilot</strong> inside VS Code, or <strong>Cursor IDE</strong> (which has Copilot-style autocomplete built in).
+</p>
+<ul>
+  <li>Install VS Code + GitHub Copilot extension, or download Cursor at <a href="https://cursor.sh" target="_blank">cursor.sh</a></li>
+  <li>Configure your environment with Python support and a virtual environment</li>
+  <li>Run your first AI-assisted autocomplete on a simple function — just to feel the magic</li>
+</ul>
+<p>🛠️ Goal: Get a "Hello, AI!" moment where you accept your first code suggestion.</p>
+
+<h3>Step 3 — Master Prompt Engineering for Code <span style="color:#888;">(~1.5 hours)</span></h3>
+<p>
+  The quality of AI-generated code depends heavily on how you communicate with it. Study and practice these prompting strategies:
+</p>
+<ul>
+  <li><strong>Descriptive comments:</strong> Write detailed inline comments before a function to steer the AI</li>
+  <li><strong>Context loading:</strong> Provide sample inputs/outputs in your prompt</li>
+  <li><strong>Iterative refinement:</strong> Ask the AI to improve or explain its own code</li>
+  <li><strong>Constraint prompting:</strong> Tell the AI what NOT to do ("avoid using global variables")</li>
+</ul>
+<p>
+  Practice each technique with a small coding task (e.g., "Write a function to parse a JSON file and return a filtered list").
+</p>
+
+<h3>Step 4 — Develop Critical Evaluation Skills <span style="color:#888;">(~1 hour)</span></h3>
+<p>
+  This is the most important step. AI code can be plausible-looking but subtly wrong. Practice the following review habits:
+</p>
+<ul>
+  <li>Always run AI-generated code with test cases — including edge cases</li>
+  <li>Check for deprecated library calls or hallucinated function names</li>
+  <li>Scan for potential security issues (e.g., SQL injection in AI-generated queries)</li>
+  <li>Ask the AI to write unit tests for the code it just generated</li>
+</ul>
+<p>
+  💡 <em>A useful mantra: "Trust, but verify — then verify again."</em>
+</p>
+
+<h3>Step 5 — Build a Full Mini-Project with AI Collaboration <span style="color:#888;">(~2–3 hours)</span></h3>
+<p>
+  Apply everything you've learned in a real project (detailed in the Hands-On Exercise below). Track how often you accept, reject, or modify AI suggestions. Reflect on which moments you felt "seduced" by a suggestion that turned out to be wrong.
+</p>
+
+<h3>Step 6 — Reflect on the Human-AI Developer Dynamic <span style="color:#888;">(~30 minutes)</span></h3>
+<p>
+  Re-read the TDS article with fresh eyes after your project. Journal your answers to:
+</p>
+<ul>
+  <li>Did AI make you more productive or more distracted?</li>
+  <li>Which parts of coding still felt uniquely human?</li>
+  <li>How will you integrate AI assistants into your long-term workflow?</li>
+</ul>
+
+<hr />
+
+<h2>Key Concepts Covered</h2>
+
+<dl>
+  <dt><strong>AI Code Assistants</strong></dt>
+  <dd>Tools powered by large language models (LLMs) trained on billions of lines of code. They predict likely continuations of your code context, similar to how autocorrect predicts text.</dd>
+
+  <dt><strong>The Seduction Effect</strong></dt>
+  <dd>A cognitive bias where developers accept AI-generated code because it <em>looks</em> correct and was generated instantly — reducing the critical scrutiny they'd normally apply to their own code.</dd>
+
+  <dt><strong>Prompt Engineering</strong></dt>
+  <dd>The practice of crafting inputs (prompts) to guide AI models toward more accurate and useful outputs. In coding contexts, this includes comments, docstrings, and natural language instructions.</dd>
+
+  <dt><strong>Code Hallucinations</strong></dt>
+  <dd>When an AI confidently generates code that references non-existent functions, libraries, or APIs. These errors can be subtle and dangerous in production environments.</dd>
+
+  <dt><strong>Human-in-the-Loop Development</strong></dt>
+  <dd>A workflow model where the developer remains the decision-maker and quality gatekeeper, using AI as a powerful but supervised collaborator.</dd>
+
+  <dt><strong>LLM Context Window</strong></dt>
+  <dd>The amount of surrounding code and text an AI model can "see" when generating suggestions. Understanding this helps you structure files and prompts more effectively.</dd>
+</dl>
+
+<hr />
+
+<h2>Hands-On Exercise</h2>
+<h3>🛠️ Mini-Project: AI-Assisted Data Dashboard Builder</h3>
+<p>
+  Build a <strong>command-line data summary tool</strong> using Python — but write it <em>entirely through AI collaboration</em>. The goal is to experience the full human-AI coding loop on a real task.
+</p>
+
+<h4>Project Spec (give this to your AI assistant as a prompt):</h4>
+<blockquote style="background:#f4f4f4; padding:12px; border-left:4px solid #4CAF50; border-radius:4px;">
+  "Write a Python script that accepts a CSV file path as a command-line argument, loads it with pandas, and prints a summary report including: number of rows and columns, column names and data types, count of missing values per column, and basic statistics (mean, median, std) for all numeric columns. Handle file-not-found errors gracefully."
+</blockquote>
+
+<h4>Your Tasks:</h4>
+<ol>
+  <li>Use your AI tool to generate the initial script from the prompt above</li>
+  <li>Test it with a real CSV file (try a dataset from <a href="https://www.kaggle.com/datasets" target="_blank">Kaggle</a>)</li>
+  <li>Intentionally break it with edge cases: empty CSV, CSV with all missing values, non-existent file path</li>
+  <li>Ask the AI to fix each bug you find</li>
+  <li>Ask the AI to generate unit tests using <code>pytest</code></li>
+  <li>Refactor one section manually, without AI help — notice how it feels different</li>
+</ol>
+<p>📝 <strong>Reflection prompt:</strong> Write 3 sentences about one moment where you almost accepted wrong AI code — and what caught it.</p>
+
+<hr />
+
+<h2>Code Walkthrough</h2>
+<h3>Example: Prompting AI with Rich Context Comments</h3>
+<p>
+  One of the most powerful techniques is writing detailed comment-driven prompts <em>before</em> your function. Here's how the same task yields very different AI outputs depending on prompt richness:
+</p>
+
+<h4>❌ Vague Prompt (leads to generic output):</h4>
+<pre style="background:#1e1e1e; color:#d4d4d4; padding:16px; border-radius:8px; overflow-x:auto;"><code>
+# parse csv
+def parse_csv(file):
+    pass
+</code></pre>
+
+<h4>✅ Rich Prompt (leads to targeted, usable output):</h4>
+<pre style="background:#1e1e1e; color:#d4d4d4; padding:16px; border-radius:8px; overflow-x:auto;"><code>
+import pandas as pd
+import sys
+from pathlib import Path
+
+def load_and_summarize_csv(file_path: str) -> None:
+    """
+    Load a CSV file from the given path and print a structured summary.
+
+    Summary includes:
+    - Total rows and columns
+    - Column names with their data types
+    - Count of missing values per column
+    - Descriptive statistics (mean, median, std) for numeric columns only
+
+    Args:
+        file_path (str): Absolute or relative path to the CSV file.
+
+    Raises:
+        FileNotFoundError: If the file does not exist at the given path.
+        ValueError: If the file is empty or cannot be parsed as CSV.
+
+    Example:
+        >>> load_and_summarize_csv("data/sales_2024.csv")
+    """
+    # AI fills in here based on your rich context 👆
+    path = Path(file_path)
+
+    if not path.exists():
+        raise FileNotFoundError(f"No file found at: {file_path}")
+
+    try:
+        df = pd.read_csv(path)
+    except pd.errors.EmptyDataError:
+        raise ValueError("The CSV file is empty or malformed.")
+
+    print(f"\n📊 CSV Summary: {path.name}")
+    print(f"   Rows: {df.shape[0]} | Columns: {df.shape[1]}\n")
+
+    print("📋 Column Info:")
+    for col in df.columns:
+        missing = df[col].isnull().sum()
+        print(f"   {col} ({df[col].dtype}) — {missing} missing values")
+
+    print("\n📈 Numeric Statistics:")
+    numeric_df = df.select_dtypes(include='number')
+    if not numeric_df.empty:
+        stats = numeric_df.agg(['mean', 'median', 'std']).round(2)
+        print(stats.to_string())
+    else:
+        print("   No numeric columns found.")
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: python summarize.py <path_to_csv>")
+        sys.exit(1)
+    load_and_summarize_csv(sys.argv[1])
+</code></pre>
+
+<p>
+  🔍 <strong>Notice:</strong> The docstring with typed args, raises, and an example gave the AI (and you!) a complete contract to work from. This is prompt engineering in practice — and it produces code you can actually trust.
+</p>
+
+<hr />
+
+<h2>Further Resources</h2>
+
+<h3>📚 Books</h3>
+<ul>
+  <li><strong>"The Pragmatic Programmer" (20th Anniversary Edition)</strong> — Hunt & Thomas. Essential for understanding what it means to be a thoughtful developer in any era, including the AI era.</li>
+  <li><strong>"Prompt Engineering for Developers"</strong> — Available as a free short course via DeepLearning.AI. Directly applicable to coding workflows.</li>
+</ul>
+
+<h3>📄 Papers & Articles</h3>
+<ul>
+  <li><a href="https://arxiv.org/abs/2107.03374" target="_blank">"Evaluating Large Language Models Trained on Code" (Codex Paper)</a> — The original OpenAI paper behind GitHub Copilot. Dense but illuminating.</li>
+  <li><a href="https://towardsdatascience.com" target="_blank">Towards Data Science</a> — Follow the publication for ongoing coverage of AI tools in data and engineering workflows.</li>
+</ul>
+
+<h3>🎓 Complementary Courses</h3>
+<ul>
+  <li><strong>DeepLearning.AI: ChatGPT Prompt Engineering for Developers</strong> (free) — Perfect companion to this path</li>
+  <li><strong>GitHub Skills: Introduction to GitHub Copilot</strong> (free) — Official hands-on labs from GitHub</li>
+  <li><strong>Fast.ai: Practical Deep Learning for Coders</strong> — Great for understanding the models behind your AI tools</li>
+</ul>
+
+<hr />
+
+<h2>Career Relevance</h2>
+<p>
+  AI-assisted coding is no longer a niche skill — it's rapidly becoming a <strong>baseline expectation</strong> across the tech industry. Mastering this workflow prepares you for:
+</p>
+
+<ul>
+  <li>
+    <strong>Software Engineer / Full-Stack Developer</strong> — Companies actively look for developers who can accelerate delivery using AI tools while maintaining code quality.
+  </li>
+  <li>
+    <strong>Data Scientist / ML Engineer</strong> — AI assistants dramatically speed up exploratory data analysis, pipeline building, and model prototyping.
+  </li>
+  <li>
+    <strong>DevOps / Platform Engineer</strong> — Scripting, automation, and infrastructure-as-code all benefit enormously from AI collaboration.
+  </li>
+  <li>
+    <strong>AI/LLM Product Developer</strong> — Building products <em>on top of</em> AI requires deep understanding of how these models behave in coding contexts.
+  </li>
+  <li>
+    <strong>Technical Lead / Engineering Manager</strong> — Leaders need to evaluate AI tools strategically, set team standards, and assess AI-generated PRs.
+  </li>
+</ul>
+
+<p style="background:#eaf7ea; padding:14px; border-radius:8px; border-left:4px solid #4CAF50;">
+  🚀 <strong
+    </article>
+  </main>
+
+  <!-- Back to Top -->
+  <button id="back-to-top" aria-label="Back to top" title="Back to top">&#8593;</button>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 <a href="../index.html">Kiwolo.io</a> &middot; Daily AI Tech Guides</p>
+  </footer>
+
+  <script>
+    // ── Theme Toggle ──
+    const toggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+
+    function getTheme() {
+      return localStorage.getItem('kiwolo-theme') ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    }
+
+    function applyTheme(theme) {
+      html.setAttribute('data-theme', theme);
+      toggle.textContent = theme === 'dark' ? '☀' : '🌙';
+      localStorage.setItem('kiwolo-theme', theme);
+    }
+
+    applyTheme(getTheme());
+
+    toggle.addEventListener('click', () => {
+      applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    });
+
+    // ── Reading Progress Bar ──
+    const bar = document.getElementById('progress-bar');
+
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? Math.round((scrollTop / docHeight) * 100) : 0;
+      bar.style.width = pct + '%';
+      bar.setAttribute('aria-valuenow', pct);
+    }
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+
+    // ── Back to Top ──
+    const backTop = document.getElementById('back-to-top');
+
+    window.addEventListener('scroll', () => {
+      backTop.classList.toggle('visible', window.scrollY > 400);
+    }, { passive: true });
+
+    backTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>

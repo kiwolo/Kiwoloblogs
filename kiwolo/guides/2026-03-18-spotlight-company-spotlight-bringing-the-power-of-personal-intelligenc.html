@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Company Spotlight: Bringing the power of Personal Intelligence to more people | Kiwolo.io</title>
+  <meta name="description" content="```html The Announcement Google has expanded its Personal Intelligence initiative, a suite of AI-powered features that connect the dots between a user's personal data — spanning Gmail, Google Photos, ...">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://kiwolo.io/guides/company-spotlight-bringing-the-power-of-personal-intelligenc">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Company Spotlight: Bringing the power of Personal Intelligence to more people">
+  <meta property="og:description" content="```html The Announcement Google has expanded its Personal Intelligence initiative, a suite of AI-powered features that connect the dots between a user's personal data — spanning Gmail, Google Photos, ...">
+  <meta property="og:url" content="https://kiwolo.io/guides/company-spotlight-bringing-the-power-of-personal-intelligenc">
+  <meta property="og:site_name" content="Kiwolo.io">
+  <meta property="article:published_time" content="2026-03-18">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Company Spotlight: Bringing the power of Personal Intelligence to more people">
+  <meta name="twitter:description" content="```html The Announcement Google has expanded its Personal Intelligence initiative, a suite of AI-powered features that connect the dots between a user's personal data — spanning Gmail, Google Photos, ...">
+
+  <!-- Custom metadata -->
+  <meta name="kiwolo:source" content="company-research">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Company Spotlight: Bringing the power of Personal Intelligence to more people",
+    "description": "```html The Announcement Google has expanded its Personal Intelligence initiative, a suite of AI-powered features that connect the dots between a user's personal data — spanning Gmail, Google Photos, ...",
+    "datePublished": "2026-03-18",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Kiwolo.io",
+      "url": "https://kiwolo.io"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://kiwolo.io/guides/company-spotlight-bringing-the-power-of-personal-intelligenc"
+    }
+  }
+  </script>
+
+  <style>
+    /* ── CSS Variables ── */
+    :root {
+      --bg: #0f0f13;
+      --surface: #1a1a23;
+      --border: #2a2a38;
+      --accent: #7c6dfa;
+      --text: #e2e2ee;
+      --muted: #888899;
+      --code-bg: #13131c;
+      --header-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      --radius: 8px;
+      --transition: 0.2s ease;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root:not([data-theme="dark"]) {
+        --bg: #f5f5f8;
+        --surface: #ffffff;
+        --border: #dcdce8;
+        --accent: #5c4ee8;
+        --text: #1a1a2e;
+        --muted: #666677;
+        --code-bg: #f0f0f5;
+        --header-bg: linear-gradient(135deg, #e8e8f8 0%, #d8e0f0 50%, #c8d8f0 100%);
+      }
+    }
+
+    [data-theme="light"] {
+      --bg: #f5f5f8;
+      --surface: #ffffff;
+      --border: #dcdce8;
+      --accent: #5c4ee8;
+      --text: #1a1a2e;
+      --muted: #666677;
+      --code-bg: #f0f0f5;
+      --header-bg: linear-gradient(135deg, #e8e8f8 0%, #d8e0f0 50%, #c8d8f0 100%);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0f0f13;
+      --surface: #1a1a23;
+      --border: #2a2a38;
+      --accent: #7c6dfa;
+      --text: #e2e2ee;
+      --muted: #888899;
+      --code-bg: #13131c;
+      --header-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    }
+
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    /* ── Reading Progress Bar ── */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: var(--accent);
+      z-index: 1000;
+      transition: width 0.1s linear;
+    }
+
+    /* ── Theme Toggle ── */
+    #theme-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 999;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition), border-color var(--transition), transform var(--transition);
+    }
+
+    #theme-toggle:hover {
+      border-color: var(--accent);
+      transform: scale(1.1);
+    }
+
+    /* ── Header ── */
+    .site-header {
+      background: var(--header-bg);
+      padding: 48px 24px 40px;
+      text-align: center;
+      position: relative;
+    }
+
+    .site-logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 16px;
+      opacity: 0.9;
+    }
+
+    .site-logo:hover { opacity: 1; }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      margin-bottom: 24px;
+      transition: color var(--transition);
+    }
+
+    .back-link:hover { color: var(--accent); }
+
+    .article-badge {
+      display: inline-block;
+      background: rgba(124, 109, 250, 0.15);
+      color: var(--accent);
+      border: 1px solid rgba(124, 109, 250, 0.3);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 20px;
+    }
+
+    .article-title {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.25;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      max-width: 820px;
+      margin: 0 auto 20px;
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    .article-meta time { font-variant-numeric: tabular-nums; }
+
+    .article-meta a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    .article-meta a:hover { color: var(--accent); }
+
+    .meta-sep { opacity: 0.4; }
+
+    /* ── Main Content ── */
+    main {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* ── Typography ── */
+    .content h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 2.5rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      letter-spacing: -0.3px;
+    }
+
+    .content h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 2rem 0 0.75rem;
+      letter-spacing: -0.2px;
+    }
+
+    .content h4 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 1.5rem 0 0.5rem;
+    }
+
+    .content p {
+      margin-bottom: 1.25rem;
+      color: var(--text);
+    }
+
+    .content a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-color: rgba(124, 109, 250, 0.4);
+      transition: text-decoration-color var(--transition);
+    }
+
+    .content a:hover { text-decoration-color: var(--accent); }
+
+    /* ── Lists ── */
+    .content ul, .content ol {
+      margin: 1rem 0 1.25rem 1.5rem;
+    }
+
+    .content li {
+      margin-bottom: 0.5rem;
+      padding-left: 0.25rem;
+    }
+
+    .content ul li::marker { color: var(--accent); }
+    .content ol li::marker { color: var(--accent); font-weight: 600; }
+
+    /* ── Code ── */
+    .content code {
+      font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", Consolas, monospace;
+      font-size: 0.875em;
+      background: var(--code-bg);
+      color: #b8b0ff;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    .content pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      position: relative;
+    }
+
+    .content pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 0.875rem;
+      color: #c8c0ff;
+      line-height: 1.6;
+    }
+
+    /* ── Blockquote ── */
+    .content blockquote {
+      border-left: 3px solid var(--accent);
+      background: var(--surface);
+      padding: 16px 20px;
+      margin: 1.5rem 0;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ── Callout ── */
+    .callout {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin: 1.5rem 0;
+    }
+
+    .callout.info { border-left-color: #4a9eff; }
+    .callout.warning { border-left-color: #f5a623; }
+    .callout.success { border-left-color: #50c878; }
+    .callout.danger { border-left-color: #ff5f5f; }
+
+    .callout-title {
+      font-weight: 700;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+
+    .callout.info .callout-title { color: #4a9eff; }
+    .callout.warning .callout-title { color: #f5a623; }
+    .callout.success .callout-title { color: #50c878; }
+    .callout.danger .callout-title { color: #ff5f5f; }
+
+    /* ── Pros / Cons ── */
+    .pros-cons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 1.5rem 0;
+    }
+
+    @media (max-width: 560px) {
+      .pros-cons { grid-template-columns: 1fr; }
+    }
+
+    .pros, .cons {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+    }
+
+    .pros { border-top: 3px solid #50c878; }
+    .cons { border-top: 3px solid #ff5f5f; }
+
+    .pros h4, .cons h4 {
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+      margin-top: 0;
+    }
+
+    .pros h4 { color: #50c878; }
+    .cons h4 { color: #ff5f5f; }
+
+    .pros ul, .cons ul {
+      margin: 0;
+      list-style: none;
+      padding: 0;
+    }
+
+    .pros li::before { content: "+ "; color: #50c878; font-weight: 700; }
+    .cons li::before { content: "− "; color: #ff5f5f; font-weight: 700; }
+
+    /* ── Table ── */
+    .content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    .content th {
+      background: var(--surface);
+      color: var(--text);
+      font-weight: 600;
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .content td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .content tr:last-child td { border-bottom: none; }
+    .content tbody tr:hover { background: var(--surface); }
+
+    /* ── Horizontal Rule ── */
+    .content hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2.5rem 0;
+    }
+
+    /* ── Back to Top ── */
+    #back-to-top {
+      position: fixed;
+      bottom: 28px;
+      right: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition), border-color var(--transition), transform var(--transition);
+      z-index: 900;
+    }
+
+    #back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #back-to-top:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 24px;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    footer a:hover { color: var(--accent); }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      main { padding: 32px 16px 64px; }
+      .site-header { padding: 40px 16px 32px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Reading Progress Bar -->
+  <div id="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
+  <!-- Theme Toggle -->
+  <button id="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light theme">🌙</button>
+
+  <!-- Header -->
+  <header class="site-header">
+    <a href="../index.html" class="site-logo">Kiwolo.io</a>
+    <br>
+    <a href="../index.html" class="back-link">&#8592; Back to Kiwolo.io</a>
+    <div>
+      <span class="article-badge">company-research</span>
+    </div>
+    <h1 class="article-title">Company Spotlight: Bringing the power of Personal Intelligence to more people</h1>
+    <div class="article-meta">
+      <time datetime="2026-03-18">March 18, 2026</time>
+      <span class="meta-sep">·</span>
+      <a href="https://blog.google/products-and-platforms/products/search/personal-intelligence-expansion/" target="_blank" rel="noopener noreferrer">View Source ↗</a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <article class="content">
+      ```html
+<h2>The Announcement</h2>
+
+<p>Google has expanded its <strong>Personal Intelligence</strong> initiative, a suite of AI-powered features that connect the dots between a user's personal data — spanning Gmail, Google Photos, and Google Search — to deliver contextually aware, individualized assistance. The announcement, published on the official Google AI Blog, signals a meaningful step beyond generic AI responses toward a model that understands <em>you</em> specifically: your emails, your memories, your search history.</p>
+
+<p>The expansion builds on earlier Gemini integrations and pushes Personal Intelligence features to a broader audience, moving what was previously a limited or Workspace-centric capability into mainstream consumer Google products. The timing is notable — Google is clearly racing to demonstrate that its ecosystem advantage (owning the inbox, the photo library, and the search bar simultaneously) translates into an AI experience competitors simply cannot replicate.</p>
+
+<hr />
+
+<h2>What Makes This Significant</h2>
+
+<p>For years, the AI industry has debated whether large language models would remain general-purpose tools or evolve into personalized assistants. Google's Personal Intelligence push is a direct answer to that question — and a pointed one. While OpenAI's ChatGPT and Anthropic's Claude have begun offering memory features, none of them sit natively inside a suite of products that billions of people already use daily.</p>
+
+<p>The significance here is structural. Google isn't building a standalone AI app and asking users to migrate their data. Instead, it is threading intelligence through products people already live inside. The practical implications are substantial:</p>
+
+<ul>
+  <li><strong>Gmail integration</strong> means the AI can surface relevant email threads, draft context-aware replies, and flag commitments you may have made weeks ago.</li>
+  <li><strong>Google Photos integration</strong> allows the assistant to recall personal milestones, recognize faces with your permission, and help narrate your life history in a way no generic model can.</li>
+  <li><strong>Search integration</strong> closes the loop — connecting what you're looking for right now to what you've done, planned, or discussed before.</li>
+</ul>
+
+<p>The AI community is paying attention because this represents a genuine moat. Data gravity — the idea that intelligence compounds the more personal context it has — has always been theoretical. Google is now trying to make it a product reality.</p>
+
+<hr />
+
+<h2>Technical Details</h2>
+
+<p>Google has not published a dedicated technical paper specifically for Personal Intelligence as a standalone system, but the feature set is underpinned by <strong>Gemini models</strong> running with extended context windows and retrieval-augmented generation (RAG) pipelines that index personal data within a user's Google Account. Key architectural observations from the announcement and surrounding documentation include:</p>
+
+<ul>
+  <li><strong>On-device and cloud hybrid processing:</strong> Some personal context operations are handled with privacy-preserving on-device inference, particularly for Photos, consistent with Google's previously announced <em>Private Compute Core</em> architecture on Android.</li>
+  <li><strong>Permission-scoped retrieval:</strong> The system does not pool user data across accounts. Each retrieval operation is siloed to the authenticated user's own corpus — a design choice Google has emphasized repeatedly in response to privacy scrutiny.</li>
+  <li><strong>Gemini 1.5 Pro backbone:</strong> The long-context capabilities (up to 1 million tokens in the Pro tier) are what make cross-product retrieval tractable. Summarizing a year of email threads or a decade of photos requires context windows that earlier models couldn't handle efficiently.</li>
+  <li><strong>Natural language querying:</strong> Users can ask free-form questions like "What restaurants did I save last summer?" or "Find the email where I agreed to that contract" without needing structured queries or specific app navigation.</li>
+</ul>
+
+<p>Benchmark data specific to Personal Intelligence recall accuracy has not been publicly released, which is a gap worth noting. Independent testing of retrieval fidelity — particularly across large, messy real-world inboxes — remains an open question.</p>
+
+<hr />
+
+<h2>How to Access It</h2>
+
+<p>Personal Intelligence features are rolling out through existing Google product surfaces rather than a standalone app or API. Here is where to find them:</p>
+
+<ul>
+  <li><strong>Google Search (gemini.google.com or search.google.com):</strong> Look for the Gemini integration panel. Users with a Google account can activate personal context through account settings.</li>
+  <li><strong>Gmail:</strong> The Gemini sidebar in Gmail (available on desktop and mobile) now includes personal context awareness. Navigate to <em>Settings → Gemini → Enable personal context</em> within the Gmail interface.</li>
+  <li><strong>Google Photos:</strong> The "Ask Photos" feature, which was introduced experimentally earlier in 2024, is part of this broader push. It is accessible directly within the Google Photos app on Android and iOS.</li>
+  <li><strong>Gemini Advanced (Google One AI Premium, $19.99/month):</strong> The fullest integration — connecting all three products simultaneously — is currently gated behind the Gemini Advanced subscription tier.</li>
+  <li><strong>Workspace users:</strong> Enterprise and education accounts have a separate rollout path governed by administrator controls and data governance policies.</li>
+</ul>
+
+<p>There is no public API for Personal Intelligence at this time. Google has not announced plans to expose personal context retrieval as a developer endpoint, likely due to the sensitivity of the underlying data.</p>
+
+<hr />
+
+<h2>Impact on the Industry</h2>
+
+<p>The competitive implications are difficult to overstate. Apple's <strong>Apple Intelligence</strong> initiative — announced at WWDC 2024 — is the most direct parallel. Apple is threading AI through Mail, Photos, and Siri in a structurally similar way, with a heavy emphasis on on-device processing. The two approaches represent the industry's two dominant philosophies: Apple bets on privacy-first, on-device processing; Google bets on cloud-scale context with stated privacy guardrails.</p>
+
+<p>For <strong>Microsoft</strong>, which has integrated Copilot deeply into Outlook and OneDrive, Google's expansion puts additional pressure on enterprise adoption. If consumers become accustomed to personal intelligence in their free Google accounts, the bar for what enterprise productivity tools must deliver rises accordingly.</p>
+
+<p>For <strong>OpenAI</strong> and <strong>Anthropic</strong>, the challenge is more fundamental. Memory features in ChatGPT and Claude are additive — you bring your own context over time. Google's advantage is that the context already exists, at scale, across a billion users. That asymmetry is hard to close without equivalent product infrastructure.</p>
+
+<p>Privacy advocates will continue to scrutinize these developments closely. The architecture of "the AI that knows your life" — however well-intentioned — raises legitimate questions about data retention, breach exposure, and the long-term commercial use of behavioral patterns gleaned from personal corpora.</p>
+
+<hr />
+
+<h2>Quick Start</h2>
+
+<p>There is no developer API to demonstrate with a code snippet at this stage. However, here is a practical step-by-step for end users wanting to activate Personal Intelligence features today:</p>
+
+<pre><code>
+1. Ensure you are signed into your Google Account at myaccount.google.com
+   → Navigate to "Data & Privacy" → confirm Gemini Apps Activity is enabled
+
+2. Open Gmail on desktop (mail.google.com)
+   → Click the Gemini icon (✦) in the right-side panel
+   → If prompted, enable "Personal context" for Gmail
+
+3. Open Google Photos (photos.google.com or the mobile app)
+   → Tap the Search bar
+   → Look for "Ask Photos" prompt (may require opting in via the in-app banner)
+
+4. Visit gemini.google.com
+   → Sign in and start a conversation
+   → Try a query like: "Summarize the emails I received from [sender] last month"
+   → Gemini will ask permission to access Gmail context if not previously granted
+
+5. For full cross-product context (Gmail + Photos + Search):
+   → Subscribe to Google One AI Premium
+   → Enable all three context sources in Gemini settings under "Extensions"
+</code></pre>
+
+<p>The onboarding flow is designed to be incremental — each product context is opt-in separately, which gives users granular control but also means the full experience requires deliberate setup.</p>
+
+<hr />
+
+<h2>What's Next</h2>
+
+<p>Google has signaled that Personal Intelligence is a long-term platform investment, not a one-time feature drop. Several threads worth watching:</p>
+
+<ul>
+  <li><strong>Google Calendar and Drive integration:</strong> Neither is currently part of the core Personal Intelligence announcement, but both are obvious next candidates. Calendar context — knowing your schedule, recurring commitments, and meeting history — would dramatically enhance the assistant's utility.</li>
+  <li><strong>Android OS-level integration:</strong> The Ask Photos capability on Android hints at a deeper OS thread, where personal intelligence becomes ambient rather than app-specific. Google I/O 2025 will likely bring more clarity here.</li>
+  <li><strong>Expanded geographic rollout:</strong> Current availability is concentrated in English-speaking markets. Multilingual Personal Intelligence — across languages where Gmail and Photos are dominant — is a stated direction without a firm timeline.</li>
+  <li><strong>Regulatory headwinds:</strong> The EU's AI Act and ongoing DMA proceedings could complicate how Google deploys personal data-driven features in European markets. Watch for market-specific feature restrictions.</li>
+  <li><strong>Community reaction:</strong> Early user feedback on platforms like Reddit's r/google and X/Twitter has been cautiously positive about utility but persistently skeptical about privacy. The "creepiness threshold" — the point at which an AI knowing too much feels uncomfortable rather than helpful — is a real adoption variable Google will need to manage carefully.</li>
+</ul>
+
+<p>The Personal Intelligence expansion is, at its core, Google's clearest articulation yet of what it believes AI is for: not a chatbot you visit, but a layer of understanding woven into the tools you already use. Whether that vision earns trust as readily as it earns admiration will define the next chapter of this rollout.</p>
+```
+    </article>
+  </main>
+
+  <!-- Back to Top -->
+  <button id="back-to-top" aria-label="Back to top" title="Back to top">&#8593;</button>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 <a href="../index.html">Kiwolo.io</a> &middot; Daily AI Tech Guides</p>
+  </footer>
+
+  <script>
+    // ── Theme Toggle ──
+    const toggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+
+    function getTheme() {
+      return localStorage.getItem('kiwolo-theme') ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    }
+
+    function applyTheme(theme) {
+      html.setAttribute('data-theme', theme);
+      toggle.textContent = theme === 'dark' ? '☀' : '🌙';
+      localStorage.setItem('kiwolo-theme', theme);
+    }
+
+    applyTheme(getTheme());
+
+    toggle.addEventListener('click', () => {
+      applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    });
+
+    // ── Reading Progress Bar ──
+    const bar = document.getElementById('progress-bar');
+
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? Math.round((scrollTop / docHeight) * 100) : 0;
+      bar.style.width = pct + '%';
+      bar.setAttribute('aria-valuenow', pct);
+    }
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+
+    // ── Back to Top ──
+    const backTop = document.getElementById('back-to-top');
+
+    window.addEventListener('scroll', () => {
+      backTop.classList.toggle('visible', window.scrollY > 400);
+    }, { passive: true });
+
+    backTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>

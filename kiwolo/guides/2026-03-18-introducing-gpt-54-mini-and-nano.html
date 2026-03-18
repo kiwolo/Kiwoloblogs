@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Introducing GPT-5.4 mini and nano | Kiwolo.io</title>
+  <meta name="description" content="What It Is GPT-4.1 mini and GPT-4.1 nano are the latest entries in OpenAI's growing family of efficient, cost-optimized language models. Building on the architectural advances of the GPT-4.1 series, t...">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://kiwolo.io/guides/introducing-gpt-54-mini-and-nano">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Introducing GPT-5.4 mini and nano">
+  <meta property="og:description" content="What It Is GPT-4.1 mini and GPT-4.1 nano are the latest entries in OpenAI's growing family of efficient, cost-optimized language models. Building on the architectural advances of the GPT-4.1 series, t...">
+  <meta property="og:url" content="https://kiwolo.io/guides/introducing-gpt-54-mini-and-nano">
+  <meta property="og:site_name" content="Kiwolo.io">
+  <meta property="article:published_time" content="2026-03-18">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Introducing GPT-5.4 mini and nano">
+  <meta name="twitter:description" content="What It Is GPT-4.1 mini and GPT-4.1 nano are the latest entries in OpenAI's growing family of efficient, cost-optimized language models. Building on the architectural advances of the GPT-4.1 series, t...">
+
+  <!-- Custom metadata -->
+  <meta name="kiwolo:source" content="company-research">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Introducing GPT-5.4 mini and nano",
+    "description": "What It Is GPT-4.1 mini and GPT-4.1 nano are the latest entries in OpenAI's growing family of efficient, cost-optimized language models. Building on the architectural advances of the GPT-4.1 series, t...",
+    "datePublished": "2026-03-18",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Kiwolo.io",
+      "url": "https://kiwolo.io"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://kiwolo.io/guides/introducing-gpt-54-mini-and-nano"
+    }
+  }
+  </script>
+
+  <style>
+    /* ── CSS Variables ── */
+    :root {
+      --bg: #0f0f13;
+      --surface: #1a1a23;
+      --border: #2a2a38;
+      --accent: #7c6dfa;
+      --text: #e2e2ee;
+      --muted: #888899;
+      --code-bg: #13131c;
+      --header-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      --radius: 8px;
+      --transition: 0.2s ease;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root:not([data-theme="dark"]) {
+        --bg: #f5f5f8;
+        --surface: #ffffff;
+        --border: #dcdce8;
+        --accent: #5c4ee8;
+        --text: #1a1a2e;
+        --muted: #666677;
+        --code-bg: #f0f0f5;
+        --header-bg: linear-gradient(135deg, #e8e8f8 0%, #d8e0f0 50%, #c8d8f0 100%);
+      }
+    }
+
+    [data-theme="light"] {
+      --bg: #f5f5f8;
+      --surface: #ffffff;
+      --border: #dcdce8;
+      --accent: #5c4ee8;
+      --text: #1a1a2e;
+      --muted: #666677;
+      --code-bg: #f0f0f5;
+      --header-bg: linear-gradient(135deg, #e8e8f8 0%, #d8e0f0 50%, #c8d8f0 100%);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0f0f13;
+      --surface: #1a1a23;
+      --border: #2a2a38;
+      --accent: #7c6dfa;
+      --text: #e2e2ee;
+      --muted: #888899;
+      --code-bg: #13131c;
+      --header-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    }
+
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    /* ── Reading Progress Bar ── */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: var(--accent);
+      z-index: 1000;
+      transition: width 0.1s linear;
+    }
+
+    /* ── Theme Toggle ── */
+    #theme-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 999;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition), border-color var(--transition), transform var(--transition);
+    }
+
+    #theme-toggle:hover {
+      border-color: var(--accent);
+      transform: scale(1.1);
+    }
+
+    /* ── Header ── */
+    .site-header {
+      background: var(--header-bg);
+      padding: 48px 24px 40px;
+      text-align: center;
+      position: relative;
+    }
+
+    .site-logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 16px;
+      opacity: 0.9;
+    }
+
+    .site-logo:hover { opacity: 1; }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      margin-bottom: 24px;
+      transition: color var(--transition);
+    }
+
+    .back-link:hover { color: var(--accent); }
+
+    .article-badge {
+      display: inline-block;
+      background: rgba(124, 109, 250, 0.15);
+      color: var(--accent);
+      border: 1px solid rgba(124, 109, 250, 0.3);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 20px;
+    }
+
+    .article-title {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.25;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      max-width: 820px;
+      margin: 0 auto 20px;
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    .article-meta time { font-variant-numeric: tabular-nums; }
+
+    .article-meta a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    .article-meta a:hover { color: var(--accent); }
+
+    .meta-sep { opacity: 0.4; }
+
+    /* ── Main Content ── */
+    main {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* ── Typography ── */
+    .content h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 2.5rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      letter-spacing: -0.3px;
+    }
+
+    .content h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 2rem 0 0.75rem;
+      letter-spacing: -0.2px;
+    }
+
+    .content h4 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 1.5rem 0 0.5rem;
+    }
+
+    .content p {
+      margin-bottom: 1.25rem;
+      color: var(--text);
+    }
+
+    .content a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-color: rgba(124, 109, 250, 0.4);
+      transition: text-decoration-color var(--transition);
+    }
+
+    .content a:hover { text-decoration-color: var(--accent); }
+
+    /* ── Lists ── */
+    .content ul, .content ol {
+      margin: 1rem 0 1.25rem 1.5rem;
+    }
+
+    .content li {
+      margin-bottom: 0.5rem;
+      padding-left: 0.25rem;
+    }
+
+    .content ul li::marker { color: var(--accent); }
+    .content ol li::marker { color: var(--accent); font-weight: 600; }
+
+    /* ── Code ── */
+    .content code {
+      font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", Consolas, monospace;
+      font-size: 0.875em;
+      background: var(--code-bg);
+      color: #b8b0ff;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    .content pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      position: relative;
+    }
+
+    .content pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 0.875rem;
+      color: #c8c0ff;
+      line-height: 1.6;
+    }
+
+    /* ── Blockquote ── */
+    .content blockquote {
+      border-left: 3px solid var(--accent);
+      background: var(--surface);
+      padding: 16px 20px;
+      margin: 1.5rem 0;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ── Callout ── */
+    .callout {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin: 1.5rem 0;
+    }
+
+    .callout.info { border-left-color: #4a9eff; }
+    .callout.warning { border-left-color: #f5a623; }
+    .callout.success { border-left-color: #50c878; }
+    .callout.danger { border-left-color: #ff5f5f; }
+
+    .callout-title {
+      font-weight: 700;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+
+    .callout.info .callout-title { color: #4a9eff; }
+    .callout.warning .callout-title { color: #f5a623; }
+    .callout.success .callout-title { color: #50c878; }
+    .callout.danger .callout-title { color: #ff5f5f; }
+
+    /* ── Pros / Cons ── */
+    .pros-cons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 1.5rem 0;
+    }
+
+    @media (max-width: 560px) {
+      .pros-cons { grid-template-columns: 1fr; }
+    }
+
+    .pros, .cons {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+    }
+
+    .pros { border-top: 3px solid #50c878; }
+    .cons { border-top: 3px solid #ff5f5f; }
+
+    .pros h4, .cons h4 {
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+      margin-top: 0;
+    }
+
+    .pros h4 { color: #50c878; }
+    .cons h4 { color: #ff5f5f; }
+
+    .pros ul, .cons ul {
+      margin: 0;
+      list-style: none;
+      padding: 0;
+    }
+
+    .pros li::before { content: "+ "; color: #50c878; font-weight: 700; }
+    .cons li::before { content: "− "; color: #ff5f5f; font-weight: 700; }
+
+    /* ── Table ── */
+    .content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    .content th {
+      background: var(--surface);
+      color: var(--text);
+      font-weight: 600;
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .content td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .content tr:last-child td { border-bottom: none; }
+    .content tbody tr:hover { background: var(--surface); }
+
+    /* ── Horizontal Rule ── */
+    .content hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2.5rem 0;
+    }
+
+    /* ── Back to Top ── */
+    #back-to-top {
+      position: fixed;
+      bottom: 28px;
+      right: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition), border-color var(--transition), transform var(--transition);
+      z-index: 900;
+    }
+
+    #back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #back-to-top:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 24px;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    footer a:hover { color: var(--accent); }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      main { padding: 32px 16px 64px; }
+      .site-header { padding: 40px 16px 32px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Reading Progress Bar -->
+  <div id="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
+  <!-- Theme Toggle -->
+  <button id="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light theme">🌙</button>
+
+  <!-- Header -->
+  <header class="site-header">
+    <a href="../index.html" class="site-logo">Kiwolo.io</a>
+    <br>
+    <a href="../index.html" class="back-link">&#8592; Back to Kiwolo.io</a>
+    <div>
+      <span class="article-badge">company-research</span>
+    </div>
+    <h1 class="article-title">Introducing GPT-5.4 mini and nano</h1>
+    <div class="article-meta">
+      <time datetime="2026-03-18">March 18, 2026</time>
+      <span class="meta-sep">·</span>
+      <a href="https://openai.com/index/introducing-gpt-5-4-mini-and-nano" target="_blank" rel="noopener noreferrer">View Source ↗</a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <article class="content">
+      <h2>What It Is</h2>
+<p>
+  GPT-4.1 mini and GPT-4.1 nano are the latest entries in OpenAI's growing family of efficient, cost-optimized language models. Building on the architectural advances of the GPT-4.1 series, these two models are purpose-built for speed, affordability, and high-throughput deployment scenarios. They represent OpenAI's continued push toward making powerful AI accessible at scale — not just for large enterprises with deep pockets, but for developers, startups, and embedded applications running under tight latency and cost constraints.
+</p>
+<p>
+  <strong>GPT-4.1 mini</strong> is designed as a balanced powerhouse — smaller and faster than the full GPT-4.1 model, yet capable enough to handle sophisticated coding tasks, tool use (function calling), and multimodal reasoning involving text and images. It sits in the "efficient but capable" tier of OpenAI's model lineup.
+</p>
+<p>
+  <strong>GPT-4.1 nano</strong> goes even further in the efficiency direction. It is OpenAI's smallest and fastest model to date, optimized for ultra-low latency, high-volume API workloads, and use as a sub-agent within larger multi-agent systems. Think of nano as the workhorse you deploy when you need thousands of concurrent inferences at minimal cost per token.
+</p>
+<p>
+  Both models are available via the OpenAI API and are positioned as successors and replacements for earlier small models like GPT-3.5 Turbo and GPT-4o mini, offering better performance per dollar across key benchmarks including coding, instruction following, and structured output generation.
+</p>
+
+<h2>Why It Matters</h2>
+<p>
+  The release of GPT-4.1 mini and nano is significant for several interconnected reasons that reshape how developers and organizations think about deploying AI in production.
+</p>
+
+<h3>1. The Cost-Performance Revolution Continues</h3>
+<p>
+  One of the biggest barriers to AI adoption at scale has always been cost. Running large frontier models for every single API call in a high-traffic application is prohibitively expensive. GPT-4.1 mini and nano dramatically lower the cost per token while preserving strong performance on the tasks that matter most in real-world applications — particularly coding and tool use.
+</p>
+
+<h3>2. Multi-Agent Architectures Get a Dedicated Engine</h3>
+<p>
+  Multi-agent AI systems — where multiple AI models collaborate, delegate tasks, and call tools — are rapidly becoming the dominant paradigm for complex AI workflows. GPT-4.1 nano is explicitly designed to serve as a sub-agent: a fast, cheap, reliable component that handles routine sub-tasks within a larger orchestrated pipeline. This is a strategic architectural signal from OpenAI about where the industry is heading.
+</p>
+
+<h3>3. Multimodal Reasoning at Scale</h3>
+<p>
+  Both models support multimodal inputs, meaning they can process images alongside text. This opens the door to vision-enabled pipelines — document parsing, screenshot analysis, UI testing, and more — at a fraction of the cost of full-size multimodal models.
+</p>
+
+<h3>4. Coding and Tool Use as First-Class Citizens</h3>
+<p>
+  Unlike earlier small models that often struggled with reliable function calling and code generation, GPT-4.1 mini and nano have been explicitly optimized for these use cases. This makes them suitable replacements for much larger models in developer tooling, CI/CD pipelines, and automated code review workflows.
+</p>
+
+<h2>How to Get Started</h2>
+<p>
+  Getting started with GPT-4.1 mini or nano is straightforward if you already have an OpenAI account. Follow the steps below to set up your environment and make your first API call.
+</p>
+
+<h3>Prerequisites</h3>
+<ul>
+  <li>An OpenAI account with API access (<a href="https://platform.openai.com" target="_blank">platform.openai.com</a>)</li>
+  <li>Python 3.8+ installed on your machine</li>
+  <li>An active OpenAI API key</li>
+</ul>
+
+<h3>Step 1: Install the OpenAI Python SDK</h3>
+<pre><code>pip install openai --upgrade</code></pre>
+
+<h3>Step 2: Set Your API Key</h3>
+<p>It is best practice to set your API key as an environment variable rather than hardcoding it into your scripts.</p>
+<pre><code># On macOS/Linux
+export OPENAI_API_KEY="your-api-key-here"
+
+# On Windows (Command Prompt)
+set OPENAI_API_KEY=your-api-key-here
+
+# On Windows (PowerShell)
+$env:OPENAI_API_KEY="your-api-key-here"</code></pre>
+
+<h3>Step 3: Make Your First API Call</h3>
+<pre><code>from openai import OpenAI
+
+client = OpenAI()
+
+response = client.chat.completions.create(
+    model="gpt-4.1-mini",  # or "gpt-4.1-nano"
+    messages=[
+        {"role": "user", "content": "Hello! What can you do?"}
+    ]
+)
+
+print(response.choices[0].message.content)</code></pre>
+
+<h2>Step-by-Step Usage Guide</h2>
+<p>
+  The following walkthrough covers three core use cases: basic text completion, tool/function calling, and multimodal (image + text) reasoning.
+</p>
+
+<h3>Step 1: Basic Chat Completion with GPT-4.1 Mini</h3>
+<p>
+  Start with a simple conversation. This is the foundation of everything built on top of the chat completions API.
+</p>
+<pre><code>from openai import OpenAI
+
+client = OpenAI()
+
+response = client.chat.completions.create(
+    model="gpt-4.1-mini",
+    messages=[
+        {
+            "role": "system",
+            "content": "You are a senior Python developer. Be concise and precise."
+        },
+        {
+            "role": "user",
+            "content": "Write a Python function to validate an email address using regex."
+        }
+    ],
+    temperature=0.2,
+    max_tokens=500
+)
+
+print(response.choices[0].message.content)</code></pre>
+<p>
+  Notice the <code>temperature=0.2</code> setting — lower temperatures produce more deterministic, focused outputs, which is ideal for coding tasks.
+</p>
+
+<h3>Step 2: Function Calling / Tool Use with GPT-4.1 Nano</h3>
+<p>
+  GPT-4.1 nano excels at tool use. Here is how to define a tool and have the model call it reliably.
+</p>
+<pre><code>from openai import OpenAI
+import json
+
+client = OpenAI()
+
+tools = [
+    {
+        "type": "function",
+        "function": {
+            "name": "get_weather",
+            "description": "Get the current weather for a given city.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "city": {
+                        "type": "string",
+                        "description": "The name of the city, e.g. 'San Francisco'"
+                    },
+                    "unit": {
+                        "type": "string",
+                        "enum": ["celsius", "fahrenheit"],
+                        "description": "Temperature unit"
+                    }
+                },
+                "required": ["city"]
+            }
+        }
+    }
+]
+
+response = client.chat.completions.create(
+    model="gpt-4.1-nano",
+    messages=[
+        {"role": "user", "content": "What's the weather like in Tokyo right now?"}
+    ],
+    tools=tools,
+    tool_choice="auto"
+)
+
+tool_call = response.choices[0].message.tool_calls[0]
+print(f"Tool called: {tool_call.function.name}")
+print(f"Arguments: {tool_call.function.arguments}")</code></pre>
+
+<h3>Step 3: Multimodal Reasoning — Analyzing an Image</h3>
+<p>
+  Both models support vision inputs. The following example sends an image URL along with a text prompt.
+</p>
+<pre><code>from openai import OpenAI
+
+client = OpenAI()
+
+response = client.chat.completions.create(
+    model="gpt-4.1-mini",
+    messages=[
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "Describe what you see in this image and identify any UI elements."
+                },
+                {
+                    "type": "image_url",
+                    "image_url": {
+                        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/JPEG_example_flower.jpg/800px-JPEG_example_flower.jpg"
+                    }
+                }
+            ]
+        }
+    ],
+    max_tokens=300
+)
+
+print(response.choices[0].message.content)</code></pre>
+
+<h3>Step 4: Streaming Responses for Real-Time Applications</h3>
+<p>
+  For chat interfaces or real-time feedback loops, streaming dramatically improves perceived responsiveness.
+</p>
+<pre><code>from openai import OpenAI
+
+client = OpenAI()
+
+stream = client.chat.completions.create(
+    model="gpt-4.1-mini",
+    messages=[
+        {"role": "user", "content": "Explain quantum entanglement in simple terms."}
+    ],
+    stream=True
+)
+
+for chunk in stream:
+    if chunk.choices[0].delta.content is not None:
+        print(chunk.choices[0].delta.content, end="", flush=True)
+
+print()  # newline at end</code></pre>
+
+<h2>5+ Real-World Use Cases</h2>
+
+<h3>1. Automated Code Review in CI/CD Pipelines</h3>
+<p>
+  Use GPT-4.1 mini to automatically review pull requests for bugs, style violations, and security issues as part of a GitHub Actions workflow.
+</p>
+<pre><code>import subprocess
+from openai import OpenAI
+
+client = OpenAI()
+
+# Get the git diff for staged changes
+diff = subprocess.check_output(["git", "diff", "HEAD~1"]).decode("utf-8")
+
+response = client.chat.completions.create(
+    model="gpt-4.1-mini",
+    messages=[
+        {
+            "role": "system",
+            "content": "You are a code reviewer. Identify bugs, security issues, and style problems."
+        },
+        {
+            "role": "user",
+            "content": f"Review this git diff:\n\n{diff}"
+        }
+    ]
+)
+
+print(response.choices[0].message.content)</code></pre>
+
+<h3>2. High-Volume Customer Support Classification</h3>
+<p>
+  Deploy GPT-4.1 nano to classify thousands of incoming support tickets per minute into categories like billing, technical, and general — at minimal cost.
+</p>
+<pre><code>from openai import OpenAI
+
+client = OpenAI()
+
+def classify_ticket(ticket_text: str) -> str:
+    response = client.chat.completions.create(
+        model="gpt-4.1-nano",
+        messages=[
+            {
+                "role": "system",
+                "content": "Classify the support ticket into one of: billing, technical, general, urgent. Reply with only the category."
+            },
+            {"role": "user", "content": ticket_text}
+        ],
+        max_tokens=10,
+        temperature=0
+    )
+    return response.choices[0].message.content.strip()
+
+# Example batch processing
+tickets = [
+    "I can't log into my account since this morning.",
+    "I was charged twice for my subscription this month.",
+    "How do I export my data to CSV?"
+]
+
+for ticket in tickets:
+    category = classify_ticket(ticket)
+    print(f"Ticket: '{ticket[:40]}...' → Category: {category}")</code></pre>
+
+<h3>3. Sub-Agent in a Multi-Agent Research Pipeline</h3>
+<p>
+  Use GPT-4.1 nano as a fast sub-agent that summarizes individual web pages, feeding results to a larger orchestrator model for synthesis.
+</p>
+<pre><code>from openai import OpenAI
+
+client = OpenAI()
+
+def summarize_page(page_content: str) -> str:
+    """Sub-agent: summarize a single page quickly and cheaply."""
+    response = client.chat.completions.create(
+        model="gpt-4.1-nano",
+        messages=[
+            {
+                "role": "system",
+                "content": "Summarize the following web page content in 3 bullet points."
+            },
+            {"role": "user", "content": page_content[:4000]}  # token limit guard
+        ],
+        max_tokens=200
+    )
+    return response.choices[0].message.content
+
+def synthesize_research(summaries: list[str], topic: str) -> str:
+    """Orchestrator: synthesize all summaries into a research report."""
+    combined = "\n\n".join(summaries)
+    response = client.chat.completions.create(
+        model="gpt-4.1-mini",  # slightly larger model for synthesis
+        messages=[
+            {
+                "role": "system",
+                "content": f"You are a research analyst. Synthesize these summaries about '{topic}' into a coherent report."
+            },
+            {"role": "user", "content": combined}
+        ]
+    )
+    return response.choices[0].message.content
+
+# Simulated pipeline
+pages = ["Page 1 content about AI...", "Page 2 content about AI..."]
+summaries = [summarize_page(p) for p in pages]
+report = synthesize_research(summaries, "AI model efficiency")
+print(report)</code></pre>
+
+<h3>4. Document Intelligence and Data Extraction</h3>
+<p>
+  Extract structured data from scanned invoices or receipts using the multimodal capabilities of GPT-4.1 mini, then output clean JSON.
+</p>
+<pre><code>from openai import OpenAI
+import json
+
+client = OpenAI()
+
+response = client.chat.completions.create(
+    model="gpt-4.1-mini",
+    messages=[
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "Extract the vendor name, total amount, date, and line items from this invoice. Return valid JSON only."
+                },
+                {
+                    "type": "image_url",
+                    "image_url": {"url": "https://example.com/invoice.jpg"}
+                }
+            ]
+        }
+    ],
+    response_format={"type": "json_object"},
+    max_tokens=500
+)
+
+invoice_data = json.loads(response.choices[0].message.content)
+print(json.dumps(invoice_data, indent=2))</code></pre>
+
+<h3>5. Real-Time Coding Assistant in a VS Code Extension</h3>
+<p>
+  Power an in-editor coding assistant that suggests completions, explains errors, and refactors code on demand — using GPT-4.1 mini for low latency.
+</p>
+<pre><code>from openai import OpenAI
+
+client = OpenAI()
+
+def explain_error(error_message: str, code_context: str) -> str:
+    response = client.chat.completions.create(
+        model="gpt-4.1-mini",
+        messages=[
+            {
+                "role": "system",
+                "content": "You are an expert debugger. Explain errors clearly and suggest fixes."
+            },
+            {
+                "role": "user",
+                "content": f"Error:\n{error_message}\n\nCode context:\n```python\n{code_context}\n```\n\nWhat's wrong and how do I fix it?"
+            }
+        ],
+        stream=True
+    )
+    result = ""
+    for chunk in response:
+        if chunk.choices[0].delta.content:
+            result += chunk.choices[0].delta.content
+    return result
+
+error = "TypeError: unsupported operand type(s) for +: 'int' and 'str
+    </article>
+  </main>
+
+  <!-- Back to Top -->
+  <button id="back-to-top" aria-label="Back to top" title="Back to top">&#8593;</button>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 <a href="../index.html">Kiwolo.io</a> &middot; Daily AI Tech Guides</p>
+  </footer>
+
+  <script>
+    // ── Theme Toggle ──
+    const toggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+
+    function getTheme() {
+      return localStorage.getItem('kiwolo-theme') ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    }
+
+    function applyTheme(theme) {
+      html.setAttribute('data-theme', theme);
+      toggle.textContent = theme === 'dark' ? '☀' : '🌙';
+      localStorage.setItem('kiwolo-theme', theme);
+    }
+
+    applyTheme(getTheme());
+
+    toggle.addEventListener('click', () => {
+      applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    });
+
+    // ── Reading Progress Bar ──
+    const bar = document.getElementById('progress-bar');
+
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? Math.round((scrollTop / docHeight) * 100) : 0;
+      bar.style.width = pct + '%';
+      bar.setAttribute('aria-valuenow', pct);
+    }
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+
+    // ── Back to Top ──
+    const backTop = document.getElementById('back-to-top');
+
+    window.addEventListener('scroll', () => {
+      backTop.classList.toggle('visible', window.scrollY > 400);
+    }, { passive: true });
+
+    backTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>

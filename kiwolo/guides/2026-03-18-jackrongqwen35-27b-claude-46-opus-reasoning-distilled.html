@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jackrong/Qwen3.5-27B-Claude-4.6-Opus-Reasoning-Distilled | Kiwolo.io</title>
+  <meta name="description" content="What It Is Jackrong/Qwen3.5-27B-Claude-4.6-Opus-Reasoning-Distilled is a knowledge-distilled large language model (LLM) available on HuggingFace that combines two powerful AI lineages into a single, h...">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://kiwolo.io/guides/jackrongqwen35-27b-claude-46-opus-reasoning-distilled">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Jackrong/Qwen3.5-27B-Claude-4.6-Opus-Reasoning-Distilled">
+  <meta property="og:description" content="What It Is Jackrong/Qwen3.5-27B-Claude-4.6-Opus-Reasoning-Distilled is a knowledge-distilled large language model (LLM) available on HuggingFace that combines two powerful AI lineages into a single, h...">
+  <meta property="og:url" content="https://kiwolo.io/guides/jackrongqwen35-27b-claude-46-opus-reasoning-distilled">
+  <meta property="og:site_name" content="Kiwolo.io">
+  <meta property="article:published_time" content="2026-03-18">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Jackrong/Qwen3.5-27B-Claude-4.6-Opus-Reasoning-Distilled">
+  <meta name="twitter:description" content="What It Is Jackrong/Qwen3.5-27B-Claude-4.6-Opus-Reasoning-Distilled is a knowledge-distilled large language model (LLM) available on HuggingFace that combines two powerful AI lineages into a single, h...">
+
+  <!-- Custom metadata -->
+  <meta name="kiwolo:source" content="huggingface">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Jackrong/Qwen3.5-27B-Claude-4.6-Opus-Reasoning-Distilled",
+    "description": "What It Is Jackrong/Qwen3.5-27B-Claude-4.6-Opus-Reasoning-Distilled is a knowledge-distilled large language model (LLM) available on HuggingFace that combines two powerful AI lineages into a single, h...",
+    "datePublished": "2026-03-18",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Kiwolo.io",
+      "url": "https://kiwolo.io"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://kiwolo.io/guides/jackrongqwen35-27b-claude-46-opus-reasoning-distilled"
+    }
+  }
+  </script>
+
+  <style>
+    /* ── CSS Variables ── */
+    :root {
+      --bg: #0f0f13;
+      --surface: #1a1a23;
+      --border: #2a2a38;
+      --accent: #7c6dfa;
+      --text: #e2e2ee;
+      --muted: #888899;
+      --code-bg: #13131c;
+      --header-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      --radius: 8px;
+      --transition: 0.2s ease;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root:not([data-theme="dark"]) {
+        --bg: #f5f5f8;
+        --surface: #ffffff;
+        --border: #dcdce8;
+        --accent: #5c4ee8;
+        --text: #1a1a2e;
+        --muted: #666677;
+        --code-bg: #f0f0f5;
+        --header-bg: linear-gradient(135deg, #e8e8f8 0%, #d8e0f0 50%, #c8d8f0 100%);
+      }
+    }
+
+    [data-theme="light"] {
+      --bg: #f5f5f8;
+      --surface: #ffffff;
+      --border: #dcdce8;
+      --accent: #5c4ee8;
+      --text: #1a1a2e;
+      --muted: #666677;
+      --code-bg: #f0f0f5;
+      --header-bg: linear-gradient(135deg, #e8e8f8 0%, #d8e0f0 50%, #c8d8f0 100%);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0f0f13;
+      --surface: #1a1a23;
+      --border: #2a2a38;
+      --accent: #7c6dfa;
+      --text: #e2e2ee;
+      --muted: #888899;
+      --code-bg: #13131c;
+      --header-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    }
+
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    /* ── Reading Progress Bar ── */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: var(--accent);
+      z-index: 1000;
+      transition: width 0.1s linear;
+    }
+
+    /* ── Theme Toggle ── */
+    #theme-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 999;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition), border-color var(--transition), transform var(--transition);
+    }
+
+    #theme-toggle:hover {
+      border-color: var(--accent);
+      transform: scale(1.1);
+    }
+
+    /* ── Header ── */
+    .site-header {
+      background: var(--header-bg);
+      padding: 48px 24px 40px;
+      text-align: center;
+      position: relative;
+    }
+
+    .site-logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 16px;
+      opacity: 0.9;
+    }
+
+    .site-logo:hover { opacity: 1; }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      margin-bottom: 24px;
+      transition: color var(--transition);
+    }
+
+    .back-link:hover { color: var(--accent); }
+
+    .article-badge {
+      display: inline-block;
+      background: rgba(124, 109, 250, 0.15);
+      color: var(--accent);
+      border: 1px solid rgba(124, 109, 250, 0.3);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 20px;
+    }
+
+    .article-title {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.25;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      max-width: 820px;
+      margin: 0 auto 20px;
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    .article-meta time { font-variant-numeric: tabular-nums; }
+
+    .article-meta a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    .article-meta a:hover { color: var(--accent); }
+
+    .meta-sep { opacity: 0.4; }
+
+    /* ── Main Content ── */
+    main {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* ── Typography ── */
+    .content h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 2.5rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      letter-spacing: -0.3px;
+    }
+
+    .content h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 2rem 0 0.75rem;
+      letter-spacing: -0.2px;
+    }
+
+    .content h4 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 1.5rem 0 0.5rem;
+    }
+
+    .content p {
+      margin-bottom: 1.25rem;
+      color: var(--text);
+    }
+
+    .content a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-color: rgba(124, 109, 250, 0.4);
+      transition: text-decoration-color var(--transition);
+    }
+
+    .content a:hover { text-decoration-color: var(--accent); }
+
+    /* ── Lists ── */
+    .content ul, .content ol {
+      margin: 1rem 0 1.25rem 1.5rem;
+    }
+
+    .content li {
+      margin-bottom: 0.5rem;
+      padding-left: 0.25rem;
+    }
+
+    .content ul li::marker { color: var(--accent); }
+    .content ol li::marker { color: var(--accent); font-weight: 600; }
+
+    /* ── Code ── */
+    .content code {
+      font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", Consolas, monospace;
+      font-size: 0.875em;
+      background: var(--code-bg);
+      color: #b8b0ff;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    .content pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      position: relative;
+    }
+
+    .content pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 0.875rem;
+      color: #c8c0ff;
+      line-height: 1.6;
+    }
+
+    /* ── Blockquote ── */
+    .content blockquote {
+      border-left: 3px solid var(--accent);
+      background: var(--surface);
+      padding: 16px 20px;
+      margin: 1.5rem 0;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ── Callout ── */
+    .callout {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin: 1.5rem 0;
+    }
+
+    .callout.info { border-left-color: #4a9eff; }
+    .callout.warning { border-left-color: #f5a623; }
+    .callout.success { border-left-color: #50c878; }
+    .callout.danger { border-left-color: #ff5f5f; }
+
+    .callout-title {
+      font-weight: 700;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+
+    .callout.info .callout-title { color: #4a9eff; }
+    .callout.warning .callout-title { color: #f5a623; }
+    .callout.success .callout-title { color: #50c878; }
+    .callout.danger .callout-title { color: #ff5f5f; }
+
+    /* ── Pros / Cons ── */
+    .pros-cons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 1.5rem 0;
+    }
+
+    @media (max-width: 560px) {
+      .pros-cons { grid-template-columns: 1fr; }
+    }
+
+    .pros, .cons {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+    }
+
+    .pros { border-top: 3px solid #50c878; }
+    .cons { border-top: 3px solid #ff5f5f; }
+
+    .pros h4, .cons h4 {
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+      margin-top: 0;
+    }
+
+    .pros h4 { color: #50c878; }
+    .cons h4 { color: #ff5f5f; }
+
+    .pros ul, .cons ul {
+      margin: 0;
+      list-style: none;
+      padding: 0;
+    }
+
+    .pros li::before { content: "+ "; color: #50c878; font-weight: 700; }
+    .cons li::before { content: "− "; color: #ff5f5f; font-weight: 700; }
+
+    /* ── Table ── */
+    .content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    .content th {
+      background: var(--surface);
+      color: var(--text);
+      font-weight: 600;
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .content td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .content tr:last-child td { border-bottom: none; }
+    .content tbody tr:hover { background: var(--surface); }
+
+    /* ── Horizontal Rule ── */
+    .content hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2.5rem 0;
+    }
+
+    /* ── Back to Top ── */
+    #back-to-top {
+      position: fixed;
+      bottom: 28px;
+      right: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition), border-color var(--transition), transform var(--transition);
+      z-index: 900;
+    }
+
+    #back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #back-to-top:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 24px;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    footer a:hover { color: var(--accent); }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      main { padding: 32px 16px 64px; }
+      .site-header { padding: 40px 16px 32px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Reading Progress Bar -->
+  <div id="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
+  <!-- Theme Toggle -->
+  <button id="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light theme">🌙</button>
+
+  <!-- Header -->
+  <header class="site-header">
+    <a href="../index.html" class="site-logo">Kiwolo.io</a>
+    <br>
+    <a href="../index.html" class="back-link">&#8592; Back to Kiwolo.io</a>
+    <div>
+      <span class="article-badge">huggingface</span>
+    </div>
+    <h1 class="article-title">Jackrong/Qwen3.5-27B-Claude-4.6-Opus-Reasoning-Distilled</h1>
+    <div class="article-meta">
+      <time datetime="2026-03-18">March 18, 2026</time>
+      <span class="meta-sep">·</span>
+      <a href="https://huggingface.co/Jackrong/Qwen3.5-27B-Claude-4.6-Opus-Reasoning-Distilled" target="_blank" rel="noopener noreferrer">View Source ↗</a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <article class="content">
+      <h2>What It Is</h2>
+<p>
+  <strong>Jackrong/Qwen3.5-27B-Claude-4.6-Opus-Reasoning-Distilled</strong> is a knowledge-distilled large language model (LLM) available on HuggingFace that combines two powerful AI lineages into a single, highly capable open-weight model. At its core, this model takes the <strong>Qwen3.5-27B</strong> architecture — Alibaba's latest generation of the Qwen model family — and applies <strong>reasoning distillation</strong> techniques inspired by Anthropic's Claude 4.6 Opus, one of the most capable proprietary reasoning models available.
+</p>
+<p>
+  Knowledge distillation in this context means the model has been fine-tuned on outputs, reasoning chains, and structured thought processes generated by Claude 4.6 Opus, effectively transferring the "thinking style" of a frontier proprietary model into an open-weight 27-billion-parameter model. The result is a mid-sized model that punches well above its weight class in logical reasoning, multi-step problem solving, and structured analytical tasks.
+</p>
+<p>
+  The model is tagged with <strong>safetensors</strong>, <strong>qwen3_5</strong>, <strong>unsloth</strong>, <strong>qwen</strong>, and <strong>qwen3.5</strong>, indicating that it ships in the memory-safe <code>safetensors</code> format and is compatible with the <strong>Unsloth</strong> optimization framework for efficient fine-tuning and inference. It sits in the growing category of "reasoning-distilled" open models — a trend that began with DeepSeek-R1 and has rapidly gained momentum across the open-source AI community.
+</p>
+
+<h2>Why It Matters</h2>
+<p>
+  The significance of this model is best understood at the intersection of three converging trends in AI development:
+</p>
+<ul>
+  <li><strong>Democratizing frontier reasoning:</strong> Anthropic's Claude 4.6 Opus is a closed, API-gated model. By distilling its reasoning capabilities into an open-weight model, Jackrong's release makes advanced chain-of-thought (CoT) reasoning accessible to developers and researchers who cannot or do not want to depend on proprietary APIs.</li>
+  <li><strong>Efficiency at scale:</strong> A 27B parameter model is deployable on a single high-end consumer GPU (e.g., an NVIDIA RTX 4090 or A100 with quantization). This is a dramatic cost reduction compared to running inference on Claude Opus-class models via API, especially at volume.</li>
+  <li><strong>Unsloth compatibility:</strong> The inclusion of Unsloth support means this model can be further fine-tuned or run inference with significantly reduced VRAM requirements — often 2x more memory efficient than standard HuggingFace Transformers loading.</li>
+  <li><strong>The distillation paradigm shift:</strong> Models like this one are part of a new generation of "teacher-student" training pipelines where open models increasingly close the gap with proprietary systems not through brute-force scaling but through targeted behavioral distillation.</li>
+  <li><strong>Qwen3.5 as a strong base:</strong> The Qwen3.5 architecture from Alibaba Cloud has demonstrated strong performance on coding, mathematics, and multilingual benchmarks, providing an excellent foundation for reasoning-focused fine-tuning.</li>
+</ul>
+<p>
+  In short, this model matters because it represents the cutting edge of open-source reasoning model development — making high-quality analytical AI more accessible, affordable, and customizable.
+</p>
+
+<h2>How to Get Started</h2>
+<h3>Prerequisites</h3>
+<ul>
+  <li>Python 3.9 or higher</li>
+  <li>CUDA 11.8+ (for GPU inference)</li>
+  <li>At least 24 GB VRAM for full-precision inference (16 GB with 4-bit quantization via bitsandbytes or Unsloth)</li>
+  <li>HuggingFace account and <code>huggingface_hub</code> CLI (optional, for faster downloads)</li>
+</ul>
+
+<h3>Installation</h3>
+<pre><code># Install core dependencies
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+
+# Install HuggingFace Transformers and related libraries
+pip install transformers accelerate safetensors sentencepiece
+
+# Install bitsandbytes for quantization support
+pip install bitsandbytes
+
+# Install Unsloth for optimized inference and fine-tuning
+pip install "unsloth[colab-new] @ git+https://github.com/unslothai/unsloth.git"
+
+# Install HuggingFace Hub CLI (optional)
+pip install huggingface_hub
+huggingface-cli login
+</code></pre>
+
+<h3>Downloading the Model</h3>
+<pre><code># Download via huggingface_hub Python API
+from huggingface_hub import snapshot_download
+
+snapshot_download(
+    repo_id="Jackrong/Qwen3.5-27B-Claude-4.6-Opus-Reasoning-Distilled",
+    local_dir="./qwen35-claude-reasoning",
+    ignore_patterns=["*.md", "*.txt"]
+)
+</code></pre>
+
+<h2>Step-by-Step Usage Guide</h2>
+
+<h3>Step 1: Load the Model with HuggingFace Transformers</h3>
+<p>
+  Begin by loading the tokenizer and model using the standard Transformers pipeline. For most consumer hardware, we recommend loading in 4-bit quantization to manage VRAM.
+</p>
+<pre><code>from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
+import torch
+
+model_id = "Jackrong/Qwen3.5-27B-Claude-4.6-Opus-Reasoning-Distilled"
+
+# 4-bit quantization config for memory efficiency
+bnb_config = BitsAndBytesConfig(
+    load_in_4bit=True,
+    bnb_4bit_use_double_quant=True,
+    bnb_4bit_quant_type="nf4",
+    bnb_4bit_compute_dtype=torch.bfloat16
+)
+
+tokenizer = AutoTokenizer.from_pretrained(model_id, trust_remote_code=True)
+
+model = AutoModelForCausalLM.from_pretrained(
+    model_id,
+    quantization_config=bnb_config,
+    device_map="auto",
+    trust_remote_code=True
+)
+
+print("Model loaded successfully.")
+</code></pre>
+
+<h3>Step 2: Construct a Reasoning-Focused Prompt</h3>
+<p>
+  Because this model has been distilled on Claude Opus reasoning traces, it responds best to prompts that invite structured, step-by-step thinking. Use a system message that activates the model's chain-of-thought capabilities.
+</p>
+<pre><code>system_prompt = """You are an expert reasoning assistant. When given a problem,
+think through it step by step, show your reasoning explicitly before arriving
+at a final answer. Use clear logical structure."""
+
+user_question = """A train leaves Station A at 9:00 AM traveling at 80 km/h.
+Another train leaves Station B (320 km away) at 10:00 AM traveling toward
+Station A at 100 km/h. At what time will the two trains meet?"""
+
+messages = [
+    {"role": "system", "content": system_prompt},
+    {"role": "user", "content": user_question}
+]
+
+# Format using the model's chat template
+text = tokenizer.apply_chat_template(
+    messages,
+    tokenize=False,
+    add_generation_prompt=True
+)
+
+print(text)
+</code></pre>
+
+<h3>Step 3: Run Inference and Parse the Output</h3>
+<p>
+  Generate a response with appropriate generation parameters. Reasoning models benefit from higher max token limits to accommodate their extended thinking chains.
+</p>
+<pre><code>inputs = tokenizer(text, return_tensors="pt").to(model.device)
+
+with torch.no_grad():
+    outputs = model.generate(
+        **inputs,
+        max_new_tokens=1024,
+        temperature=0.6,
+        top_p=0.9,
+        top_k=50,
+        do_sample=True,
+        repetition_penalty=1.1,
+        pad_token_id=tokenizer.eos_token_id
+    )
+
+# Decode only the new tokens (exclude the input prompt)
+generated_ids = outputs[0][inputs["input_ids"].shape[1]:]
+response = tokenizer.decode(generated_ids, skip_special_tokens=True)
+
+print("=== MODEL RESPONSE ===")
+print(response)
+</code></pre>
+
+<h3>Step 4: Use Unsloth for Faster Inference</h3>
+<p>
+  If you have Unsloth installed, you can load the model more efficiently for production or repeated inference tasks:
+</p>
+<pre><code>from unsloth import FastLanguageModel
+
+model, tokenizer = FastLanguageModel.from_pretrained(
+    model_name="Jackrong/Qwen3.5-27B-Claude-4.6-Opus-Reasoning-Distilled",
+    max_seq_length=4096,
+    dtype=None,       # Auto-detect best dtype
+    load_in_4bit=True
+)
+
+# Enable faster inference mode
+FastLanguageModel.for_inference(model)
+</code></pre>
+
+<h2>5+ Real-World Use Cases</h2>
+
+<h3>1. Automated Code Review and Debugging</h3>
+<p>Feed the model a buggy Python function and ask it to reason through the issue and propose a fix.</p>
+<pre><code>buggy_code = """
+def calculate_average(numbers):
+    total = 0
+    for n in numbers:
+        total += n
+    return total / len(numbers)  # Bug: fails on empty list
+"""
+
+prompt = f"""Review the following Python function. Identify all bugs,
+explain the reasoning behind each issue, and provide a corrected version:
+
+{buggy_code}"""
+
+# Pass through the inference pipeline constructed in Step 3
+</code></pre>
+
+<h3>2. Mathematical Problem Solving</h3>
+<p>The distilled reasoning capabilities make this model excellent for multi-step math problems, including competition-level algebra and calculus.</p>
+<pre><code>math_prompt = """Solve the following problem step by step:
+
+Find all real values of x that satisfy:
+log₂(x² - 4x) = log₂(x + 12)
+
+Show each algebraic step and verify your solution."""
+</code></pre>
+
+<h3>3. Legal and Contractual Document Analysis</h3>
+<p>Parse complex contract clauses and reason about potential risks or obligations.</p>
+<pre><code>contract_clause = """
+Section 14.2: The Licensor reserves the right to terminate this agreement
+with 30 days notice if the Licensee's monthly active users exceed 10,000
+without prior written consent, except in cases where Exhibit C applies.
+"""
+
+analysis_prompt = f"""Analyze the following contract clause for potential
+risks to a startup with rapidly growing user base. Reason through each
+implication carefully:
+
+{contract_clause}"""
+</code></pre>
+
+<h3>4. Scientific Hypothesis Generation</h3>
+<p>Use the model's reasoning depth to generate and evaluate scientific hypotheses based on experimental data descriptions.</p>
+<pre><code>research_prompt = """Given the following experimental observations from a
+materials science study:
+- Sample A (pure copper): conductivity 5.96 × 10⁷ S/m
+- Sample B (copper + 2% silver alloy): conductivity 5.87 × 10⁷ S/m
+- Sample C (copper + 5% silver alloy): conductivity 5.64 × 10⁷ S/m
+
+Generate three hypotheses explaining the observed trend and rank them
+by scientific plausibility with reasoning."""
+</code></pre>
+
+<h3>5. Educational Tutoring and Explanation Generation</h3>
+<p>Generate Socratic-style explanations for students learning complex topics.</p>
+<pre><code>tutor_prompt = """Explain how public key cryptography works to a
+high school student who understands basic algebra but has never
+studied computer science. Use an analogy, then provide the
+mathematical reasoning step by step."""
+</code></pre>
+
+<h3>6. Strategic Business Decision Analysis</h3>
+<p>Use chain-of-thought reasoning to evaluate business scenarios with multiple variables and trade-offs.</p>
+<pre><code>business_prompt = """A SaaS company has two growth options:
+Option A: Raise $5M Series A, hire 20 engineers, 18-month runway
+Option B: Remain bootstrapped, hire 4 engineers, grow organically
+
+Current MRR: $45,000, growing at 15% MoM. Analyze each option
+considering market timing, dilution risk, execution risk, and
+long-term value creation. Recommend one with full reasoning."""
+</code></pre>
+
+<h2>Code Examples</h2>
+
+<h3>Complete Inference Pipeline with Streaming Output</h3>
+<pre><code>from transformers import (
+    AutoTokenizer,
+    AutoModelForCausalLM,
+    BitsAndBytesConfig,
+    TextStreamer
+)
+import torch
+
+def load_reasoning_model(model_id: str, use_4bit: bool = True):
+    """Load the Qwen3.5 Claude-distilled reasoning model."""
+    bnb_config = None
+    if use_4bit:
+        bnb_config = BitsAndBytesConfig(
+            load_in_4bit=True,
+            bnb_4bit_use_double_quant=True,
+            bnb_4bit_quant_type="nf4",
+            bnb_4bit_compute_dtype=torch.bfloat16
+        )
+
+    tokenizer = AutoTokenizer.from_pretrained(
+        model_id,
+        trust_remote_code=True,
+        padding_side="left"
+    )
+
+    model = AutoModelForCausalLM.from_pretrained(
+        model_id,
+        quantization_config=bnb_config,
+        device_map="auto",
+        trust_remote_code=True,
+        torch_dtype=torch.bfloat16 if not use_4bit else None
+    )
+
+    return model, tokenizer
+
+
+def reason(model, tokenizer, question: str, stream: bool = True) -> str:
+    """Run inference with optional streaming output."""
+    system = (
+        "You are an advanced reasoning assistant trained to solve complex problems. "
+        "Always think step-by-step, show your reasoning explicitly, "
+        "and conclude with a clear final answer."
+    )
+
+    messages = [
+        {"role": "system", "content": system},
+        {"role": "user", "content": question}
+    ]
+
+    formatted = tokenizer.apply_chat_template(
+        messages,
+        tokenize=False,
+        add_generation_prompt=True
+    )
+
+    inputs = tokenizer(formatted, return_tensors="pt").to(model.device)
+
+    streamer = TextStreamer(tokenizer, skip_prompt=True) if stream else None
+
+    with torch.no_grad():
+        output = model.generate(
+            **inputs,
+            max_new_tokens=2048,
+            temperature=0.6,
+            top_p=0.92,
+            do_sample=True,
+            repetition_penalty=1.05,
+            streamer=streamer,
+            pad_token_id=tokenizer.eos_token_id
+        )
+
+    if not stream:
+        new_tokens = output[0][inputs["input_ids"].shape[1]:]
+        return tokenizer.decode(new_tokens, skip_special_tokens=True)
+
+    return ""  # Streamer handles output in real-time
+
+
+# Main execution
+if __name__ == "__main__":
+    MODEL_ID = "Jackrong/Qwen3.5-27B-Claude-4.6-Opus-Reasoning-Distilled"
+
+    print("Loading model...")
+    model, tokenizer = load_reasoning_model(MODEL_ID)
+
+    question = """
+    A company's revenue grows by 20% in year 1, shrinks by
+    </article>
+  </main>
+
+  <!-- Back to Top -->
+  <button id="back-to-top" aria-label="Back to top" title="Back to top">&#8593;</button>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 <a href="../index.html">Kiwolo.io</a> &middot; Daily AI Tech Guides</p>
+  </footer>
+
+  <script>
+    // ── Theme Toggle ──
+    const toggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+
+    function getTheme() {
+      return localStorage.getItem('kiwolo-theme') ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    }
+
+    function applyTheme(theme) {
+      html.setAttribute('data-theme', theme);
+      toggle.textContent = theme === 'dark' ? '☀' : '🌙';
+      localStorage.setItem('kiwolo-theme', theme);
+    }
+
+    applyTheme(getTheme());
+
+    toggle.addEventListener('click', () => {
+      applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    });
+
+    // ── Reading Progress Bar ──
+    const bar = document.getElementById('progress-bar');
+
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? Math.round((scrollTop / docHeight) * 100) : 0;
+      bar.style.width = pct + '%';
+      bar.setAttribute('aria-valuenow', pct);
+    }
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+
+    // ── Back to Top ──
+    const backTop = document.getElementById('back-to-top');
+
+    window.addEventListener('scroll', () => {
+      backTop.classList.toggle('visible', window.scrollY > 400);
+    }, { passive: true });
+
+    backTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
