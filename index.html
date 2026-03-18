@@ -1,27 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- ── Primary SEO ── -->
   <title>Kiwolo.io — Daily AI Tech Guides</title>
-  <meta name="description" content="Kiwolo.io publishes daily how-to guides on the most trending AI tools, models, and papers. Stay ahead with practical, in-depth tutorials generated from live trending sources." />
-  <meta name="keywords" content="AI guides, machine learning tutorials, AI tools 2026, trending AI, HuggingFace, arXiv, daily AI news, how-to AI" />
+  <meta name="description"
+    content="Kiwolo.io publishes daily how-to guides on the most trending AI tools, models, and papers. Stay ahead with practical, in-depth tutorials generated from live trending sources." />
+  <meta name="keywords"
+    content="AI guides, machine learning tutorials, AI tools 2026, trending AI, HuggingFace, arXiv, daily AI news, how-to AI" />
   <meta name="author" content="Kiwolo.io" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://kiwolo.io/" />
 
   <!-- ── Open Graph ── -->
-  <meta property="og:type"        content="website" />
-  <meta property="og:title"       content="Kiwolo.io — Daily AI Tech Guides" />
-  <meta property="og:description" content="Daily how-to guides on the most trending AI tools, models, and papers. Practical tutorials, real-world use cases, and code examples." />
-  <meta property="og:url"         content="https://kiwolo.io/" />
-  <meta property="og:locale"      content="en_US" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Kiwolo.io — Daily AI Tech Guides" />
+  <meta property="og:description"
+    content="Daily how-to guides on the most trending AI tools, models, and papers. Practical tutorials, real-world use cases, and code examples." />
+  <meta property="og:url" content="https://kiwolo.io/" />
+  <meta property="og:locale" content="en_US" />
 
   <!-- ── Twitter Card ── -->
-  <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="Kiwolo.io — Daily AI Tech Guides" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Kiwolo.io — Daily AI Tech Guides" />
   <meta name="twitter:description" content="Daily how-to guides on trending AI tools, models, and papers." />
 
   <!-- ── JSON-LD structured data ── -->
@@ -44,86 +48,97 @@
        THEME TOKENS
     ══════════════════════════════════════════ */
     :root {
-      --bg:           #101012;
-      --surface:      #1b1b1f;
-      --border:       #2e2e35;
-      --accent:       #a0a0a8;
-      --accent2:      #d4d4da;
-      --text:         #e8e8ec;
-      --muted:        #77777f;
-      --code-bg:      #141416;
-      --header-bg:    linear-gradient(135deg, #18181c 0%, #222228 50%, #1a1a20 100%);
-      --h3-color:     #c8c8d0;
+      --bg: #101012;
+      --surface: #1b1b1f;
+      --border: #2e2e35;
+      --accent: #a0a0a8;
+      --accent2: #d4d4da;
+      --text: #e8e8ec;
+      --muted: #77777f;
+      --code-bg: #141416;
+      --header-bg: linear-gradient(135deg, #18181c 0%, #222228 50%, #1a1a20 100%);
+      --h3-color: #c8c8d0;
       --selection-bg: #505058;
       --selection-fg: #fff;
-      --card-shadow:  0 4px 6px rgba(0,0,0,0.4), 0 1px 3px rgba(0,0,0,0.3);
-      --card-shadow-hover: 0 20px 40px rgba(0,0,0,0.5), 0 8px 16px rgba(0,0,0,0.4);
-      --card-highlight: rgba(255,255,255,0.04);
+      --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.3);
+      --card-shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.5), 0 8px 16px rgba(0, 0, 0, 0.4);
+      --card-highlight: rgba(255, 255, 255, 0.04);
     }
 
     @media (prefers-color-scheme: light) {
       :root:not([data-theme="dark"]) {
-        --bg:           #f0f0f2;
-        --surface:      #ffffff;
-        --border:       #d4d4da;
-        --accent:       #505058;
-        --accent2:      #3a3a42;
-        --text:         #1a1a1e;
-        --muted:        #6a6a72;
-        --code-bg:      #e8e8ec;
-        --header-bg:    linear-gradient(135deg, #3a3a42 0%, #4a4a52 50%, #5a5a62 100%);
-        --h3-color:     #2a2a32;
+        --bg: #f0f0f2;
+        --surface: #ffffff;
+        --border: #d4d4da;
+        --accent: #505058;
+        --accent2: #3a3a42;
+        --text: #1a1a1e;
+        --muted: #6a6a72;
+        --code-bg: #e8e8ec;
+        --header-bg: linear-gradient(135deg, #3a3a42 0%, #4a4a52 50%, #5a5a62 100%);
+        --h3-color: #2a2a32;
         --selection-bg: #505058;
         --selection-fg: #fff;
-        --card-shadow:  0 4px 6px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.06);
-        --card-shadow-hover: 0 20px 40px rgba(0,0,0,0.12), 0 8px 16px rgba(0,0,0,0.08);
-        --card-highlight: rgba(0,0,0,0.02);
+        --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.06);
+        --card-shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(0, 0, 0, 0.08);
+        --card-highlight: rgba(0, 0, 0, 0.02);
       }
     }
 
     :root[data-theme="dark"] {
-      --bg:           #101012;
-      --surface:      #1b1b1f;
-      --border:       #2e2e35;
-      --accent:       #a0a0a8;
-      --accent2:      #d4d4da;
-      --text:         #e8e8ec;
-      --muted:        #77777f;
-      --code-bg:      #141416;
-      --header-bg:    linear-gradient(135deg, #18181c 0%, #222228 50%, #1a1a20 100%);
-      --h3-color:     #c8c8d0;
+      --bg: #101012;
+      --surface: #1b1b1f;
+      --border: #2e2e35;
+      --accent: #a0a0a8;
+      --accent2: #d4d4da;
+      --text: #e8e8ec;
+      --muted: #77777f;
+      --code-bg: #141416;
+      --header-bg: linear-gradient(135deg, #18181c 0%, #222228 50%, #1a1a20 100%);
+      --h3-color: #c8c8d0;
       --selection-bg: #505058;
       --selection-fg: #fff;
-      --card-shadow:  0 4px 6px rgba(0,0,0,0.4), 0 1px 3px rgba(0,0,0,0.3);
-      --card-shadow-hover: 0 20px 40px rgba(0,0,0,0.5), 0 8px 16px rgba(0,0,0,0.4);
-      --card-highlight: rgba(255,255,255,0.04);
+      --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.3);
+      --card-shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.5), 0 8px 16px rgba(0, 0, 0, 0.4);
+      --card-highlight: rgba(255, 255, 255, 0.04);
     }
 
     :root[data-theme="light"] {
-      --bg:           #f0f0f2;
-      --surface:      #ffffff;
-      --border:       #d4d4da;
-      --accent:       #505058;
-      --accent2:      #3a3a42;
-      --text:         #1a1a1e;
-      --muted:        #6a6a72;
-      --code-bg:      #e8e8ec;
-      --header-bg:    linear-gradient(135deg, #3a3a42 0%, #4a4a52 50%, #5a5a62 100%);
-      --h3-color:     #2a2a32;
+      --bg: #f0f0f2;
+      --surface: #ffffff;
+      --border: #d4d4da;
+      --accent: #505058;
+      --accent2: #3a3a42;
+      --text: #1a1a1e;
+      --muted: #6a6a72;
+      --code-bg: #e8e8ec;
+      --header-bg: linear-gradient(135deg, #3a3a42 0%, #4a4a52 50%, #5a5a62 100%);
+      --h3-color: #2a2a32;
       --selection-bg: #505058;
       --selection-fg: #fff;
-      --card-shadow:  0 4px 6px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.06);
-      --card-shadow-hover: 0 20px 40px rgba(0,0,0,0.12), 0 8px 16px rgba(0,0,0,0.08);
-      --card-highlight: rgba(0,0,0,0.02);
+      --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.06);
+      --card-shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(0, 0, 0, 0.08);
+      --card-highlight: rgba(0, 0, 0, 0.02);
     }
 
     @media (prefers-contrast: high) {
-      :root { --border: #888; --muted: var(--text); --surface: var(--bg); }
+      :root {
+        --border: #888;
+        --muted: var(--text);
+        --surface: var(--bg);
+      }
     }
 
-    ::selection { background: var(--selection-bg); color: var(--selection-fg); }
+    ::selection {
+      background: var(--selection-bg);
+      color: var(--selection-fg);
+    }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
       font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
@@ -150,10 +165,12 @@
       margin-bottom: 0.4rem;
     }
 
-    .logo span { color: var(--accent); }
+    .logo span {
+      color: var(--accent);
+    }
 
     .tagline {
-      color: rgba(255,255,255,0.7);
+      color: rgba(255, 255, 255, 0.7);
       font-size: 1rem;
       margin-bottom: 1.5rem;
       letter-spacing: 0.03em;
@@ -181,7 +198,7 @@
     }
 
     header p.subtitle {
-      color: rgba(255,255,255,0.65);
+      color: rgba(255, 255, 255, 0.65);
       max-width: 600px;
       margin: 0 auto 1.5rem;
       font-size: 1rem;
@@ -208,7 +225,7 @@
 
     .stat span {
       font-size: 0.78rem;
-      color: rgba(255,255,255,0.55);
+      color: rgba(255, 255, 255, 0.55);
       letter-spacing: 0.06em;
       text-transform: uppercase;
     }
@@ -262,8 +279,8 @@
       transform: translateZ(0);
       transform-style: preserve-3d;
       transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                  box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                  border-color 0.3s ease;
+        box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        border-color 0.3s ease;
       position: relative;
       overflow: hidden;
     }
@@ -326,13 +343,40 @@
       border-radius: 999px;
     }
 
-    .source-badge.reddit          { background: #ff4500; color: #fff; }
-    .source-badge.huggingface     { background: #f5c518; color: #111; }
-    .source-badge.arxiv           { background: #b31b1b; color: #fff; }
-    .source-badge.technews        { background: #0891b2; color: #fff; }
-    .source-badge.companyresearch { background: #3a3a42; color: #d4d4da; }
-    .source-badge.learningresource{ background: #4a4a52; color: #e0e0e4; }
-    .source-badge.ai              { background: var(--accent); color: #fff; }
+    .source-badge.reddit {
+      background: #ff4500;
+      color: #fff;
+    }
+
+    .source-badge.huggingface {
+      background: #f5c518;
+      color: #111;
+    }
+
+    .source-badge.arxiv {
+      background: #b31b1b;
+      color: #fff;
+    }
+
+    .source-badge.technews {
+      background: #0891b2;
+      color: #fff;
+    }
+
+    .source-badge.companyresearch {
+      background: #3a3a42;
+      color: #d4d4da;
+    }
+
+    .source-badge.learningresource {
+      background: #4a4a52;
+      color: #e0e0e4;
+    }
+
+    .source-badge.ai {
+      background: var(--accent);
+      color: #fff;
+    }
 
     .guide-card h3 {
       font-size: 1.05rem;
@@ -361,7 +405,9 @@
       margin-top: auto;
     }
 
-    .read-link:hover { text-decoration: underline; }
+    .read-link:hover {
+      text-decoration: underline;
+    }
 
     /* ── Empty state ── */
     .empty-state {
@@ -494,14 +540,14 @@
       font-weight: 600;
       color: var(--text);
       cursor: pointer;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
       transition: background 0.2s, border-color 0.2s;
       user-select: none;
     }
 
     #theme-toggle:hover {
       border-color: var(--accent);
-      box-shadow: 0 0 0 1px var(--accent), 0 4px 14px rgba(0,0,0,0.3);
+      box-shadow: 0 0 0 1px var(--accent), 0 4px 14px rgba(0, 0, 0, 0.3);
     }
 
     /* ── Footer ── */
@@ -513,45 +559,92 @@
       border-top: 1px solid var(--border);
     }
 
-    footer a { color: var(--accent); text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
 
     /* ── Links ── */
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
 
     /* ── Responsive ── */
     @media (max-width: 768px) {
-      header { padding: 3rem 1.25rem 2rem; }
-      main { padding: 2rem 1.25rem 4rem; }
-      .guides-grid { grid-template-columns: 1fr; }
-      .stats-row { gap: 1.25rem; }
+      header {
+        padding: 3rem 1.25rem 2rem;
+      }
+
+      main {
+        padding: 2rem 1.25rem 4rem;
+      }
+
+      .guides-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-row {
+        gap: 1.25rem;
+      }
     }
 
     @media (max-width: 480px) {
-      header { padding: 2.5rem 1rem 1.75rem; }
-      .logo { font-size: 1.8rem; }
-      main { padding: 1.5rem 1rem 3rem; }
-      .steps-grid { grid-template-columns: 1fr 1fr; }
+      header {
+        padding: 2.5rem 1rem 1.75rem;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+      }
+
+      main {
+        padding: 1.5rem 1rem 3rem;
+      }
+
+      .steps-grid {
+        grid-template-columns: 1fr 1fr;
+      }
     }
 
     @media (min-width: 1200px) {
-      main { max-width: 1200px; }
+      main {
+        max-width: 1200px;
+      }
     }
 
     /* ── Smooth theme transitions ── */
-    body, header, main, footer,
-    .guide-card, .step-card, .sources-section {
+    body,
+    header,
+    main,
+    footer,
+    .guide-card,
+    .step-card,
+    .sources-section {
       transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
+
+      *,
+      *::before,
+      *::after {
         transition-duration: 0.01ms !important;
-        animation-duration:  0.01ms !important;
+        animation-duration: 0.01ms !important;
       }
+
       .guide-card:hover,
-      .step-card:hover { transform: none !important; }
+      .step-card:hover {
+        transform: none !important;
+      }
     }
 
     /* ── Search & Filter bar ── */
@@ -592,7 +685,9 @@
       transition: border-color 0.2s, box-shadow 0.2s;
     }
 
-    #search-input::placeholder { color: var(--muted); }
+    #search-input::placeholder {
+      color: var(--muted);
+    }
 
     #search-input:focus {
       border-color: var(--accent);
@@ -630,9 +725,20 @@
       color: #fff;
     }
 
-    .filter-btn--company.active  { background: #059669; border-color: #059669; }
-    .filter-btn--learning.active { background: #d97706; border-color: #d97706; }
-    .filter-btn--spotlight.active{ background: #7c3aed; border-color: #7c3aed; }
+    .filter-btn--company.active {
+      background: #059669;
+      border-color: #059669;
+    }
+
+    .filter-btn--learning.active {
+      background: #d97706;
+      border-color: #d97706;
+    }
+
+    .filter-btn--spotlight.active {
+      background: #7c3aed;
+      border-color: #7c3aed;
+    }
 
     /* ── Card 3D fade-in animation ── */
     @keyframes cardIn {
@@ -640,6 +746,7 @@
         opacity: 0;
         transform: translateY(24px) rotateX(-4deg) scale(0.96);
       }
+
       to {
         opacity: 1;
         transform: translateY(0) rotateX(0) scale(1);
@@ -651,13 +758,33 @@
     }
 
     /* stagger each card */
-    .guide-card:nth-child(1)  { animation-delay: 0.05s; }
-    .guide-card:nth-child(2)  { animation-delay: 0.10s; }
-    .guide-card:nth-child(3)  { animation-delay: 0.15s; }
-    .guide-card:nth-child(4)  { animation-delay: 0.20s; }
-    .guide-card:nth-child(5)  { animation-delay: 0.25s; }
-    .guide-card:nth-child(6)  { animation-delay: 0.30s; }
-    .guide-card:nth-child(n+7){ animation-delay: 0.35s; }
+    .guide-card:nth-child(1) {
+      animation-delay: 0.05s;
+    }
+
+    .guide-card:nth-child(2) {
+      animation-delay: 0.10s;
+    }
+
+    .guide-card:nth-child(3) {
+      animation-delay: 0.15s;
+    }
+
+    .guide-card:nth-child(4) {
+      animation-delay: 0.20s;
+    }
+
+    .guide-card:nth-child(5) {
+      animation-delay: 0.25s;
+    }
+
+    .guide-card:nth-child(6) {
+      animation-delay: 0.30s;
+    }
+
+    .guide-card:nth-child(n+7) {
+      animation-delay: 0.35s;
+    }
 
     /* ── Section type label on card ── */
     .section-tag {
@@ -671,8 +798,17 @@
       margin-left: auto;
     }
 
-    .section-tag.company-spotlight { background: rgba(160,160,168,0.12); color: #b0b0b8; border: 1px solid rgba(160,160,168,0.25); }
-    .section-tag.learning-path     { background: rgba(200,200,208,0.12); color: #c8c8d0; border: 1px solid rgba(200,200,208,0.25); }
+    .section-tag.company-spotlight {
+      background: rgba(160, 160, 168, 0.12);
+      color: #b0b0b8;
+      border: 1px solid rgba(160, 160, 168, 0.25);
+    }
+
+    .section-tag.learning-path {
+      background: rgba(200, 200, 208, 0.12);
+      color: #c8c8d0;
+      border: 1px solid rgba(200, 200, 208, 0.25);
+    }
 
     /* ── No results state ── */
     #no-results {
@@ -683,353 +819,452 @@
       color: var(--muted);
     }
 
-    #no-results strong { display: block; font-size: 1rem; color: var(--text); margin-bottom: 0.4rem; }
+    #no-results strong {
+      display: block;
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
   </style>
 </head>
+
 <body>
 
-<!-- Theme toggle -->
-<button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-  <span class="t-icon" id="theme-icon">☀</span>
-  <span id="theme-label">Light</span>
-</button>
+  <!-- Theme toggle -->
+  <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+    <span class="t-icon" id="theme-icon">☀</span>
+    <span id="theme-label">Light</span>
+  </button>
 
-<!-- Header -->
-<header>
-  <div class="badge">Daily AI Guides</div>
-  <div class="logo">Kiwolo<span>.</span>io</div>
-  <p class="tagline">Daily AI Tech Guides — Curated from the web, written by AI</p>
-  <h1>Your Daily Briefing on<br>What's Trending in AI</h1>
-  <p class="subtitle">
-    Every day, Kiwolo.io monitors Reddit, HuggingFace, arXiv, and tech blogs to find the most
-    trending AI tools and papers — then writes detailed how-to guides so you can get started immediately.
-  </p>
-  <div class="stats-row">
-    <div class="stat">
-      <strong>4</strong>
-      <span>Sources</span>
-    </div>
-    <div class="stat">
-      <strong>Daily</strong>
-      <span>Updates</span>
-    </div>
-    <div class="stat">
-      <strong>3+</strong>
-      <span>Guides/Day</span>
-    </div>
-    <div class="stat">
-      <strong>Free</strong>
-      <span>Always</span>
-    </div>
-  </div>
-</header>
-
-<!-- Main content -->
-<main>
-
-  <!-- Guides section -->
-  <div class="section-header">
-    <h2>Latest Guides</h2>
-    <span class="count-label" id="guide-count"></span>
-  </div>
-
-  <!-- Search & Category filter -->
-  <div class="filter-bar">
-    <div class="search-wrap">
-      <span class="search-icon">🔍</span>
-      <input type="search" id="search-input" placeholder="Search guides…" autocomplete="off" />
-    </div>
-    <div class="filter-btns">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="reddit">Reddit</button>
-      <button class="filter-btn" data-filter="huggingface">HuggingFace</button>
-      <button class="filter-btn" data-filter="arxiv">arXiv</button>
-      <button class="filter-btn" data-filter="technews">Tech News</button>
-      <button class="filter-btn filter-btn--company" data-filter="company-research">🏢 Company Research</button>
-      <button class="filter-btn filter-btn--learning" data-filter="learning-resource">🎓 Learning</button>
-      <button class="filter-btn filter-btn--spotlight" data-filter="company-spotlight">⭐ Spotlight</button>
-    </div>
-  </div>
-
-  <div class="guides-grid" id="guides-container">
-    <!-- GUIDES_START -->
-<article class="guide-card" data-source="company-research">
-  <div class="card-meta">
-    <time class="card-date" datetime="2026-03-18">2026-03-18</time>
-    <span class="source-badge companyresearch">company-research</span>
-    
-  </div>
-  <h3><a href="guides/2026-03-18-spotlight-company-spotlight-bringing-the-power-of-personal-intelligenc.html">Company Spotlight: Bringing the power of Personal Intelligence to more people</a></h3>
-  <p class="excerpt">```html The Announcement Google has expanded its Personal Intelligence initiative, a suite of AI-powered features that connect the dots between a user's personal data — spanning Gmail, Google Photos, ...</p>
-  <a class="read-link" href="guides/2026-03-18-spotlight-company-spotlight-bringing-the-power-of-personal-intelligenc.html">Read Guide →</a>
-</article><article class="guide-card" data-source="company-research">
-  <div class="card-meta">
-    <time class="card-date" datetime="2026-03-18">2026-03-18</time>
-    <span class="source-badge companyresearch">company-research</span>
-    
-  </div>
-  <h3><a href="guides/2026-03-18-measuring-progress-toward-agi-a-cognitive-framework.html">Measuring progress toward AGI: A cognitive framework</a></h3>
-  <p class="excerpt">What It Is Google DeepMind has introduced a formal cognitive framework designed to systematically measure and track progress toward Artificial General Intelligence (AGI). Rather than relying on vague ...</p>
-  <a class="read-link" href="guides/2026-03-18-measuring-progress-toward-agi-a-cognitive-framework.html">Read Guide →</a>
-</article><article class="guide-card" data-source="huggingface">
-  <div class="card-meta">
-    <time class="card-date" datetime="2026-03-18">2026-03-18</time>
-    <span class="source-badge huggingface">huggingface</span>
-    
-  </div>
-  <h3><a href="guides/2026-03-18-hauhaucsqwen35-35b-a3b-uncensored-hauhaucs-aggressive.html">HauhauCS/Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive</a></h3>
-  <p class="excerpt">What It Is HauhauCS/Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive is a fine-tuned, uncensored variant of Alibaba's Qwen3.5 architecture — a cutting-edge Mixture-of-Experts (MoE) large language model....</p>
-  <a class="read-link" href="guides/2026-03-18-hauhaucsqwen35-35b-a3b-uncensored-hauhaucs-aggressive.html">Read Guide →</a>
-</article><article class="guide-card" data-source="huggingface">
-  <div class="card-meta">
-    <time class="card-date" datetime="2026-03-18">2026-03-18</time>
-    <span class="source-badge huggingface">huggingface</span>
-    
-  </div>
-  <h3><a href="guides/2026-03-18-wan-aiwan22-animate.html">Wan-AI/Wan2.2-Animate</a></h3>
-  <p class="excerpt">What It Is Wan2.2-Animate is a cutting-edge AI-powered video generation and animation model developed by Wan-AI, hosted as a trending Space on HuggingFace. It represents the next evolutionary step in ...</p>
-  <a class="read-link" href="guides/2026-03-18-wan-aiwan22-animate.html">Read Guide →</a>
-</article><article class="guide-card" data-source="company-research">
-  <div class="card-meta">
-    <time class="card-date" datetime="2026-03-18">2026-03-18</time>
-    <span class="source-badge companyresearch">company-research</span>
-    
-  </div>
-  <h3><a href="guides/2026-03-18-bringing-the-power-of-personal-intelligence-to-more-people.html">Bringing the power of Personal Intelligence to more people</a></h3>
-  <p class="excerpt">What It Is Google's Personal Intelligence is an AI-powered capability built into Google's core products — including Google Search, Gmail, and Google Photos — that enables the AI to understand and act ...</p>
-  <a class="read-link" href="guides/2026-03-18-bringing-the-power-of-personal-intelligence-to-more-people.html">Read Guide →</a>
-</article><article class="guide-card" data-source="company-research">
-  <div class="card-meta">
-    <time class="card-date" datetime="2026-03-18">2026-03-18</time>
-    <span class="source-badge companyresearch">company-research</span>
-    
-  </div>
-  <h3><a href="guides/2026-03-18-introducing-gpt-54-mini-and-nano.html">Introducing GPT-5.4 mini and nano</a></h3>
-  <p class="excerpt">What It Is GPT-4.1 mini and GPT-4.1 nano are the latest entries in OpenAI's growing family of efficient, cost-optimized language models. Building on the architectural advances of the GPT-4.1 series, t...</p>
-  <a class="read-link" href="guides/2026-03-18-introducing-gpt-54-mini-and-nano.html">Read Guide →</a>
-</article><article class="guide-card" data-source="company-research">
-  <div class="card-meta">
-    <time class="card-date" datetime="2026-03-18">2026-03-18</time>
-    <span class="source-badge companyresearch">company-research</span>
-    
-  </div>
-  <h3><a href="guides/2026-03-18-our-latest-investment-in-open-source-security-for-the-ai-era.html">Our latest investment in open source security for the AI era</a></h3>
-  <p class="excerpt">What It Is Google's latest investment in open source security for the AI era represents a multi-pronged initiative designed to harden the software supply chain, AI model ecosystems, and developer tool...</p>
-  <a class="read-link" href="guides/2026-03-18-our-latest-investment-in-open-source-security-for-the-ai-era.html">Read Guide →</a>
-</article><article class="guide-card" data-source="huggingface">
-  <div class="card-meta">
-    <time class="card-date" datetime="2026-03-18">2026-03-18</time>
-    <span class="source-badge huggingface">huggingface</span>
-    
-  </div>
-  <h3><a href="guides/2026-03-18-jackrongqwen35-27b-claude-46-opus-reasoning-distilled.html">Jackrong/Qwen3.5-27B-Claude-4.6-Opus-Reasoning-Distilled</a></h3>
-  <p class="excerpt">What It Is Jackrong/Qwen3.5-27B-Claude-4.6-Opus-Reasoning-Distilled is a knowledge-distilled large language model (LLM) available on HuggingFace that combines two powerful AI lineages into a single, h...</p>
-  <a class="read-link" href="guides/2026-03-18-jackrongqwen35-27b-claude-46-opus-reasoning-distilled.html">Read Guide →</a>
-</article><article class="guide-card" data-source="learning-resource">
-  <div class="card-meta">
-    <time class="card-date" datetime="2026-03-18">2026-03-18</time>
-    <span class="source-badge learningresource">learning-resource</span>
-    
-  </div>
-  <h3><a href="guides/2026-03-18-learning-learning-path-why-you-should-stop-worrying-about-ai-taking-d.html">Learning Path: Why You Should Stop Worrying About AI Taking Data Science Jobs</a></h3>
-  <p class="excerpt">```html What You'll Learn This learning path is designed to shift your mindset from fear to confidence. Rather than worrying about AI replacing data scientists, you'll learn how to evolve alongside AI...</p>
-  <a class="read-link" href="guides/2026-03-18-learning-learning-path-why-you-should-stop-worrying-about-ai-taking-d.html">Read Guide →</a>
-</article><article class="guide-card" data-source="learning-resource">
-  <div class="card-meta">
-    <time class="card-date" datetime="2026-03-18">2026-03-18</time>
-    <span class="source-badge learningresource">Towards Data Science</span>
-    
-    <span class="section-tag learning-path">🎓 Learning Path</span>
-    
-  </div>
-  <h3><a href="guides/2026-03-18-learning-learning-path-the-new-experience-of-coding-with-ai.html">Learning Path: The New Experience of Coding with AI</a></h3>
-  <p class="excerpt">```html What You'll Learn This learning path guides you through the rapidly evolving world of AI-assisted coding — one of the most transformative shifts in modern software development. By the end, you...</p>
-  <a class="read-link" href="guides/2026-03-18-learning-learning-path-the-new-experience-of-coding-with-ai.html">Read Guide →</a>
-</article><article class="guide-card" data-source="company-research">
-  <div class="card-meta">
-    <time class="card-date" datetime="2026-03-18">2026-03-18</time>
-    <span class="source-badge companyresearch">company-research</span>
-    
-  </div>
-  <h3><a href="guides/2026-03-18-equipping-workers-with-insights-about-compensation.html">Equipping workers with insights about compensation</a></h3>
-  <p class="excerpt">What It Is OpenAI's research initiative, </p>
-  <a class="read-link" href="guides/2026-03-18-equipping-workers-with-insights-about-compensation.html">Read Guide →</a>
-</article><article class="guide-card" data-source="huggingface">
-  <div class="card-meta">
-    <time class="card-date" datetime="2026-03-18">2026-03-18</time>
-    <span class="source-badge huggingface">huggingface</span>
-    
-  </div>
-  <h3><a href="guides/2026-03-18-prithivmlmodsqwen-image-edit-2511-loras-fast.html">prithivMLmods/Qwen-Image-Edit-2511-LoRAs-Fast</a></h3>
-  <p class="excerpt">What It Is Qwen-Image-Edit-2511-LoRAs-Fast is a HuggingFace Space created by prithivMLmods that delivers a fast, interactive image editing pipeline powered by the Qwen2.5-VL vision-language model fami...</p>
-  <a class="read-link" href="guides/2026-03-18-prithivmlmodsqwen-image-edit-2511-loras-fast.html">Read Guide →</a>
-</article><article class="guide-card" data-source="huggingface">
-  <div class="card-meta">
-    <time class="card-date" datetime="2026-03-18">2026-03-18</time>
-    <span class="source-badge huggingface">huggingface</span>
-    
-  </div>
-  <h3><a href="guides/2026-03-18-zai-orgglm-ocr.html">zai-org/GLM-OCR</a></h3>
-  <p class="excerpt">What It Is GLM-OCR is a specialized multimodal vision-language model developed by zai-org (Zhipu AI) and hosted on HuggingFace at zai-org/GLM-OCR. Built on top of the GLM (General Language Model) arch...</p>
-  <a class="read-link" href="guides/2026-03-18-zai-orgglm-ocr.html">Read Guide →</a>
-</article>
-<!-- GUIDES_END -->
-
-    <!-- No results state -->
-    <div id="no-results">
-      <strong>No guides match your search.</strong>
-      Try a different keyword or reset the filter.
-    </div>
-
-    <!-- Empty state (shown when no guides exist yet) -->
-    <div class="empty-state" id="empty-state" style="grid-column: 1/-1;">
-      <div class="empty-icon">🚀</div>
-      <h3>First guides coming soon!</h3>
-      <p>Run <code>python automation/run.py</code> to generate today's AI tech guides.</p>
-    </div>
-  </div>
-
-  <!-- How it works -->
-  <div class="how-it-works">
-    <h2>How It Works</h2>
-    <div class="steps-grid">
-      <div class="step-card">
-        <div class="step-num">01</div>
-        <h4>Scan Trending Sources</h4>
-        <p>Every morning, we scan Reddit r/MachineLearning, HuggingFace trending models, arXiv new papers, and major tech news feeds.</p>
+  <!-- Header -->
+  <header>
+    <div class="badge">Daily AI Guides</div>
+    <div class="logo">Kiwolo<span>.</span>io</div>
+    <p class="tagline">Daily AI Tech Guides — Curated from the web, written by AI</p>
+    <h1>Your Daily Briefing on<br>What's Trending in AI</h1>
+    <p class="subtitle">
+      Every day, Kiwolo.io monitors Reddit, HuggingFace, arXiv, and tech blogs to find the most
+      trending AI tools and papers — then writes detailed how-to guides so you can get started immediately.
+    </p>
+    <div class="stats-row">
+      <div class="stat">
+        <strong>4</strong>
+        <span>Sources</span>
       </div>
-      <div class="step-card">
-        <div class="step-num">02</div>
-        <h4>Rank & Filter</h4>
-        <p>Topics are scored by engagement, recency, and novelty. Already-covered topics are filtered out automatically.</p>
+      <div class="stat">
+        <strong>Daily</strong>
+        <span>Updates</span>
       </div>
-      <div class="step-card">
-        <div class="step-num">03</div>
-        <h4>Write with Claude</h4>
-        <p>Claude AI writes a detailed how-to guide for each topic — covering what it is, how to use it, code examples, and real-world use cases.</p>
+      <div class="stat">
+        <strong>3+</strong>
+        <span>Guides/Day</span>
       </div>
-      <div class="step-card">
-        <div class="step-num">04</div>
-        <h4>Publish & Index</h4>
-        <p>Guides are saved as HTML + Markdown files and this index is updated automatically. Fresh content every day.</p>
+      <div class="stat">
+        <strong>Free</strong>
+        <span>Always</span>
       </div>
     </div>
-  </div>
+  </header>
 
-  <!-- Sources section -->
-  <div class="sources-section" style="margin-top: 2rem;">
-    <h3>Content Sources</h3>
-    <div class="sources-list">
-      <span class="source-chip">🔴 Reddit r/MachineLearning</span>
-      <span class="source-chip">🟡 HuggingFace Trending Models</span>
-      <span class="source-chip">🟡 HuggingFace Trending Spaces</span>
-      <span class="source-chip">🔴 arXiv cs.AI</span>
-      <span class="source-chip">🔴 arXiv cs.LG</span>
-      <span class="source-chip">🔵 TechCrunch AI</span>
-      <span class="source-chip">🔵 VentureBeat AI</span>
-      <span class="source-chip">🔵 The Verge AI</span>
+  <!-- Main content -->
+  <main>
+
+    <!-- Guides section -->
+    <div class="section-header">
+      <h2>Latest Guides</h2>
+      <span class="count-label" id="guide-count"></span>
     </div>
-  </div>
 
-</main>
+    <!-- Search & Category filter -->
+    <div class="filter-bar">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="search" id="search-input" placeholder="Search guides…" autocomplete="off" />
+      </div>
+      <div class="filter-btns">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="reddit">Reddit</button>
+        <button class="filter-btn" data-filter="huggingface">HuggingFace</button>
+        <button class="filter-btn" data-filter="arxiv">arXiv</button>
+        <button class="filter-btn" data-filter="technews">Tech News</button>
+        <button class="filter-btn filter-btn--company" data-filter="company-research">🏢 Company Research</button>
+        <button class="filter-btn filter-btn--learning" data-filter="learning-resource">🎓 Learning</button>
+        <button class="filter-btn filter-btn--spotlight" data-filter="company-spotlight">⭐ Spotlight</button>
+      </div>
+    </div>
 
-<footer>
-  <p>© 2026 <strong>Kiwolo.io</strong> &nbsp;·&nbsp; Daily AI Tech Guides &nbsp;·&nbsp;
-  Powered by <a href="https://anthropic.com" rel="noopener">Claude</a></p>
-</footer>
+    <div class="guides-grid" id="guides-container">
+      <!-- GUIDES_START -->
+      <article class="guide-card" data-source="company-research">
+        <div class="card-meta">
+          <time class="card-date" datetime="2026-03-18">2026-03-18</time>
+          <span class="source-badge companyresearch">company-research</span>
 
-<script>
-  // Theme toggle
-  (function() {
-    const saved = localStorage.getItem("kiwolo-theme");
-    if (saved) {
-      document.documentElement.setAttribute("data-theme", saved);
-      updateToggleUI(saved);
+        </div>
+        <h3><a
+            href="https://github.com/kiwolo/Kiwoloblogs/tree/main/kiwolo/guides/2026-03-18-spotlight-company-spotlight-bringing-the-power-of-personal-intelligenc.html">Company
+            Spotlight: Bringing the power of Personal Intelligence to more people</a></h3>
+        <p class="excerpt">```html The Announcement Google has expanded its Personal Intelligence initiative, a suite of
+          AI-powered features that connect the dots between a user's personal data — spanning Gmail, Google Photos, ...
+        </p>
+        <a class="read-link"
+          href="https://github.com/kiwolo/Kiwoloblogs/tree/main/kiwolo/guides/2026-03-18-spotlight-company-spotlight-bringing-the-power-of-personal-intelligenc.html">Read
+          Guide →</a>
+      </article>
+      <article class="guide-card" data-source="company-research">
+        <div class="card-meta">
+          <time class="card-date" datetime="2026-03-18">2026-03-18</time>
+          <span class="source-badge companyresearch">company-research</span>
+
+        </div>
+        <h3><a
+            href="https://github.com/kiwolo/Kiwoloblogs/tree/main/kiwolo/guides/2026-03-18-measuring-progress-toward-agi-a-cognitive-framework.html">Measuring
+            progress toward AGI: A cognitive framework</a></h3>
+        <p class="excerpt">What It Is Google DeepMind has introduced a formal cognitive framework designed to
+          systematically measure and track progress toward Artificial General Intelligence (AGI). Rather than relying on
+          vague ...</p>
+        <a class="read-link"
+          href="https://github.com/kiwolo/Kiwoloblogs/tree/main/kiwolo/guides/2026-03-18-measuring-progress-toward-agi-a-cognitive-framework.html">Read
+          Guide →</a>
+      </article>
+      <article class="guide-card" data-source="huggingface">
+        <div class="card-meta">
+          <time class="card-date" datetime="2026-03-18">2026-03-18</time>
+          <span class="source-badge huggingface">huggingface</span>
+
+        </div>
+        <h3><a
+            href="https://github.com/kiwolo/Kiwoloblogs/tree/main/kiwolo/guides/2026-03-18-hauhaucsqwen35-35b-a3b-uncensored-hauhaucs-aggressive.html">HauhauCS/Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive</a>
+        </h3>
+        <p class="excerpt">What It Is HauhauCS/Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive is a fine-tuned,
+          uncensored variant of Alibaba's Qwen3.5 architecture — a cutting-edge Mixture-of-Experts (MoE) large language
+          model....</p>
+        <a class="read-link"
+          href="https://github.com/kiwolo/Kiwoloblogs/tree/main/kiwolo/guides/2026-03-18-hauhaucsqwen35-35b-a3b-uncensored-hauhaucs-aggressive.html">Read
+          Guide →</a>
+      </article>
+      <article class="guide-card" data-source="huggingface">
+        <div class="card-meta">
+          <time class="card-date" datetime="2026-03-18">2026-03-18</time>
+          <span class="source-badge huggingface">huggingface</span>
+
+        </div>
+        <h3><a
+            href="https://github.com/kiwolo/Kiwoloblogs/tree/main/kiwolo/guides/2026-03-18-wan-aiwan22-animate.html">Wan-AI/Wan2.2-Animate</a>
+        </h3>
+        <p class="excerpt">What It Is Wan2.2-Animate is a cutting-edge AI-powered video generation and animation model
+          developed by Wan-AI, hosted as a trending Space on HuggingFace. It represents the next evolutionary step in
+          ...</p>
+        <a class="read-link"
+          href="https://github.com/kiwolo/Kiwoloblogs/tree/main/kiwolo/guides/2026-03-18-wan-aiwan22-animate.html">Read
+          Guide →</a>
+      </article>
+      <article class="guide-card" data-source="company-research">
+        <div class="card-meta">
+          <time class="card-date" datetime="2026-03-18">2026-03-18</time>
+          <span class="source-badge companyresearch">company-research</span>
+
+        </div>
+        <h3><a
+            href="https://github.com/kiwolo/Kiwoloblogs/tree/main/kiwolo/guides/2026-03-18-bringing-the-power-of-personal-intelligence-to-more-people.html">Bringing
+            the power of Personal Intelligence to more people</a></h3>
+        <p class="excerpt">What It Is Google's Personal Intelligence is an AI-powered capability built into Google's
+          core products — including Google Search, Gmail, and Google Photos — that enables the AI to understand and act
+          ...</p>
+        <a class="read-link"
+          href="https://github.com/kiwolo/Kiwoloblogs/tree/main/kiwolo/guides/2026-03-18-bringing-the-power-of-personal-intelligence-to-more-people.html">Read
+          Guide →</a>
+      </article>
+      <article class="guide-card" data-source="company-research">
+        <div class="card-meta">
+          <time class="card-date" datetime="2026-03-18">2026-03-18</time>
+          <span class="source-badge companyresearch">company-research</span>
+
+        </div>
+        <h3><a
+            href="https://github.com/kiwolo/Kiwoloblogs/tree/main/kiwolo/guides/2026-03-18-introducing-gpt-54-mini-and-nano.html">Introducing
+            GPT-5.4 mini and nano</a></h3>
+        <p class="excerpt">What It Is GPT-4.1 mini and GPT-4.1 nano are the latest entries in OpenAI's growing family of
+          efficient, cost-optimized language models. Building on the architectural advances of the GPT-4.1 series, t...
+        </p>
+        <a class="read-link"
+          href="https://github.com/kiwolo/Kiwoloblogs/tree/main/kiwolo/guides/2026-03-18-introducing-gpt-54-mini-and-nano.html">Read
+          Guide →</a>
+      </article>
+      <article class="guide-card" data-source="company-research">
+        <div class="card-meta">
+          <time class="card-date" datetime="2026-03-18">2026-03-18</time>
+          <span class="source-badge companyresearch">company-research</span>
+
+        </div>
+        <h3><a
+            href="https://github.com/kiwolo/Kiwoloblogs/tree/main/kiwolo/guides/2026-03-18-our-latest-investment-in-open-source-security-for-the-ai-era.html">Our
+            latest investment in open source security for the AI era</a></h3>
+        <p class="excerpt">What It Is Google's latest investment in open source security for the AI era represents a
+          multi-pronged initiative designed to harden the software supply chain, AI model ecosystems, and developer
+          tool...</p>
+        <a class="read-link"
+          href="https://github.com/kiwolo/Kiwoloblogs/tree/main/kiwolo/guides/2026-03-18-our-latest-investment-in-open-source-security-for-the-ai-era.html">Read
+          Guide →</a>
+      </article>
+      <article class="guide-card" data-source="huggingface">
+        <div class="card-meta">
+          <time class="card-date" datetime="2026-03-18">2026-03-18</time>
+          <span class="source-badge huggingface">huggingface</span>
+
+        </div>
+        <h3><a
+            href="https://github.com/kiwolo/Kiwoloblogs/tree/main/kiwolo/guides/2026-03-18-jackrongqwen35-27b-claude-46-opus-reasoning-distilled.html">Jackrong/Qwen3.5-27B-Claude-4.6-Opus-Reasoning-Distilled</a>
+        </h3>
+        <p class="excerpt">What It Is Jackrong/Qwen3.5-27B-Claude-4.6-Opus-Reasoning-Distilled is a knowledge-distilled
+          large language model (LLM) available on HuggingFace that combines two powerful AI lineages into a single, h...
+        </p>
+        <a class="read-link"
+          href="https://github.com/kiwolo/Kiwoloblogs/tree/main/kiwolo/guides/2026-03-18-jackrongqwen35-27b-claude-46-opus-reasoning-distilled.html">Read
+          Guide →</a>
+      </article>
+      <article class="guide-card" data-source="learning-resource">
+        <div class="card-meta">
+          <time class="card-date" datetime="2026-03-18">2026-03-18</time>
+          <span class="source-badge learningresource">learning-resource</span>
+
+        </div>
+        <h3><a
+            href="https://github.com/kiwolo/Kiwoloblogs/tree/main/kiwolo/guides/2026-03-18-learning-learning-path-why-you-should-stop-worrying-about-ai-taking-d.html">Learning
+            Path: Why You Should Stop Worrying About AI Taking Data Science Jobs</a></h3>
+        <p class="excerpt">```html What You'll Learn This learning path is designed to shift your mindset from fear to
+          confidence. Rather than worrying about AI replacing data scientists, you'll learn how to evolve alongside
+          AI...</p>
+        <a class="read-link"
+          href="https://github.com/kiwolo/Kiwoloblogs/tree/main/kiwolo/guides/2026-03-18-learning-learning-path-why-you-should-stop-worrying-about-ai-taking-d.html">Read
+          Guide →</a>
+      </article>
+      <article class="guide-card" data-source="learning-resource">
+        <div class="card-meta">
+          <time class="card-date" datetime="2026-03-18">2026-03-18</time>
+          <span class="source-badge learningresource">Towards Data Science</span>
+
+          <span class="section-tag learning-path">🎓 Learning Path</span>
+
+        </div>
+        <h3><a
+            href="https://github.com/kiwolo/Kiwoloblogs/tree/main/kiwolo/guides/2026-03-18-learning-learning-path-the-new-experience-of-coding-with-ai.html">Learning
+            Path: The New Experience of Coding with AI</a></h3>
+        <p class="excerpt">```html What You'll Learn This learning path guides you through the rapidly evolving world of
+          AI-assisted coding — one of the most transformative shifts in modern software development. By the end, you...
+        </p>
+        <a class="read-link"
+          href="https://github.com/kiwolo/Kiwoloblogs/tree/main/kiwolo/guides/2026-03-18-learning-learning-path-the-new-experience-of-coding-with-ai.html">Read
+          Guide →</a>
+      </article>
+      <article class="guide-card" data-source="company-research">
+        <div class="card-meta">
+          <time class="card-date" datetime="2026-03-18">2026-03-18</time>
+          <span class="source-badge companyresearch">company-research</span>
+
+        </div>
+        <h3><a
+            href="https://github.com/kiwolo/Kiwoloblogs/tree/main/kiwolo/guides/2026-03-18-equipping-workers-with-insights-about-compensation.html">Equipping
+            workers with insights about compensation</a></h3>
+        <p class="excerpt">What It Is OpenAI's research initiative, </p>
+        <a class="read-link"
+          href="https://github.com/kiwolo/Kiwoloblogs/tree/main/kiwolo/guides/2026-03-18-equipping-workers-with-insights-about-compensation.html">Read
+          Guide →</a>
+      </article>
+      <article class="guide-card" data-source="huggingface">
+        <div class="card-meta">
+          <time class="card-date" datetime="2026-03-18">2026-03-18</time>
+          <span class="source-badge huggingface">huggingface</span>
+
+        </div>
+        <h3><a
+            href="https://github.com/kiwolo/Kiwoloblogs/tree/main/kiwolo/guides/2026-03-18-prithivmlmodsqwen-image-edit-2511-loras-fast.html">prithivMLmods/Qwen-Image-Edit-2511-LoRAs-Fast</a>
+        </h3>
+        <p class="excerpt">What It Is Qwen-Image-Edit-2511-LoRAs-Fast is a HuggingFace Space created by prithivMLmods
+          that delivers a fast, interactive image editing pipeline powered by the Qwen2.5-VL vision-language model
+          fami...</p>
+        <a class="read-link"
+          href="https://github.com/kiwolo/Kiwoloblogs/tree/main/kiwolo/guides/2026-03-18-prithivmlmodsqwen-image-edit-2511-loras-fast.html">Read
+          Guide →</a>
+      </article>
+      <article class="guide-card" data-source="huggingface">
+        <div class="card-meta">
+          <time class="card-date" datetime="2026-03-18">2026-03-18</time>
+          <span class="source-badge huggingface">huggingface</span>
+
+        </div>
+        <h3><a
+            href="https://github.com/kiwolo/Kiwoloblogs/tree/main/kiwolo/guides/2026-03-18-zai-orgglm-ocr.html">zai-org/GLM-OCR</a>
+        </h3>
+        <p class="excerpt">What It Is GLM-OCR is a specialized multimodal vision-language model developed by zai-org
+          (Zhipu AI) and hosted on HuggingFace at zai-org/GLM-OCR. Built on top of the GLM (General Language Model)
+          arch...</p>
+        <a class="read-link"
+          href="https://github.com/kiwolo/Kiwoloblogs/tree/main/kiwolo/guides/2026-03-18-zai-orgglm-ocr.html">Read Guide
+          →</a>
+      </article>
+      <!-- GUIDES_END -->
+
+      <!-- No results state -->
+      <div id="no-results">
+        <strong>No guides match your search.</strong>
+        Try a different keyword or reset the filter.
+      </div>
+
+      <!-- Empty state (shown when no guides exist yet) -->
+      <div class="empty-state" id="empty-state" style="grid-column: 1/-1;">
+        <div class="empty-icon">🚀</div>
+        <h3>First guides coming soon!</h3>
+        <p>Run <code>python automation/run.py</code> to generate today's AI tech guides.</p>
+      </div>
+    </div>
+
+    <!-- How it works -->
+    <div class="how-it-works">
+      <h2>How It Works</h2>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">01</div>
+          <h4>Scan Trending Sources</h4>
+          <p>Every morning, we scan Reddit r/MachineLearning, HuggingFace trending models, arXiv new papers, and major
+            tech news feeds.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">02</div>
+          <h4>Rank & Filter</h4>
+          <p>Topics are scored by engagement, recency, and novelty. Already-covered topics are filtered out
+            automatically.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">03</div>
+          <h4>Write with Claude</h4>
+          <p>Claude AI writes a detailed how-to guide for each topic — covering what it is, how to use it, code
+            examples, and real-world use cases.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">04</div>
+          <h4>Publish & Index</h4>
+          <p>Guides are saved as HTML + Markdown files and this index is updated automatically. Fresh content every day.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sources section -->
+    <div class="sources-section" style="margin-top: 2rem;">
+      <h3>Content Sources</h3>
+      <div class="sources-list">
+        <span class="source-chip">🔴 Reddit r/MachineLearning</span>
+        <span class="source-chip">🟡 HuggingFace Trending Models</span>
+        <span class="source-chip">🟡 HuggingFace Trending Spaces</span>
+        <span class="source-chip">🔴 arXiv cs.AI</span>
+        <span class="source-chip">🔴 arXiv cs.LG</span>
+        <span class="source-chip">🔵 TechCrunch AI</span>
+        <span class="source-chip">🔵 VentureBeat AI</span>
+        <span class="source-chip">🔵 The Verge AI</span>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>© 2026 <strong>Kiwolo.io</strong> &nbsp;·&nbsp; Daily AI Tech Guides &nbsp;·&nbsp;
+      Powered by <a href="https://anthropic.com" rel="noopener">Claude</a></p>
+  </footer>
+
+  <script>
+    // Theme toggle
+    (function () {
+      const saved = localStorage.getItem("kiwolo-theme");
+      if (saved) {
+        document.documentElement.setAttribute("data-theme", saved);
+        updateToggleUI(saved);
+      }
+    })();
+
+    function toggleTheme() {
+      const root = document.documentElement;
+      const current = root.getAttribute("data-theme") || "dark";
+      const next = current === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      localStorage.setItem("kiwolo-theme", next);
+      updateToggleUI(next);
     }
-  })();
 
-  function toggleTheme() {
-    const root = document.documentElement;
-    const current = root.getAttribute("data-theme") || "dark";
-    const next = current === "dark" ? "light" : "dark";
-    root.setAttribute("data-theme", next);
-    localStorage.setItem("kiwolo-theme", next);
-    updateToggleUI(next);
-  }
-
-  function updateToggleUI(theme) {
-    const icon = document.getElementById("theme-icon");
-    const label = document.getElementById("theme-label");
-    if (theme === "light") {
-      icon.textContent = "🌙";
-      label.textContent = "Dark";
-    } else {
-      icon.textContent = "☀";
-      label.textContent = "Light";
-    }
-  }
-
-  document.addEventListener("DOMContentLoaded", function() {
-    const cards = Array.from(document.querySelectorAll(".guide-card"));
-    const countEl   = document.getElementById("guide-count");
-    const emptyEl   = document.getElementById("empty-state");
-    const noResults = document.getElementById("no-results");
-    const searchEl  = document.getElementById("search-input");
-    const filterBtns = document.querySelectorAll(".filter-btn");
-
-    let activeFilter = "all";
-    let searchQuery  = "";
-
-    // Initial count / empty state
-    if (cards.length > 0 && emptyEl) emptyEl.style.display = "none";
-
-    function updateCount(visible) {
-      countEl.textContent = visible + " guide" + (visible !== 1 ? "s" : "");
+    function updateToggleUI(theme) {
+      const icon = document.getElementById("theme-icon");
+      const label = document.getElementById("theme-label");
+      if (theme === "light") {
+        icon.textContent = "🌙";
+        label.textContent = "Dark";
+      } else {
+        icon.textContent = "☀";
+        label.textContent = "Light";
+      }
     }
 
-    function applyFilters() {
-      let visible = 0;
-      cards.forEach(card => {
-        const source  = (card.dataset.source || "").toLowerCase();
-        const title   = (card.querySelector("h3")?.textContent || "").toLowerCase();
-        const excerpt = (card.querySelector(".excerpt")?.textContent || "").toLowerCase();
-        const text    = title + " " + excerpt;
+    document.addEventListener("DOMContentLoaded", function () {
+      const cards = Array.from(document.querySelectorAll(".guide-card"));
+      const countEl = document.getElementById("guide-count");
+      const emptyEl = document.getElementById("empty-state");
+      const noResults = document.getElementById("no-results");
+      const searchEl = document.getElementById("search-input");
+      const filterBtns = document.querySelectorAll(".filter-btn");
 
-        const matchesFilter = activeFilter === "all" || source === activeFilter;
-        const matchesSearch = searchQuery === "" || text.includes(searchQuery);
+      let activeFilter = "all";
+      let searchQuery = "";
 
-        if (matchesFilter && matchesSearch) {
-          card.style.display = "";
-          visible++;
-        } else {
-          card.style.display = "none";
-        }
+      // Initial count / empty state
+      if (cards.length > 0 && emptyEl) emptyEl.style.display = "none";
+
+      function updateCount(visible) {
+        countEl.textContent = visible + " guide" + (visible !== 1 ? "s" : "");
+      }
+
+      function applyFilters() {
+        let visible = 0;
+        cards.forEach(card => {
+          const source = (card.dataset.source || "").toLowerCase();
+          const title = (card.querySelector("h3")?.textContent || "").toLowerCase();
+          const excerpt = (card.querySelector(".excerpt")?.textContent || "").toLowerCase();
+          const text = title + " " + excerpt;
+
+          const matchesFilter = activeFilter === "all" || source === activeFilter;
+          const matchesSearch = searchQuery === "" || text.includes(searchQuery);
+
+          if (matchesFilter && matchesSearch) {
+            card.style.display = "";
+            visible++;
+          } else {
+            card.style.display = "none";
+          }
+        });
+
+        updateCount(visible);
+        noResults.style.display = (cards.length > 0 && visible === 0) ? "block" : "none";
+      }
+
+      // Category filter buttons
+      filterBtns.forEach(btn => {
+        btn.addEventListener("click", function () {
+          filterBtns.forEach(b => b.classList.remove("active"));
+          this.classList.add("active");
+          activeFilter = this.dataset.filter;
+          applyFilters();
+        });
       });
 
-      updateCount(visible);
-      noResults.style.display = (cards.length > 0 && visible === 0) ? "block" : "none";
-    }
-
-    // Category filter buttons
-    filterBtns.forEach(btn => {
-      btn.addEventListener("click", function() {
-        filterBtns.forEach(b => b.classList.remove("active"));
-        this.classList.add("active");
-        activeFilter = this.dataset.filter;
+      // Search input
+      searchEl.addEventListener("input", function () {
+        searchQuery = this.value.trim().toLowerCase();
         applyFilters();
       });
-    });
 
-    // Search input
-    searchEl.addEventListener("input", function() {
-      searchQuery = this.value.trim().toLowerCase();
+      // Initial render
       applyFilters();
     });
-
-    // Initial render
-    applyFilters();
-  });
-</script>
+  </script>
 
 </body>
+
 </html>
